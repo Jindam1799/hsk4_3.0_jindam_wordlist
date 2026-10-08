@@ -108,7 +108,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   box-shadow: 0 5px 0 var(--red-dark); display: grid; gap: 1px;
 }
 .cta b { font-size: 18px; font-weight: 900; }
-.cta small { font-size: 12px; opacity: .9; }
+.cta small { font-size: 13px; opacity: .9; font-variant-numeric: tabular-nums; }
 .cta:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--red-dark); }
 .home-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .ghost {

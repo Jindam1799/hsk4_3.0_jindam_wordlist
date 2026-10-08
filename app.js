@@ -121,7 +121,7 @@
       </div>`;
     const started = Object.keys(state.rounds).length > 0 || state.section > 0 || state.idx > 0;
     $("#continueTitle").textContent = started ? "이어서 공부하기" : "공부 시작하기";
-    $("#continueSub").textContent = `${pad(w.no)} ${w.word}부터 · 구간 ${sectionLabel(sections[state.section])}`;
+    $("#continueSub").textContent = `구간 ${sectionLabel(sections[state.section])}`;
   }
 
   // ---------- 단어 카드 ----------
