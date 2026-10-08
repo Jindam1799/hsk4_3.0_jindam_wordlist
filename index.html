@@ -36,6 +36,7 @@
       </div>
 
       <div class="home-actions">
+        <button class="review-pill" id="reviewBtn" hidden></button>
         <button class="cta" id="cardsBtn"><b>🃏 카드로 외우기</b><small id="continueSub"></small></button>
         <div class="home-row">
           <button class="ghost" id="homeSectionBtn">구간 고르기</button>
@@ -120,7 +121,7 @@
         <li>
           <span class="step-no">1</span>
           <div><b>체크박스로 공부한 횟수 표시</b>
-            <p>카드 위쪽에 작은 체크박스가 3개 있어요. 오른쪽으로 밀어 ⭕ 알아요를 할 때마다 하나씩 채워지고, 3개를 모두 채우면 3번 공부 완료!</p></div>
+            <p>체크박스 3개는 <b>서로 다른 날</b> 기억해 낼 때마다 채워져요. 처음 ⭕ → 1칸, 하루 뒤 또 ⭕ → 2칸, 3일 뒤 또 ⭕ → 3칸 완료! ❌ 몰라요면 한 칸 내려가요.</p></div>
         </li>
         <li>
           <span class="step-no">2</span>
@@ -136,6 +137,7 @@
       <ul class="app-tips">
         <li><b>꾹</b>누르고 있으면 뜻·병음이 보이고, 손을 떼면 사라져요.</li>
         <li><b>톡</b>치면 카드가 뒤집혀 짝꿍어휘가 나와요. 짝꿍어휘도 한 줄씩 꾹 눌러 확인해요.</li>
+        <li><b>📅 복습</b>체크한 단어는 하루 뒤, 3일 뒤에 ‘오늘 복습할 단어’로 다시 나와요. 홈에서 매일 먼저 해요.</li>
         <li><b>밀기</b>떠올렸으면 오른쪽으로 밀어 ⭕ 알아요, 헷갈리면 왼쪽으로 밀어 ❌ 몰라요 — 몰라요 단어는 4장 뒤에 또 나와요. 잘못 밀었으면 ↩ 되돌리기.</li>
         <li><b>🔊</b>소리 버튼을 누르면 중국어 발음이 나와요. 따라 말해 보세요.<br><small class="voice">발음 목소리: <span id="voiceName">확인 중…</span></small></li>
         <li><b>방향</b>‘뜻 보고 중국어 말하기’로 바꾸면 한국어를 보고 중국어를 먼저 말해요.</li>

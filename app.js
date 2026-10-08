@@ -35,6 +35,7 @@
     rounds: store.get("rounds", {}),           // { 단어번호: [bool, bool, bool] } 체크박스 3개
     status: store.get("status", {}),           // { 단어번호: "k"(알아요) | "a"(다시) } 마지막 결과
     log: store.get("log", {}),                 // { "YYYY-MM-DD": { seen, known } } 날짜별 공부량
+    srs: store.get("srs", {}),                 // { 단어번호: { last: 마지막으로 칸이 바뀐 날, due: 다음 복습 날 } }
     session: store.get("cardSession", null),   // 지금 넘기고 있는 카드 묶음
   };
 
@@ -54,6 +55,7 @@
   };
   // 🔄 이모지는 색을 바꿀 수 없어서 같은 모양의 아이콘을 직접 그림 (글자색을 따라감)
   const AGAIN_ICON = '<svg class="ic-again" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9"/><path d="M5.2 2.8v3.6h3.6"/><path d="M4 13a8 8 0 0 0 14.3 4.9"/><path d="M18.8 21.2v-3.6h-3.6"/></svg>';
+  const CAL_ICON = '<svg class="ic-cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg>';
   const todayKey = () => new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD (기기 시간 기준)
 
   // ---------- 발음: 여자 목소리 Tingting ----------
@@ -124,13 +126,39 @@
     state.log[k] = d;
     store.set("log", state.log);
   }
-  function fillRound(no) { // ⭕ 알아요: 비어 있는 첫 체크박스를 채움
-    const r = roundsOf(no).slice();
-    const i = r.indexOf(false);
-    if (i >= 0) r[i] = true;
-    state.rounds[no] = r;
+  // ---------- 체크 3칸 = 서로 다른 날 3번 기억해 냄 (간격 반복) ----------
+  // 1칸: 처음 ⭕ → 1일 뒤 복습 / 2칸: 1일 이상 지나 또 ⭕ → 3일 뒤 복습 / 3칸: 3일 이상 지나 또 ⭕ → 완료
+  // ❌ 몰라요: 한 칸 내려감, 다음 날 복습. 같은 날 다시 ⭕ 해도 칸은 그대로
+  const GAP_AFTER = [0, 1, 3]; // 지금 칸 수 → 다음 칸까지 기다릴 날 수
+  const levelOf = (no) => roundsOf(no).filter(Boolean).length;
+  const dayNum = (key) => Math.round(new Date(key + "T00:00:00").getTime() / 86400000);
+  const addDays = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toLocaleDateString("sv-SE"); };
+  function setLevel(no, lv, waitDays) {
+    state.rounds[no] = [lv >= 1, lv >= 2, lv >= 3];
     store.set("rounds", state.rounds);
+    state.srs[no] = { last: todayKey(), due: lv >= 3 ? null : addDays(waitDays) };
+    store.set("srs", state.srs);
   }
+  function know(no) { // 결과 문구를 돌려줌
+    const lv = levelOf(no), info = state.srs[no];
+    if (lv >= 3) return "🍅 이미 다 익은 단어예요!";
+    const waited = info?.last ? dayNum(todayKey()) - dayNum(info.last) : Infinity;
+    if (lv === 0 || waited >= GAP_AFTER[lv]) {
+      const next = lv + 1;
+      if (next === 3) { setLevel(no, 3, 0); return "🍅 3칸 완료! 다 익었어요"; }
+      setLevel(no, next, GAP_AFTER[next]);
+      return `⭕ ${next}칸 체크! ${GAP_AFTER[next] === 1 ? "내일" : `${GAP_AFTER[next]}일 뒤에`} 다시 확인해요`;
+    }
+    const left = GAP_AFTER[lv] - waited;
+    return `⭕ 오늘은 체크 끝 · ${left === 1 ? "내일" : `${left}일 뒤에`} 또 맞히면 ${lv + 1}칸`;
+  }
+  function dontKnow(no) {
+    const lv = levelOf(no);
+    setLevel(no, Math.max(0, lv - 1), 1);
+    return lv > 0 ? "❌ 몰라요 · 체크 한 칸 내려가요" : "❌ 몰라요 · 4장 뒤에 다시";
+  }
+  // 오늘 복습할 단어: 복습 날짜가 오늘이거나 지난 단어 (3칸 완료 단어는 제외)
+  const dueWords = () => WORDS.filter((w) => { const d = state.srs[w.no]?.due; return d && d <= todayKey() && levelOf(w.no) < 3; }).map((w) => w.no);
   function setStatus(no, s) {
     state.status[no] = s;
     store.set("status", state.status);
@@ -166,8 +194,8 @@
   let flipped = false;
 
   const boxes = (no) => `
-    <span class="boxes" aria-label="공부한 횟수">
-      ${roundsOf(no).map((on, i) => `<button class="box${on ? " on" : ""}" data-box="${i}" aria-pressed="${on}" aria-label="${i + 1}번째 공부"></button>`).join("")}
+    <span class="boxes" aria-label="체크 ${levelOf(no)}칸">
+      ${roundsOf(no).map((on) => `<span class="box${on ? " on" : ""}"></span>`).join("")}
     </span>`;
   const speakBtn = (text, cls = "") => `<button class="say ${cls}" data-say="${esc(text)}" aria-label="발음 듣기">${SPEAKER}</button>`;
   const lenCls = (s) => `len-${Math.min([...s].length, 5)}`;
@@ -329,19 +357,17 @@
     if (busy || isDone()) return;
     const s = state.session, no = s.queue[s.pos];
     s.hist = s.hist || [];
-    const h = { known, no, pos: s.pos, rounds: state.rounds[no] ? state.rounds[no].slice() : null, status: state.status[no] ?? null, day: todayKey() };
+    const h = { known, no, pos: s.pos, rounds: state.rounds[no] ? state.rounds[no].slice() : null, srs: state.srs[no] ? { ...state.srs[no] } : null, status: state.status[no] ?? null, day: todayKey() };
     if (known) {
-      fillRound(no);
       setStatus(no, "k");
       s.known.push(no);
-      const filled = roundsOf(no).filter(Boolean).length;
-      toast(filled === 3 ? "⭕ 3번 공부 완료!" : `⭕ ${filled}번째 체크`);
+      toast(know(no));
     } else {
       setStatus(no, "a");
       s.again.push(no);
       h.insertAt = Math.min(s.pos + 1 + AGAIN_GAP, s.queue.length);
       s.queue.splice(h.insertAt, 0, no); // 4장 뒤에 다시
-      toast("❌ 몰라요 · 4장 뒤에 다시");
+      toast(dontKnow(no));
     }
     addLog(known);
     s.hist.push(h);
@@ -356,6 +382,8 @@
     const h = s.hist.pop();
     if (h.rounds) state.rounds[h.no] = h.rounds; else delete state.rounds[h.no];
     if (h.status) state.status[h.no] = h.status; else delete state.status[h.no];
+    if (h.srs) state.srs[h.no] = h.srs; else delete state.srs[h.no];
+    store.set("srs", state.srs);
     store.set("rounds", state.rounds);
     store.set("status", state.status);
     const list = h.known ? s.known : s.again;
@@ -397,7 +425,8 @@
       return;
     }
     const fc = e.target.closest(".fc");
-    if (e.target.closest("button") || (fc && nearButton(e.clientX, e.clientY))) { lastButtonAt = Date.now(); return; }
+    // 버튼·카드 윗줄(번호·체크·🔊)을 누를 때는 꾹·톡·밀기를 하지 않음
+    if (e.target.closest("button, .face-top") || (fc && nearButton(e.clientX, e.clientY))) { lastButtonAt = Date.now(); return; }
     if (!fc || busy || (e.pointerType === "mouse" && e.button !== 0)) return;
     const target = flipped ? e.target.closest(".back .hold") : fc.querySelector(".front .hold");
     pt = { id: e.pointerId, x: e.clientX, y: e.clientY, t: Date.now(), fc, target, held: false, drag: false, dx: 0 };
@@ -457,17 +486,6 @@
       speak(say.dataset.say, say, reveal);
       return;
     }
-    const box = e.target.closest("[data-box]");
-    if (box) {
-      const no = cur().no, i = +box.dataset.box;
-      const r = roundsOf(no).slice();
-      r[i] = !r[i];
-      state.rounds[no] = r;
-      store.set("rounds", state.rounds);
-      box.classList.toggle("on", r[i]);
-      box.setAttribute("aria-pressed", r[i]);
-      return;
-    }
     const act = e.target.closest("[data-act]")?.dataset.act;
     if (!act) return;
     const s = state.session;
@@ -508,7 +526,17 @@
     const started = s && (s.pos > 0 || s.known.length || s.again.length) && s.pos < s.queue.length;
     $("#cardsBtn b").textContent = started ? "🃏 이어서 외우기" : "🃏 카드로 외우기";
     $("#continueSub").textContent = s && !s.key.startsWith("s") && s.pos < s.queue.length ? s.title : `구간 ${sectionLabel(sections[state.section])}`;
+    const due = dueWords().length;
+    $("#reviewBtn").hidden = due === 0;
+    $("#reviewBtn").innerHTML = `${CAL_ICON} 오늘 복습할 단어 <b>${due}개</b> <span>복습하기 →</span>`;
   }
+  function startReview() {
+    const due = dueWords();
+    if (!due.length) return;
+    closeSheets();
+    startSession(listSession("review", `오늘 복습 ${due.length}개`, shuffle(due).slice(0, 50)));
+  }
+  $("#reviewBtn").addEventListener("click", startReview);
   function showScreen(name) {
     $("#home").hidden = name !== "home";
     $("#cards").hidden = name !== "cards";
@@ -639,6 +667,7 @@
     const learned = WORDS.filter((w) => roundsOf(w.no)[0]).length;
     const mastered = WORDS.filter((w) => roundsOf(w.no).every(Boolean)).length;
     const weak = weakWords();
+    const due = dueWords();
     const today = state.log[todayKey()] || { seen: 0, known: 0 };
     const pct = (n) => Math.round((n / total) * 100);
     $("#statsBody").innerHTML = `
@@ -646,8 +675,8 @@
       <div class="st-big">
         <div class="st-ring" style="--p:${pct(learned)}"><b>${learned}</b><small>/ ${total}</small></div>
         <div class="st-big-text">
-          <p><b>외운 단어</b> <span>⭕ 알아요를 한 번 이상 누른 단어</span></p>
-          <p class="st-line"><span>3번 공부 완료</span><b>${mastered}개</b></p>
+          <p><b>외운 단어</b> <span>체크 1칸 이상 · 3칸 = 서로 다른 날 3번 기억</span></p>
+          <p class="st-line"><span>🍅 3칸 완료</span><b>${mastered}개</b></p>
           <div class="st-bar"><i style="width:${pct(mastered)}%"></i></div>
         </div>
       </div>
@@ -658,20 +687,27 @@
         <div><small>연속 공부</small><b>${streakDays()}일${streakDays() >= 3 ? " 🔥" : ""}</b></div>
       </div>
 
-      <button class="st-weak" data-act="weak" ${weak.length ? "" : "disabled"}>
-        <span>${AGAIN_ICON} 다시 볼 단어 <b>${weak.length}개</b></span>
-        <small>${weak.length ? "모아서 연습하기 →" : "아직 없어요"}</small>
-      </button>
+      <div class="st-two">
+        <button class="st-weak" data-act="review" ${due.length ? "" : "disabled"}>
+          <span>${CAL_ICON} 오늘 복습 <b>${due.length}개</b></span>
+          <small>${due.length ? "복습하기 →" : "다 했어요"}</small>
+        </button>
+        <button class="st-weak" data-act="weak" ${weak.length ? "" : "disabled"}>
+          <span>${AGAIN_ICON} 다시 볼 단어 <b>${weak.length}개</b></span>
+          <small>${weak.length ? "연습하기 →" : "아직 없어요"}</small>
+        </button>
+      </div>
 
       <p class="st-map-title">구간 지도 <small>누르면 그 구간 카드를 시작해요</small></p>
       <div class="st-map">
         ${sections.map((sec, i) => {
           const done = sec.filter((w) => roundsOf(w.no)[0]).length;
-          const full = sec.every((w) => roundsOf(w.no)[0]);
-          // 토마토 짝꿍이 모양: 외운 만큼 아래에서부터 빨갛게 익어 감
-          return `<button class="tile${i === state.section ? " on" : ""}${full ? " full" : ""}" data-tile="${i}" style="--f:${(done / sec.length) * 100}%" aria-label="구간 ${sectionLabel(sec)} 외운 단어 ${done}개">
+          const ripe = sec.reduce((n, w) => n + levelOf(w.no), 0) / (sec.length * 3); // 체크 칸 수만큼 익음
+          const full = sec.every((w) => levelOf(w.no) === 3);
+          // 토마토 짝꿍이 모양: 체크가 채워질수록 아래에서부터 빨갛게 익어 감
+          return `<button class="tile${i === state.section ? " on" : ""}${full ? " full" : ""}" data-tile="${i}" style="--f:${Math.round(ripe * 100)}%" aria-label="구간 ${sectionLabel(sec)} ${Math.round(ripe * 100)}% 익음">
             <span class="t-leaf"></span>
-            <span class="t-body"><span class="t-eyes"></span><b>${i + 1}</b><small>${done}/${sec.length}</small></span>
+            <span class="t-body"><span class="t-eyes"></span><b>${i + 1}</b><small>${Math.round(ripe * 100)}%</small></span>
           </button>`;
         }).join("")}
       </div>`;
@@ -686,6 +722,7 @@
       startSession(sectionSession(state.section));
       return;
     }
+    if (e.target.closest('[data-act="review"]')) { startReview(); return; }
     if (e.target.closest('[data-act="weak"]')) {
       const weak = weakWords();
       if (!weak.length) return;
@@ -705,6 +742,7 @@
 
   // ---------- 시작: 홈(표지). 처음 온 사람에게는 '공부 방법'을 한 번 보여 줌 ----------
   if (state.session && !Array.isArray(state.session.queue)) state.session = null;
+  for (const no of Object.keys(state.rounds)) { const n = state.rounds[no].filter(Boolean).length; state.rounds[no] = [n >= 1, n >= 2, n >= 3]; }
   history.replaceState({ screen: "home" }, "");
   showScreen("home");
   if (!store.get("introSeen", false)) {
