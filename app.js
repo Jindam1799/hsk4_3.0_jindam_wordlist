@@ -18,6 +18,12 @@
     },
   };
 
+  // ---------- 확대·축소 막기 ----------
+  // 안드로이드 크롬은 viewport 설정으로 막히지만, 아이폰 사파리는 설정을 무시하므로 손가락 두 개 동작을 직접 막음
+  ["gesturestart", "gesturechange", "gestureend"].forEach((t) => document.addEventListener(t, (e) => e.preventDefault(), { passive: false }));
+  document.addEventListener("touchmove", (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  // (두 번 톡 확대는 style.css의 touch-action으로 막음 — 버튼을 빠르게 두 번 눌러도 둘 다 동작하도록)
+
   const sections = [];
   for (let i = 0; i < WORDS.length; i += SECTION_SIZE) sections.push(WORDS.slice(i, i + SECTION_SIZE));
   const clampSection = (i) => Math.max(0, Math.min(i, sections.length - 1));
@@ -382,7 +388,14 @@
     });
   }
   let lastButtonAt = 0;
+  const fingers = new Set(); // 지금 화면에 닿아 있는 손가락
+  const forget = (e) => fingers.delete(e.pointerId);
   stageEl.addEventListener("pointerdown", (e) => {
+    fingers.add(e.pointerId);
+    if (fingers.size > 1) { // 손가락 두 개 → 꾹·톡·밀기 모두 취소 (확대하려다 몰라요가 되지 않게)
+      if (pt) { clearTimeout(pt.timer); pt.target?.classList.remove("show"); pt.cancel = true; }
+      return;
+    }
     const fc = e.target.closest(".fc");
     if (e.target.closest("button") || (fc && nearButton(e.clientX, e.clientY))) { lastButtonAt = Date.now(); return; }
     if (!fc || busy || (e.pointerType === "mouse" && e.button !== 0)) return;
@@ -394,7 +407,7 @@
     }, HOLD_MS);
   });
   stageEl.addEventListener("pointermove", (e) => {
-    if (!pt || e.pointerId !== pt.id) return;
+    if (!pt || e.pointerId !== pt.id || pt.cancel) return;
     const dx = e.clientX - pt.x, dy = e.clientY - pt.y;
     if (!pt.drag && Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy)) {
       pt.drag = true;
@@ -416,7 +429,11 @@
     pt = null;
     clearTimeout(p.timer);
     p.target?.classList.remove("show");
-    if (cancelled) { bounce(p.fc); return; }
+    if (cancelled || p.cancel) {
+      bounce(p.fc);
+      p.fc.querySelectorAll(".stamp").forEach((st) => { st.style.opacity = 0; });
+      return;
+    }
     if (p.drag) {
       const fast = Math.abs(p.dx) > 30 && Date.now() - p.t < 250;
       if (Math.abs(p.dx) > 70 || fast) judge(p.dx > 0);
@@ -428,8 +445,8 @@
     }
     if (!p.held && Date.now() - p.t < 400 && Date.now() - lastButtonAt > 500) flip(); // 짧게 톡 → 뒤집기 (버튼 누른 직후는 제외)
   }
-  stageEl.addEventListener("pointerup", (e) => endPointer(e, false));
-  stageEl.addEventListener("pointercancel", (e) => endPointer(e, true));
+  stageEl.addEventListener("pointerup", (e) => { forget(e); endPointer(e, false); });
+  stageEl.addEventListener("pointercancel", (e) => { forget(e); endPointer(e, true); });
 
   // 버튼: 발음 / 체크박스 / 끝 화면 / 안내
   stageEl.addEventListener("click", (e) => {

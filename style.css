@@ -19,6 +19,8 @@
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { -webkit-text-size-adjust: 100%; }
+/* 두 손가락 확대·축소와 두 번 톡 확대 막기 (위아래·좌우 움직임만 허용) */
+html, body { touch-action: pan-x pan-y; }
 html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
 body {
   margin: 0; color: var(--ink); font-family: var(--ko); font-size: 15px; line-height: 1.45;
