@@ -93,32 +93,8 @@
   const SPEAKER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
 
   // ---------- 캐릭터 (표지의 짝꿍이) ----------
-  // 캐릭터 그림은 진담중국어 단어장 표지 원본에서 오려 낸 것 (img/char.png, img/mini.png). 몸의 글자는 앱이 올림
-  const CHAR_IMG = '<img src="img/char.png" alt="" draggable="false">';
-  const MINI_IMG = '<img src="img/mini.png" alt="" draggable="false">';
-
-  // 짝꿍어휘에서 표제어를 빼고 남은 "짝꿍" 부분 (예: 按时完成 → 完成)
-  function partner(pair, word) {
-    const rest = pair.replace(word, "").replace(/[，,。！？…\s]/g, "");
-    return rest && rest.length <= 4 ? rest : null;
-  }
-
+  // 홈: 시작 버튼 문구와 이어서 볼 구간
   function renderHero() {
-    const w = WORDS[sections[state.section][state.idx].no - 1];
-    const zs = { 1: 0.27, 2: 0.2, 3: 0.155, 4: 0.12 }[w.word.length] || 0.12;
-    $("#hero").innerHTML = `
-      <div class="char" id="heroChar" role="button" aria-label="${esc(w.word)} 발음 듣기" style="--zs:${zs}">
-        ${CHAR_IMG}
-        <div class="char-text"><b>${esc(w.word)}</b><small>${esc(w.pinyin)} · ${esc(w.meaning.split(/[;,]/)[0])}</small></div>
-      </div>
-      <span class="bubble">우리는 짝꿍!</span>
-      <div class="minis">
-        ${w.pairs.map((p, i) => `
-          <div class="mini-wrap">
-            <div class="mini len-${Math.max(2, (partner(p[0], w.word) || "").length)}">${MINI_IMG}<span>${esc(partner(p[0], w.word) || CIRCLED[i])}</span></div>
-            <div class="mini-label">${CIRCLED[i]} ${esc(p[0])}<small>${esc(p[2])}</small></div>
-          </div>`).join("")}
-      </div>`;
     const started = Object.keys(state.rounds).length > 0 || state.section > 0 || state.idx > 0;
     $("#continueTitle").textContent = started ? "이어서 공부하기" : "공부 시작하기";
     $("#continueSub").textContent = `구간 ${sectionLabel(sections[state.section])}`;
@@ -218,9 +194,6 @@
     else showHome();
   });
   $("#continueBtn").addEventListener("click", () => showStudy());
-  $("#home").addEventListener("click", (e) => {
-    if (e.target.closest("#heroChar")) speak(WORDS[sections[state.section][state.idx].no - 1].word);
-  });
 
   // ---------- 넘기기 (애니메이션) ----------
   function neighbor(dir) {
