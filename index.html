@@ -18,7 +18,7 @@
         <span class="badge">HSK 3.0</span>
         <h1>HSK 4급 <span>짝꿍어휘</span></h1>
       </div>
-      <button class="icon-btn" id="infoBtn" aria-label="사용법">?</button>
+      <button class="icon-btn" id="infoBtn" aria-label="공부 방법 보기">?</button>
     </div>
 
     <label class="search">
@@ -49,18 +49,50 @@
     <button class="nav-btn" id="nextBtn" aria-label="다음">›</button>
   </footer>
 
-  <dialog id="info">
-    <h2>이렇게 공부해요</h2>
-    <ol>
-      <li><b>짝꿍어휘</b> — 단어 하나가 아니라 함께 쓰는 덩어리 3개로 익혀요.</li>
-      <li><b>입에 붙이기</b> — 한자를 누르면 원어민 발음이 나와요. 따라 말해 보세요.</li>
-      <li><b>가리기</b> — ‘중국어 가리기’로 한국어만 보고 중국어를 먼저 말해 보세요. 가려진 부분을 누르면 정답이 보여요.</li>
-      <li><b>1·2·3 회독</b> — 한 번 볼 때마다 박스를 체크해요. 체크는 이 기기에 저장돼요.</li>
-    </ol>
-    <p class="source">게임과 단어장의 HSK 단어 및 급수는 중외언어교류협력센터의 《HSK考试大纲》 어휘 목록을 기준으로 확인했으며, 짝꿍어휘는 실제 말하기 연습을 위해 진담중국어가 추가하였다.</p>
-    <p class="brand-foot">덩어리로 익히면, 중국어가 <b>툭!</b><br>진담중국어 · 진심을 담은 중국어</p>
-    <form method="dialog"><button class="close">닫기</button></form>
-  </dialog>
+  <section class="intro" id="intro" aria-label="이렇게 공부해요">
+    <div class="intro-banner">
+      <p class="intro-level">HSK 4급</p>
+      <h2>단어와 짝꿍어휘</h2>
+      <p class="intro-sub">필수 어휘 1000 · 단어마다 짝꿍어휘 3개</p>
+    </div>
+    <div class="intro-body">
+      <h3>이렇게 공부해요</h3>
+      <ol class="steps">
+        <li>
+          <span class="step-no">1</span>
+          <div>
+            <b>체크박스로 공부한 횟수 표시</b>
+            <p>단어 왼쪽에 작은 체크박스가 3개 있어요.<br>단어를 공부할 때마다 하나씩 체크해 주세요.<br>체크 3개를 모두 채우면 3번 공부 완료!</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">2</span>
+          <div>
+            <b>단어 → 짝꿍어휘 순서로</b>
+            <p>큰 글씨 단어와 뜻을 먼저 익히고, 아래 ①②③ 짝꿍어휘로 실제 쓰임을 확인해요.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-no">3</span>
+          <div>
+            <b>번호로 진도 확인</b>
+            <p>0001부터 1000까지 번호가 붙어 있고, 50개마다 빨간 띠가 나와요. 오늘 어디까지 했는지 바로 찾을 수 있어요.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="boxes-hint">시작 전에 <span class="demo-box"></span><span class="demo-box"></span><span class="demo-box"></span> ← 이런 박스가 단어마다 있어요</p>
+
+      <button class="start-btn" id="startBtn">단어 공부 시작하기</button>
+
+      <ul class="app-tips">
+        <li><b>🔊 발음</b> 한자를 누르면 중국어 발음을 들을 수 있어요.</li>
+        <li><b>가리기</b> ‘중국어 가리기’를 켜고 한국어만 보며 먼저 말해 보세요. 가린 곳을 누르면 정답이 보여요.</li>
+        <li><b>저장</b> 체크한 박스는 지금 쓰는 휴대폰(브라우저)에 저장돼요.</li>
+      </ul>
+      <p class="source">게임과 단어장의 HSK 단어 및 급수는 중외언어교류협력센터의 《HSK考试大纲》 어휘 목록을 기준으로 확인했으며, 짝꿍어휘는 실제 말하기 연습을 위해 진담중국어가 추가하였다.</p>
+      <p class="brand-foot">덩어리로 익히면, 중국어가 <b>툭!</b><br>진담중국어 · 진심을 담은 중국어</p>
+    </div>
+  </section>
 
   <script src="data.js"></script>
   <script src="app.js"></script>

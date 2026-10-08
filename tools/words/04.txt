@@ -1,0 +1,200 @@
+601|全球|quánqiú|전 세계, 글로벌|全球经济|quánqiú jīngjì|세계 경제|全球市场|quánqiú shìchǎng|세계 시장|全球范围|quánqiú fànwéi|전 세계 범위
+602|全身|quánshēn|온몸, 전신|全身发热|quánshēn fārè|온몸에 열이 나다|全身检查|quánshēn jiǎnchá|전신 검사|全身上下|quánshēn shàngxià|온몸 전체
+603|缺|quē|부족하다, 모자라다|缺钱|quē qián|돈이 부족하다|缺人|quē rén|사람이 부족하다|缺时间|quē shíjiān|시간이 부족하다
+604|缺点|quēdiǎn|결점, 단점|有缺点|yǒu quēdiǎn|단점이 있다|改正缺点|gǎizhèng quēdiǎn|단점을 고치다|优缺点|yōuquēdiǎn|장단점
+605|缺少|quēshǎo|부족하다|缺少经验|quēshǎo jīngyàn|경험이 부족하다|缺少时间|quēshǎo shíjiān|시간이 부족하다|缺少资金|quēshǎo zījīn|자금이 부족하다
+606|却|què|그런데, 오히려, 하지만|却不知道|què bù zhīdào|그런데 모르다|却发现|què fāxiàn|그런데 발견하다|却没有|què méiyǒu|그런데 ~하지 않았다
+607|确实|quèshí|확실히|确实很好|quèshí hěn hǎo|확실히 좋다|确实如此|quèshí rúcǐ|확실히 그렇다|确实不错|quèshí búcuò|확실히 괜찮다
+608|然而|rán'ér|그러나|然而事实并非如此|rán'ér shìshí bìngfēi rúcǐ|그러나 사실은 그렇지 않다|然而还是不行|rán'ér háishi bùxíng|그러나 여전히 안 된다|然而他没有放弃|rán'ér tā méiyǒu fàngqì|그러나 그는 포기하지 않았다
+609|热闹|rènao|떠들썩하다, 활기차다|非常热闹|fēicháng rènao|매우 북적이다|热闹起来|rènao qǐlái|활기를 띠기 시작하다|凑热闹|còu rènao|구경하며 왁자지껄한 데 끼다
+610|人生|rénshēng|인생|人生目标|rénshēng mùbiāo|인생 목표|人生经历|rénshēng jīnglì|인생 경험|人生道路|rénshēng dàolù|인생길
+611|人数|rénshù|인원수|参加人数|cānjiā rénshù|참가 인원|人数增加|rénshù zēngjiā|인원수가 늘다|人数限制|rénshù xiànzhì|인원 제한
+612|人员|rényuán|인원, 관계자|工作人员|gōngzuò rényuán|직원|相关人员|xiāngguān rényuán|관련 인원|管理人员|guǎnlǐ rényuán|관리 인원
+613|任何|rènhé|어떠한, 무슨|任何人|rènhé rén|누구든지|任何时候|rènhé shíhou|언제든지|任何事情|rènhé shìqing|어떤 일이든
+614|任务|rènwu|임무, 과제|完成任务|wánchéng rènwu|임무를 완수하다|工作任务|gōngzuò rènwu|업무 과제|重要任务|zhòngyào rènwu|중요한 임무
+615|扔|rēng|버리다, 던지다|扔垃圾|rēng lājī|쓰레기를 버리다|扔掉|rēng diào|버리다|把球扔出去|bǎ qiú rēng chūqù|공을 던지다
+616|仍|réng|여전히, 아직도|仍在继续|réng zài jìxù|여전히 계속되고 있다|仍有机会|réng yǒu jīhuì|아직 기회가 있다|仍需努力|réng xū nǔlì|여전히 노력이 필요하다
+617|仍然|réngrán|여전히|仍然坚持|réngrán jiānchí|여전히 지속하다|仍然如此|réngrán rúcǐ|여전히 그렇다|仍然记得|réngrán jìde|여전히 기억한다
+618|日常|rìcháng|일상의, 평상시의|日常生活|rìcháng shēnghuó|일상생활|日常工作|rìcháng gōngzuò|일상 업무|日常用品|rìcháng yòngpǐn|생활용품
+619|日记|rìjì|일기|写日记|xiě rìjì|일기를 쓰다|一篇日记|yì piān rìjì|일기 한 편|写日记的习惯|xiě rìjì de xíguàn|일기 쓰는 습관
+620|日期|rìqī|날짜|填写日期|tiánxiě rìqī|날짜를 기입하다|出发日期|chūfā rìqī|출발 날짜|生产日期|shēngchǎn rìqī|생산일
+621|日子|rìzi|날; 생활, 나날|过日子|guò rìzi|생활하다|好日子|hǎo rìzi|좋은 날·좋은 시절|这些日子|zhèxiē rìzi|요즘 며칠 동안
+622|入|rù|들어가다|入场|rùchǎng|입장하다|入门|rùmén|입문하다|入队|rù duì|팀에 들어가다
+623|入口|rùkǒu|입구|公园入口|gōngyuán rùkǒu|공원 입구|找入口|zhǎo rùkǒu|입구를 찾다|入口处|rùkǒu chù|입구 부근
+624|入学|rùxué|입학하다|入学考试|rùxué kǎoshì|입학시험|办理入学手续|bànlǐ rùxué shǒuxù|입학 수속을 하다|入学以后|rùxué yǐhòu|입학한 뒤
+625|入住|rùzhù|입주하다, 체크인하다|入住酒店|rùzhù jiǔdiàn|호텔에 체크인하다|办理入住|bànlǐ rùzhù|체크인 수속을 하다|正式入住|zhèngshì rùzhù|정식으로 입주하다
+626|散步|sànbù|산책하다|出去散步|chūqù sànbù|산책하러 나가다|饭后散步|fàn hòu sànbù|식후 산책|在公园散步|zài gōngyuán sànbù|공원에서 산책하다
+627|扫码|sǎomǎ|QR코드 등을 스캔하다|扫码支付|sǎomǎ zhīfù|QR코드로 결제하다|扫码点餐|sǎomǎ diǎn cān|QR코드로 주문하다|扫码进入|sǎomǎ jìnrù|코드를 스캔해 입장하다
+628|森林|sēnlín|삼림, 숲|一片森林|yí piàn sēnlín|숲 하나|森林公园|sēnlín gōngyuán|삼림 공원|保护森林|bǎohù sēnlín|숲을 보호하다
+629|商量|shāngliang|의논하다, 상의하다|跟家人商量|gēn jiārén shāngliang|가족과 상의하다|商量一下|shāngliang yíxià|한번 의논하다|商量这件事|shāngliang zhè jiàn shì|이 일을 의논하다
+630|商品|shāngpǐn|상품|商品价格|shāngpǐn jiàgé|상품 가격|购买商品|gòumǎi shāngpǐn|상품을 구매하다|商品质量|shāngpǐn zhìliàng|상품 품질
+631|伤心|shāngxīn|슬퍼하다|感到伤心|gǎndào shāngxīn|슬픔을 느끼다|很伤心|hěn shāngxīn|매우 슬프다|别伤心|bié shāngxīn|슬퍼하지 마라
+632|上门|shàngmén|직접 찾아가다, 방문하다|上门服务|shàngmén fúwù|방문 서비스|送货上门|sòng huò shàngmén|집까지 배송하다|上门维修|shàngmén wéixiū|방문 수리하다
+633|稍|shāo|조금, 약간|稍等一下|shāo děng yíxià|잠시 기다리다|稍后联系|shāohòu liánxì|조금 뒤에 연락하다|稍有不同|shāo yǒu bù tóng|약간 다르다
+634|稍微|shāowēi|조금, 약간|稍微休息一下|shāowēi xiūxi yíxià|잠깐 쉬다|稍微便宜一点儿|shāowēi piányi yìdiǎnr|조금 더 싸다|稍微有点儿累|shāowēi yǒudiǎnr lèi|조금 피곤하다
+635|少见|shǎojiàn|드물다, 보기 힘들다|很少见|hěn shǎojiàn|매우 드물다|并不少见|bìng bù shǎojiàn|그다지 드물지 않다|少见的现象|shǎojiàn de xiànxiàng|보기 드문 현상
+636|少量|shǎoliàng|소량의, 적은 양의|少量食物|shǎoliàng shíwù|소량의 음식|少量的水|shǎoliàng de shuǐ|소량의 물|少量使用|shǎoliàng shǐyòng|소량 사용하다
+637|少数|shǎoshù|소수|少数人|shǎoshù rén|소수의 사람|少数民族|shǎoshù mínzú|소수민족|极少数|jí shǎoshù|극소수
+638|少年|shàonián|소년, 청소년|少年时代|shàonián shídài|소년 시절|青少年|qīngshàonián|청소년|一个少年|yí gè shàonián|소년 한 명
+639|社会|shèhuì|사회|社会发展|shèhuì fāzhǎn|사회 발전|社会问题|shèhuì wèntí|사회 문제|现代社会|xiàndài shèhuì|현대 사회
+640|摄氏度|shèshìdù|섭씨도|三十摄氏度|sān shí shèshìdù|섭씨 30도|零下五摄氏度|líng xià wǔ shèshìdù|섭씨 영하 5도|气温达到三十五摄氏度|qìwēn dádào sān shí wǔ shèshìdù|기온이 섭씨 35도에 이르다
+641|身|shēn|몸; 벌(옷 등의 양사)|身上|shēn shàng|몸에, 몸 위에|一身衣服|yìshēn yīfu|옷 한 벌|一身汗|yìshēn hàn|온몸에 땀이 나다
+642|深|shēn|깊다|水很深|shuǐ hěn shēn|물이 깊다|印象很深|yìnxiàng hěn shēn|인상이 깊다|感情很深|gǎnqíng hěn shēn|정이 깊다
+643|身份证|shēnfènzhèng|신분증, 주민신분증|出示身份证|chūshì shēnfènzhèng|신분증을 제시하다|身份证号码|shēnfènzhèng hàomǎ|신분증 번호|带身份证|dài shēnfènzhèng|신분증을 지참하다
+644|申请|shēnqǐng|신청하다|申请签证|shēnqǐng qiānzhèng|비자를 신청하다|申请职位|shēnqǐng zhíwèi|직책에 지원하다|提出申请|tíchū shēnqǐng|신청서를 내다
+645|甚至|shènzhì|심지어|甚至连他都|shènzhì lián tā dōu|심지어 그마저도|甚至忘记了|shènzhì wàngjì le|심지어 잊어버렸다|甚至不知道|shènzhì bù zhīdào|심지어 모른다
+646|生|shēng|낳다, 생기다|生孩子|shēng háizi|아이를 낳다|生病|shēngbìng|병이 나다|生火|shēng huǒ|불을 피우다
+647|生|shēng|날것의, 익지 않은; 낯선|生肉|shēng ròu|날고기|生鸡蛋|shēng jīdàn|날달걀|生词|shēng cí|새 단어, 낯선 단어
+648|生命|shēngmìng|생명|珍惜生命|zhēnxī shēngmìng|생명을 소중히 여기다|生命危险|shēngmìng wēixiǎn|생명이 위험하다|生命安全|shēngmìng ānquán|생명 안전
+649|生意|shēngyi|장사, 사업|做生意|zuò shēngyi|장사하다|生意很好|shēngyi hěn hǎo|장사가 잘되다|谈生意|tán shēngyi|사업 이야기를 하다
+650|省|shěng|성(중국의 행정구역)|广东省|Guǎngdōng shěng|광둥성|一个省|yí gè shěng|성 하나|省内|shěng nèi|성내
+651|剩|shèng|남다, 남기다|还剩多少|hái shèng duōshao|얼마나 남았나|只剩一个|zhǐ shèng yí gè|하나만 남다|剩一点儿|shèng yìdiǎnr|조금 남다
+652|失败|shībài|실패하다; 실패한|最终失败|zuìzhōng shībài|결국 실패하다|不怕失败|bú pà shībài|실패를 두려워하지 않다|失败的原因|shībài de yuányīn|실패 원인
+653|师傅|shīfu|기사님, 기술자; 사부|司机师傅|sījī shīfu|기사님|维修师傅|wéixiū shīfu|수리 기사|师傅，麻烦您……|shīfu, máfan nín ……|기사님, 부탁드리는데요…
+654|失去|shīqù|잃다|失去机会|shīqù jīhuì|기회를 잃다|失去信心|shīqù xìnxīn|자신감을 잃다|失去工作|shīqù gōngzuò|일자리를 잃다
+655|师生|shīshēng|교사와 학생|全校师生|quán xiào shīshēng|전교 교직원과 학생|师生关系|shīshēng guānxì|사제 관계|师生交流|shīshēng jiāoliú|교사와 학생 간 교류
+656|失望|shīwàng|실망하다|感到失望|gǎndào shīwàng|실망을 느끼다|很失望|hěn shīwàng|매우 실망하다|让人失望|ràng rén shīwàng|실망시키다
+657|十分|shífēn|매우, 대단히|十分满意|shífēn mǎnyì|매우 만족하다|十分高兴|shífēn gāoxìng|매우 기쁘다|十分重要|shífēn zhòngyào|매우 중요하다
+658|实际|shíjì|실제|实际情况|shíjì qíngkuàng|실제 상황|实际行动|shíjì xíngdòng|실제 행동|实际问题|shíjì wèntí|실제 문제
+659|时间表|shíjiānbiǎo|시간표, 일정표|制定时间表|zhìdìng shíjiānbiǎo|일정표를 만들다|课程时间表|kèchéng shíjiānbiǎo|수업 시간표|按照时间表|ànzhào shíjiānbiǎo|일정표에 따라
+660|实际上|shíjìshàng|실제로는, 사실은|实际上并不是|shíjìshàng bìng bú shì|사실은 ~가 아니다|实际上很简单|shíjìshàng hěn jiǎndān|사실 매우 간단하다|实际上已经……|shíjìshàng yǐjīng ……|실제로 이미…
+661|食品|shípǐn|식품|食品安全|shípǐn ānquán|식품 안전|健康食品|jiànkāng shípǐn|건강식품|食品店|shípǐn diàn|식품점
+662|食堂|shítáng|구내식당, 학생식당|学校食堂|xuéxiào shítáng|학교 식당|去食堂吃饭|qù shítáng chī fàn|식당에 밥 먹으러 가다|食堂饭菜|shítáng fàn cài|구내식당 음식
+663|食物|shíwù|음식, 식품|新鲜食物|xīnxiān shíwù|신선한 음식|准备食物|zhǔnbèi shíwù|음식을 준비하다|浪费食物|làngfèi shíwù|음식을 낭비하다
+664|实在|shízài|정말; 진솔하고 착실하다|实在太累了|shízài tài lèi le|정말 너무 피곤하다|实在不知道|shízài bù zhīdào|정말 모르겠다|人很实在|rén hěn shízài|사람이 진솔하고 착실하다
+665|十字路口|shízì lùkǒu|사거리, 교차로|在十字路口|zài shízì lùkǒu|사거리에|过十字路口|guò shízì lùkǒu|사거리를 건너다|十字路口左转|shízì lùkǒu zuǒ zhuǎn|사거리에서 좌회전하다
+666|使|shǐ|~하게 하다|使人开心|shǐ rén kāixīn|사람을 기쁘게 하다|使生活更方便|shǐ shēnghuó gèng fāngbiàn|생활을 더 편리하게 하다|使问题更加严重|shǐ wèntí gèngjiā yánzhòng|문제를 더 심각하게 하다
+667|使馆|shǐguǎn|대사관, 공관|中国使馆|Zhōngguó shǐguǎn|중국 대사관|外国使馆|wàiguó shǐguǎn|외국 대사관|使馆工作人员|shǐguǎn gōngzuò rényuán|대사관 직원
+668|使用|shǐyòng|사용하다|使用手机|shǐyòng shǒujī|휴대전화를 사용하다|使用方法|shǐyòng fāngfǎ|사용 방법|正确使用|zhèngquè shǐyòng|올바르게 사용하다
+669|市场|shìchǎng|시장|市场价格|shìchǎng jiàgé|시장 가격|进入市场|jìnrù shìchǎng|시장에 진입하다|市场需求|shìchǎng xūqiú|시장 수요
+670|是否|shìfǒu|~인지 아닌지, 여부|是否同意|shìfǒu tóngyì|동의하는지 여부|是否可以|shìfǒu kěyǐ|가능한지 여부|是否参加|shìfǒu cānjiā|참가할지 여부
+671|适合|shìhé|적합하다|适合自己|shìhé zìjǐ|자신에게 맞다|适合的工作|shìhé de gōngzuò|적합한 일|非常适合|fēicháng shìhé|매우 적합하다
+672|世纪|shìjì|세기|二十一世纪|èr shí yí shìjì|21세기|上个世纪|shàng gè shìjì|지난 세기|世纪之交|shìjì zhī jiāo|세기의 전환기
+673|视频|shìpín|영상, 동영상|看视频|kàn shìpín|영상을 보다|短视频|duǎn shìpín|숏폼 영상|视频会议|shìpín huìyì|화상회의
+674|市区|shìqū|시내, 도시 지역|住在市区|zhù zài shìqū|시내에 살다|市区交通|shìqū jiāotōng|시내 교통|市区内|shìqū nèi|시내에서
+675|试题|shìtí|시험 문제|一道试题|yídào shìtí|시험 문제 한 개|试题答案|shìtí dá'àn|시험 문제의 답|练习试题|liànxí shìtí|연습 문제
+676|适应|shìyìng|적응하다|适应环境|shìyìng huánjìng|환경에 적응하다|适应生活|shìyìng shēnghuó|생활에 적응하다|慢慢适应|màn màn shìyìng|천천히 적응하다
+677|收费|shōufèi|요금을 받다, 유료이다|按小时收费|àn xiǎoshí shōufèi|시간당 요금을 받다|停车收费|tíngchē shōufèi|주차 요금을 받다|这里收费吗|zhèlǐ shōufèi ma|여기는 유료인가요
+678|收入|shōurù|수입|家庭收入|jiātíng shōurù|가계 수입|增加收入|zēngjiā shōurù|수입을 늘리다|收入水平|shōurù shuǐpíng|수입 수준
+679|收拾|shōushi|정리하다|收拾房间|shōushi fángjiān|방을 정리하다|收拾东西|shōushi dōngxi|물건을 정리하다|收拾行李|shōushi xíngli|짐을 챙기다
+680|收听|shōutīng|청취하다|收听广播|shōutīng guǎngbō|방송을 듣다|收听节目|shōutīng jiémù|프로그램을 청취하다|在线收听|zàixiàn shōutīng|온라인으로 듣다
+681|首|shǒu|수(노래·시 등의 양사)|一首歌|yì shǒu gē|노래 한 곡|两首诗|liǎng shǒu shī|시 두 편|一首曲子|yì shǒu qǔ zi|곡 한 곡
+682|首都|shǒudū|수도|中国的首都|Zhōngguó de shǒudū|중국의 수도|首都北京|shǒudū Běijīng|수도 베이징|首都机场|shǒudū jīchǎng|수도공항
+683|首先|shǒuxiān|먼저, 우선|首先介绍|shǒuxiān jièshào|먼저 소개하다|首先要做的|shǒuxiān yào zuò de|먼저 해야 할 일|首先……其次……|shǒuxiān …… qícì ……|우선……그다음……
+684|受不了|shòubuliǎo|견딜 수 없다|实在受不了|shízài shòubuliǎo|정말 견딜 수 없다|受不了这种味道|shòubuliǎo zhè zhǒng wèidào|이런 냄새를 견딜 수 없다|疼得受不了|téng de shòubuliǎo|견디기 힘들 정도로 아프다
+685|售票员|shòupiàoyuán|매표원|一名售票员|yì míng shòupiàoyuán|매표원 한 명|车站售票员|chēzhàn shòupiàoyuán|역 매표원|向售票员买票|xiàng shòupiàoyuán mǎi piào|매표원에게 표를 사다
+686|受伤|shòushāng|다치다|腿受伤了|tuǐ shòushāng le|다리를 다쳤다|严重受伤|yánzhòng shòushāng|심하게 다치다|受伤的人|shòushāng de rén|다친 사람
+687|输|shū|지다, 패하다|输了比赛|shū le bǐsài|경기에서 졌다|输给对方|shū gěi duìfāng|상대에게 지다|不想输|bù xiǎng shū|지고 싶지 않다
+688|熟|shú/shóu|익다; 익숙하다|肉熟了|ròu shú le|고기가 익었다|跟他很熟|gēn tā hěn shú|그와 매우 친하다|熟人|shúrén|아는 사람
+689|熟悉|shúxi|잘 알다, 익숙하다|熟悉环境|shúxi huánjìng|환경에 익숙하다|很熟悉|hěn shúxi|매우 잘 알다|彼此熟悉|bǐcǐ shúxi|서로 잘 알다
+690|暑假|shǔjià|여름방학|放暑假|fàng shǔjià|여름방학을 하다|暑假作业|shǔjià zuòyè|여름방학 숙제|暑假期间|shǔjià qījiān|여름방학 동안
+691|数|shù|수, 수량; 몇·수십의|总数|zǒngshù|총수|人数|rénshù|인원수|数百人|shù bǎi rén|수백 명
+692|数量|shùliàng|수량|增加数量|zēngjiā shùliàng|수량을 늘리다|数量很多|shùliàng hěn duō|수량이 많다|控制数量|kòngzhì shùliàng|수량을 조절하다
+693|树林|shùlín|숲, 수풀|一片树林|yí piàn shùlín|숲 한 구역|穿过树林|chuānguò shùlín|숲을 통과하다|树林里|shùlín lǐ|숲속
+694|数字|shùzì|숫자|写数字|xiě shùzì|숫자를 쓰다|阿拉伯数字|Ālābó shùzì|아라비아 숫자|记住数字|jì zhù shùzì|숫자를 기억하다
+695|帅|shuài|잘생기다|长得帅|zhǎng de shuài|잘생겼다|很帅|hěn shuài|매우 잘생기다|帅气|shuài qì|멋지다
+696|顺便|shùnbiàn|~하는 김에, 겸사겸사|顺便买点东西|shùnbiàn mǎi diǎn dōngxi|오는 김에 물건을 좀 사다|顺便问一下|shùnbiàn wèn yíxià|겸사겸사 물어보다|顺便去看看|shùnbiàn qù kàn kàn|가는 김에 한번 들러보다
+697|顺利|shùnlì|순조롭다|进行顺利|jìnxíng shùnlì|순조롭게 진행되다|顺利完成|shùnlì wánchéng|순조롭게 완성하다|祝你顺利|zhù nǐ shùnlì|잘되기를 바라다
+698|顺序|shùnxù|순서|按照顺序|ànzhào shùnxù|순서대로|排列顺序|páiliè shùnxù|순서를 배열하다|先后顺序|xiānhòu shùnxù|선후 순서
+699|说法|shuōfǎ|말하는 방식; 견해, 주장|这种说法|zhè zhǒng shuōfǎ|이런 말·주장|有一种说法|yǒu yì zhǒng shuōfǎ|이런 설이 있다|不同的说法|bù tóng de shuōfǎ|서로 다른 견해·표현
+700|说明|shuōmíng|설명하다; 설명|说明原因|shuōmíng yuányīn|이유를 설명하다|说明情况|shuōmíng qíngkuàng|상황을 설명하다|详细说明|xiángxì shuōmíng|자세히 설명하다
+701|说明书|shuōmíngshū|설명서, 사용설명서|阅读说明书|yuèdú shuōmíngshū|설명서를 읽다|产品说明书|chǎnpǐn shuōmíngshū|제품 설명서|按照说明书操作|ànzhào shuōmíngshū cāozuò|설명서대로 조작하다
+702|硕士|shuòshì|석사|硕士学位|shuòshì xuéwèi|석사 학위|读硕士|dú shuòshì|석사를 따다|硕士研究生|shuòshì yánjiūshēng|석사 대학원생
+703|死|sǐ|죽다; 죽은|快死了|kuài sǐ le|죽을 것 같다|饿死了|è sǐ le|배고파 죽겠다|死鱼|sǐ yú|죽은 물고기
+704|速度|sùdù|속도|速度很快|sùdù hěn kuài|속도가 빠르다|提高速度|tígāo sùdù|속도를 높이다|行驶速度|xíngshǐ sùdù|주행 속도
+705|塑料|sùliào|플라스틱|塑料袋|sùliàodài|비닐봉지|塑料瓶|sùliào píng|플라스틱병|塑料制品|sùliào zhìpǐn|플라스틱 제품
+706|酸|suān|시다|味道很酸|wèidào hěn suān|맛이 시다|又酸又甜|yòu suān yòu tián|새콤달콤하다|有点儿酸|yǒudiǎnr suān|조금 시다
+707|酸奶|suānnǎi|요구르트|喝酸奶|hē suānnǎi|요구르트를 마시다|一杯酸奶|yì bēi suānnǎi|요구르트 한 컵|原味酸奶|yuán wèi suānnǎi|플레인 요구르트
+708|算|suàn|계산하다; ~로 치다|算一下|suàn yíxià|계산해 보다|算错了|suàn cuò le|계산을 잘못하다|这不算贵|zhè bú suàn guì|이건 비싼 편이 아니다
+709|随便|suíbiàn|마음대로, 편하게|随便看看|suíbiàn kàn kàn|편하게 둘러보다|随便坐|suíbiàn zuò|편하게 앉으세요|随便吃|suíbiàn chī|편하게 드세요
+710|随着|suízhe|~함에 따라|随着时间|suízhe shíjiān|시간이 흐름에 따라|随着发展|suízhe fāzhǎn|발전함에 따라|随着年龄增长|suízhe niánlíng zēngzhǎng|나이가 들어감에 따라
+711|孙女|sūnnǚ|손녀|小孙女|xiǎo sūnnǚ|어린 손녀|看望孙女|kànwàng sūnnǚ|손녀를 만나러 가다|爷爷和孙女|yéye hé sūnnǚ|할아버지와 손녀
+712|孙子|sūnzi|손자|我的孙子|wǒ de sūnzi|내 손자|带孙子|dài sūnzi|손자를 돌보다|疼爱孙子|téngài sūnzi|손자를 예뻐하다
+713|所有|suǒyǒu|모든, 전부|所有人|suǒyǒu rén|모든 사람|所有东西|suǒyǒu dōngxi|모든 물건|所有问题|suǒyǒu wèntí|모든 문제
+714|台|tái|대(기계 등의 양사)|一台电脑|yì tái diànnǎo|컴퓨터 한 대|一台电视|yì tái diànshì|TV 한 대|一台机器|yì tái jīqì|기계 한 대
+715|抬|tái|들다|抬头|táitóu|고개를 들다|抬起来|tái qǐlái|들어 올리다|抬东西|tái dōngxi|물건을 들다
+716|抬头|táitóu|고개를 들다|抬头看|táitóu kàn|고개를 들어 보다|抬起头来|tái qǐ tóu lái|고개를 들다|不敢抬头|bù gǎn táitóu|고개를 들 엄두를 못 내다
+717|态度|tàidù|태도|态度认真|tàidù rènzhēn|태도가 진지하다|改变态度|gǎibiàn tàidù|태도를 바꾸다|工作态度|gōngzuò tàidù|업무 태도
+718|弹|tán|(현악기·건반악기를) 연주하다|弹钢琴|tán gāngqín|피아노를 치다|弹吉他|tán jítā|기타를 치다|弹琴|tán qín|악기를 연주하다
+719|谈|tán|이야기하다, 논의하다|谈工作|tán gōngzuò|일에 관해 이야기하다|谈问题|tán wèntí|문제를 논의하다|谈一谈|tán yì tán|한번 이야기해 보다
+720|汤|tāng|국, 탕|喝汤|hē tāng|국을 마시다|做汤|zuò tāng|국을 끓이다|一碗汤|yì wǎn tāng|국 한 그릇
+721|躺|tǎng|눕다|躺下|tǎng xià|눕다|躺在床上|tǎng zài chuáng shàng|침대에 눕다|躺着休息|tǎng zhe xiūxi|누워서 쉬다
+722|趟|tàng|번, 차례(왕복·이동의 양사)|去一趟|qù yí tàng|한번 다녀오다|跑一趟银行|pǎo yí tàng yínháng|은행에 한번 다녀오다|回一趟老家|huí yí tàng lǎojiā|고향에 한번 다녀오다
+723|讨论|tǎolùn|토론하다|参加讨论|cānjiā tǎolùn|토론에 참가하다|讨论问题|tǎolùn wèntí|문제를 토론하다|热烈讨论|rèliè tǎolùn|열띤 토론
+724|讨厌|tǎoyàn|싫어하다|很讨厌|hěn tǎoyàn|매우 싫다|讨厌下雨|tǎoyàn xià yǔ|비 오는 게 싫다|让人讨厌|ràng rén tǎoyàn|사람을 짜증나게 하다
+725|特点|tèdiǎn|특징|性格特点|xìnggé tèdiǎn|성격 특징|有特点|yǒu tèdiǎn|특징이 있다|突出特点|tūchū tèdiǎn|두드러진 특징
+726|提|tí|들다; 제기하다|提问题|tí wèntí|질문을 제기하다|提要求|tí yāoqiú|요구를 제시하다|提行李|tí xíngli|짐을 들다
+727|提出|tíchū|제기하다, 제안하다|提出问题|tíchū wèntí|문제를 제기하다|提出建议|tíchū jiànyì|제안을 내놓다|提出要求|tíchū yāoqiú|요구를 제시하다
+728|提到|tídào|언급하다|提到这个问题|tídào zhège wèntí|이 문제를 언급하다|刚才提到|gāngcái tídào|방금 언급하다|多次提到|duō cì tídào|여러 차례 언급하다
+729|提供|tígōng|제공하다|提供帮助|tígōng bāngzhù|도움을 제공하다|提供机会|tígōng jīhuì|기회를 제공하다|提供资料|tígōng zīliào|자료를 제공하다
+730|提前|tíqián|앞당기다|提前准备|tíqián zhǔnbèi|미리 준비하다|提前到达|tíqián dàodá|일찍 도착하다|提前完成|tíqián wánchéng|미리 완성하다
+731|提醒|tíxǐng|일깨우다, 상기시키다|提醒一下|tíxǐng yíxià|한번 알려 주다|提醒大家|tíxǐng dàjiā|모두에게 주의를 주다|提醒我带伞|tíxǐng wǒ dài sǎn|나에게 우산 챙기라고 알려 주다
+732|体检|tǐjiǎn|건강검진을 받다|去体检|qù tǐjiǎn|건강검진을 받으러 가다|做体检|zuò tǐjiǎn|건강검진을 하다|体检报告|tǐjiǎn bàogào|건강검진 결과서
+733|体温|tǐwēn|체온|量体温|liáng tǐwēn|체온을 재다|体温正常|tǐwēn zhèngcháng|체온이 정상이다|体温升高|tǐwēn shēng gāo|체온이 올라가다
+734|体重|tǐzhòng|체중|体重增加|tǐzhòng zēngjiā|체중이 늘다|体重下降|tǐzhòng xiàjiàng|체중이 줄다|控制体重|kòngzhì tǐzhòng|체중을 관리하다
+735|填写|tiánxiě|기입하다, 작성하다|填写表格|tiánxiě biǎogé|양식을 작성하다|填写信息|tiánxiě xìnxī|정보를 기입하다|填写申请表|tiánxiě shēnqǐng biǎo|신청서를 작성하다
+736|条件|tiáojiàn|조건|生活条件|shēnghuó tiáojiàn|생활 조건|符合条件|fúhé tiáojiàn|조건에 부합하다|工作条件|gōngzuò tiáojiàn|근무 조건
+737|听力|tīnglì|듣기 능력, 청해|练习听力|liànxí tīnglì|듣기를 연습하다|听力考试|tīnglì kǎoshì|듣기 시험|提高听力水平|tígāo tīnglì shuǐpíng|듣기 실력을 높이다
+738|听众|tīngzhòng|청중, 청취자|广播听众|guǎngbō tīngzhòng|라디오 청취자|现场听众|xiànchǎng tīngzhòng|현장 청중|吸引听众|xīyǐn tīngzhòng|청중을 끌어들이다
+739|停|tíng|멈추다, 세우다|停一下|tíng yíxià|잠깐 멈추다|停下来|tíng xiàlái|멈추다|停在门口|tíng zài ménkǒu|문 앞에 세워 두다
+740|停车|tíngchē|주차하다|禁止停车|jìnzhǐ tíngchē|주차 금지|路边停车|lùbiān tíngchē|길가에 주차하다|停车收费|tíngchē shōufèi|주차 요금을 받다
+741|停车场|tíngchēchǎng|주차장|地下停车场|dìxià tíngchēchǎng|지하주차장|找停车场|zhǎo tíngchēchǎng|주차장을 찾다|停车场入口|tíngchēchǎng rùkǒu|주차장 입구
+742|停止|tíngzhǐ|정지하다|停止工作|tíngzhǐ gōngzuò|일을 멈추다|停止哭泣|tíngzhǐ kūqì|울음을 멈추다|停止比赛|tíngzhǐ bǐsài|경기를 중단하다
+743|通|tōng|통하다, 연결되다|通电话|tōng diànhuà|통화하다|路通了|lù tōng le|길이 뚫렸다|通往机场|tōng wǎng jīchǎng|공항으로 통하다
+744|通过|tōngguò|통과하다, ~을 통해|通过考试|tōngguò kǎoshì|시험에 통과하다|通过努力|tōngguò nǔlì|노력을 통해|顺利通过|shùnlì tōngguò|순조롭게 통과하다
+745|通知|tōngzhī|알리다; 통지, 공지|通知大家|tōngzhī dàjiā|모두에게 알리다|收到通知|shōudào tōngzhī|통지를 받다|正式通知|zhèngshì tōngzhī|공식 통지
+746|童年|tóngnián|어린 시절|童年生活|tóngnián shēnghuó|어린 시절 생활|童年回忆|tóngnián huíyì|어린 시절의 추억|童年时代|tóngnián shídài|어린 시절
+747|同时|tóngshí|동시에; 한편|同时进行|tóngshí jìnxíng|동시에 진행하다|与此同时|yǔ cǐ tóngshí|이와 동시에|同时也……|tóngshí yě ……|동시에 또…
+748|同样|tóngyàng|똑같은, 마찬가지로|同样重要|tóngyàng zhòngyào|똑같이 중요하다|同样的问题|tóngyàng de wèntí|같은 문제|同样的方法|tóngyàng de fāngfǎ|같은 방법
+749|桶|tǒng|통, 양동이|一桶水|yì tǒng shuǐ|물 한 통|垃圾桶|lājītǒng|쓰레기통|水桶|shuǐ tǒng|물통
+750|痛|tòng|아프다, 통증이 있다|肚子痛|dùzi tòng|배가 아프다|牙痛|yá tòng|이가 아프다|痛得睡不着|tòng de shuìbuzháo|아파서 잠을 못 자다
+751|头痛|tóutòng|머리가 아프다, 두통|经常头痛|jīngcháng tóutòng|자주 머리가 아프다|头痛得厉害|tóutòng de lìhai|머리가 심하게 아프다|头痛了一天|tóutòng le yì tiān|하루 종일 머리가 아팠다
+752|图|tú|그림, 도표|看图|kàn tú|그림을 보다|一幅图|yì fú tú|그림·도표 한 장|图中|tú zhōng|그림 속에
+753|图片|túpiàn|이미지, 그림|查看图片|chákàn túpiàn|이미지를 확인하다|上传图片|shàngchuán túpiàn|이미지를 업로드하다|一张图片|yì zhāng túpiàn|이미지 한 장
+754|土|tǔ|흙, 토양|挖土|wā tǔ|흙을 파다|土里|tǔ lǐ|흙 속|一堆土|yì duī tǔ|흙 한 더미
+755|推|tuī|밀다|推门|tuī mén|문을 밀다|推车|tuī chē|수레를 밀다|往前推|wǎng qián tuī|앞으로 밀다
+756|推迟|tuīchí|연기하다|推迟时间|tuīchí shíjiān|시간을 미루다|会议推迟|huìyì tuīchí|회의가 연기되다|推迟出发|tuīchí chūfā|출발을 연기하다
+757|推出|tuīchū|내놓다, 출시하다|推出新产品|tuīchū xīn chǎnpǐn|신제품을 출시하다|正式推出|zhèngshì tuīchū|정식 출시하다|推出新服务|tuīchū xīn fúwù|새로운 서비스를 내놓다
+758|脱|tuō|벗다|脱衣服|tuō yīfu|옷을 벗다|脱鞋|tuō xié|신발을 벗다|脱下来|tuō xiàlái|벗어 내리다
+759|袜子|wàzi|양말|穿袜子|chuān wàzi|양말을 신다|买袜子|mǎi wàzi|양말을 사다|一双袜子|yì shuāng wàzi|양말 한 켤레
+760|外出|wàichū|외출하다, 밖에 나가다|外出工作|wàichū gōngzuò|외부에 나가 일하다|外出办事|wàichū bànshì|볼일을 보러 나가다|外出旅游|wàichū lǚyóu|여행을 떠나다
+761|外套|wàitào|외투, 겉옷|穿外套|chuān wàitào|겉옷을 입다|脱外套|tuō wàitào|겉옷을 벗다|一件外套|yí jiàn wàitào|외투 한 벌
+762|完全|wánquán|완전히|完全同意|wánquán tóngyì|완전히 동의하다|完全正确|wánquán zhèngquè|완전히 맞다|完全不同|wánquán bù tóng|완전히 다르다
+763|晚安|wǎn'ān|잘 자요, 안녕히 주무세요|说晚安|shuō wǎn'ān|잘 자라고 인사하다|跟孩子说晚安|gēn háizi shuō wǎn'ān|아이에게 잘 자라고 말하다|晚安，明天见|wǎn'ān, míngtiān jiàn|잘 자, 내일 봐
+764|晚餐|wǎncān|저녁 식사|吃晚餐|chī wǎncān|저녁을 먹다|准备晚餐|zhǔnbèi wǎncān|저녁을 준비하다|丰盛的晚餐|fēngshèng de wǎncān|푸짐한 저녁 식사
+765|网购|wǎnggòu|온라인 쇼핑하다|经常网购|jīngcháng wǎnggòu|자주 온라인 쇼핑하다|网购衣服|wǎnggòu yīfu|옷을 온라인으로 사다|网购商品|wǎnggòu shāngpǐn|상품을 온라인으로 구매하다
+766|往往|wǎngwǎng|흔히, 자주 ~하곤 하다|往往会……|wǎngwǎng huì ……|흔히 ~하곤 한다|往往是……|wǎngwǎng shì ……|흔히 ~이다|往往容易……|wǎngwǎng róngyì ……|흔히 ~하기 쉽다
+767|网页|wǎngyè|웹페이지|打开网页|dǎkāi wǎngyè|웹페이지를 열다|浏览网页|liúlǎn wǎngyè|웹페이지를 둘러보다|网页内容|wǎngyè nèiróng|웹페이지 내용
+768|网友|wǎngyǒu|누리꾼, 온라인 친구|一位网友|yí wèi wǎngyǒu|한 네티즌|网友评论|wǎngyǒu pínglùn|네티즌 댓글·평론|网友表示|wǎngyǒu biǎoshì|네티즌이 밝히다
+769|网址|wǎngzhǐ|웹주소, URL|输入网址|shūrù wǎngzhǐ|웹주소를 입력하다|官方网址|guānfāng wǎngzhǐ|공식 웹주소|记住网址|jì zhù wǎngzhǐ|웹주소를 기억하다
+770|危险|wēixiǎn|위험하다; 위험|发生危险|fāshēng wēixiǎn|위험한 일이 생기다|脱离危险|tuōlí wēixiǎn|위험에서 벗어나다|危险情况|wēixiǎn qíngkuàng|위험한 상황
+771|为|wéi|~로 삼다, ~이다|以……为主|yǐ …… wéizhǔ|~을 주로 하다|以……为例|yǐ …… wéilì|~을 예로 들다|以……为目标|yǐ …… wéi mùbiāo|~을 목표로 삼다
+772|味|wèi|맛, 냄새|甜味|tián wèi|단맛|香味|xiāng wèi|향기|辣味|là wèi|매운맛
+773|味道|wèidào|맛, 냄새|味道不错|wèidào búcuò|맛이 괜찮다|什么味道|shénme wèidào|무슨 냄새·맛|闻到味道|wén dào wèidào|냄새를 맡다
+774|卫生|wèishēng|위생; 위생적인|讲卫生|jiǎng wèishēng|위생에 신경 쓰다|注意卫生|zhùyì wèishēng|위생에 주의하다|卫生条件|wèishēng tiáojiàn|위생 조건
+775|温度|wēndù|온도|温度适宜|wēndù shìyí|온도가 적당하다|测量温度|cèliáng wēndù|온도를 재다|室内温度|shì nèi wēndù|실내 온도
+776|闻|wén|냄새를 맡다|闻一闻|wén yì wén|냄새를 한번 맡아 보다|闻到香味|wén dào xiāng wèi|향을 맡다|闻起来很香|wén qǐlái hěn xiāng|냄새를 맡아 보니 향긋하다
+777|文件|wénjiàn|문서, 파일|打开文件|dǎkāi wénjiàn|파일을 열다|发送文件|fāsòng wénjiàn|파일을 보내다|文件内容|wénjiàn nèiróng|문서 내용
+778|文章|wénzhāng|글, 글 한 편|写文章|xiě wénzhāng|글을 쓰다|一篇文章|yì piān wénzhāng|글 한 편|文章内容|wénzhāng nèiróng|글의 내용
+779|文字|wénzì|문자, 글|一段文字|yí duàn wénzì|글 한 단락|文字内容|wénzì nèiróng|글 내용|文字说明|wénzì shuōmíng|글로 된 설명
+780|污染|wūrǎn|오염, 오염되다|空气污染|kōngqì wūrǎn|대기 오염|环境污染|huánjìng wūrǎn|환경 오염|防止污染|fángzhǐ wūrǎn|오염을 방지하다
+781|无|wú|없다, ~이 없다|无污染|wú wūrǎn|무공해의|无条件|wútiáojiàn|무조건의|无风险|wú fēngxiǎn|위험이 없는
+782|无法|wúfǎ|~할 수 없다|无法参加|wúfǎ cānjiā|참가할 수 없다|无法完成|wúfǎ wánchéng|완료할 수 없다|无法接受|wúfǎ jiēshòu|받아들일 수 없다
+783|无聊|wúliáo|심심하다, 무료하다|感到无聊|gǎndào wúliáo|심심함을 느끼다|很无聊|hěn wúliáo|매우 심심하다|生活无聊|shēnghuó wúliáo|생활이 무료하다
+784|无论|wúlùn|~을 막론하고|无论……都……|wúlùn …… dōu ……|~을 막론하고 모두|无论是谁|wúlùn shì shéi|누구든|无论发生什么|wúlùn fāshēng shénme|무슨 일이 생기든
+785|午餐|wǔcān|점심 식사|吃午餐|chī wǔcān|점심을 먹다|准备午餐|zhǔnbèi wǔcān|점심을 준비하다|午餐时间|wǔcān shíjiān|점심시간
+786|误会|wùhuì|오해하다; 오해|产生误会|chǎnshēng wùhuì|오해가 생기다|消除误会|xiāochú wùhuì|오해를 풀다|别误会|bié wùhuì|오해하지 마
+787|吸|xī|빨아들이다, 들이마시다|吸烟|xī yān|담배를 피우다|吸气|xī qì|숨을 들이마시다|吸一口气|xī yìkǒuqì|숨을 한 번 들이마시다
+788|西部|xībù|서부|中国西部|Zhōngguó xībù|중국 서부|西部地区|xībù dìqū|서부 지역|位于西部|wèiyú xībù|서부에 위치하다
+789|西红柿|xīhóngshì|토마토|西红柿炒鸡蛋|xīhóngshì chǎo jīdàn|토마토 달걀볶음|吃西红柿|chī xīhóngshì|토마토를 먹다|一个西红柿|yí gè xīhóngshì|토마토 한 개
+790|吸引|xīyǐn|끌어당기다, 매료시키다|吸引游客|xīyǐn yóukè|관광객을 끌어들이다|吸引注意力|xīyǐn zhùyì lì|주의를 끌다|吸引顾客|xīyǐn gùkè|고객을 끌어들이다
+791|细|xì|가늘다, 세밀하다|头发很细|tóufa hěn xì|머리카락이 가늘다|细线|xì xiàn|가는 선·실|切得很细|qiē de hěn xì|아주 잘게 썰다
+792|细心|xìxīn|세심하다, 꼼꼼하다|做事细心|zuò shì xìxīn|일을 꼼꼼하게 하다|细心照顾|xìxīn zhàogù|세심하게 돌보다|细心检查|xìxīn jiǎnchá|꼼꼼히 확인하다
+793|下降|xiàjiàng|내려가다, 감소하다|温度下降|wēndù xiàjiàng|온도가 내려가다|价格下降|jiàgé xiàjiàng|가격이 내려가다|数量下降|shùliàng xiàjiàng|수량이 감소하다
+794|鲜|xiān|신선하다|鲜牛奶|xiān niúnǎi|신선한 우유|鲜肉|xiān ròu|신선한 고기|味道很鲜|wèidào hěn xiān|맛이 신선하고 감칠맛이 나다
+795|鲜花|xiānhuā|생화, 꽃|一束鲜花|yí shù xiānhuā|꽃 한 다발|买鲜花|mǎi xiānhuā|꽃을 사다|送鲜花|sòng xiānhuā|꽃을 선물하다
+796|咸|xián|짜다|很咸|hěn xián|매우 짜다|咸味|xián wèi|짠맛|咸鱼|xián yú|소금에 절인 생선
+797|现金|xiànjīn|현금|付现金|fù xiànjīn|현금으로 지불하다|现金支付|xiànjīn zhīfù|현금 결제|带现金|dài xiànjīn|현금을 가지고 다니다
+798|羡慕|xiànmù|부러워하다|羡慕别人|xiànmù biérén|다른 사람을 부러워하다|让人羡慕|ràng rén xiànmù|부러움을 사다|真羡慕你|zhēn xiànmù nǐ|정말 네가 부럽다
+799|线上|xiànshàng|온라인|线上课程|xiànshàng kèchéng|온라인 수업|线上学习|xiànshàng xuéxí|온라인 학습|线上支付|xiànshàng zhīfù|온라인 결제
+800|线下|xiànxià|오프라인|线下活动|xiànxià huódòng|오프라인 행사|线下课程|xiànxià kèchéng|오프라인 수업|线下见面|xiànxià jiànmiàn|오프라인에서 만나다

@@ -3,6 +3,7 @@
 
   const SECTION_SIZE = 50;
   const pad = (n) => String(n).padStart(4, "0");
+  const CIRCLED = ["①", "②", "③"];
 
   // ---------- 저장 (localStorage가 막혀 있어도 앱은 동작) ----------
   const store = {
@@ -39,10 +40,17 @@
   function currentList() {
     if (!state.query) return sections[state.section] || [];
     const q = fold(state.query);
-    return WORDS.filter((w) =>
-      [w.word, w.pinyin, w.meaning, ...w.pairs.flat()].some((t) => fold(t).includes(q)) ||
-      pad(w.no) === state.query.trim()
-    );
+    // 0: 단어·병음·번호가 정확히 일치 / 1: 표제어나 뜻에 포함 / 2: 짝꿍어휘에만 포함
+    const score = (w) => {
+      if (fold(w.word) === q || fold(w.pinyin) === q || pad(w.no) === state.query.trim()) return 0;
+      if ([w.word, w.pinyin, w.meaning].some((t) => fold(t).includes(q))) return 1;
+      if (w.pairs.flat().some((t) => fold(t).includes(q))) return 2;
+      return -1;
+    };
+    return WORDS.map((w) => [score(w), w])
+      .filter(([sc]) => sc >= 0)
+      .sort((a, b) => a[0] - b[0] || a[1].no - b[1].no)
+      .map(([, w]) => w);
   }
 
   // ---------- 발음 (중국어 여성 음성 우선) ----------
@@ -80,30 +88,47 @@
     const r = roundsOf(w.no);
     return `
       <article class="word" data-no="${w.no}">
-        <div class="word-head">
-          <div class="word-meta">
-            <span class="no">${pad(w.no)}</span>
-            <div class="rounds" aria-label="회독 체크">
-              ${[0, 1, 2].map((i) => `<button class="round${r[i] ? " on" : ""}" data-round="${i}" aria-pressed="${r[i]}" aria-label="${i + 1}회독">${i + 1}</button>`).join("")}
-            </div>
+        <div class="side">
+          <span class="no">${pad(w.no)}</span>
+          <div class="rounds" aria-label="공부한 횟수 체크">
+            ${[0, 1, 2].map((i) => `<button class="round${r[i] ? " on" : ""}" data-round="${i}" aria-pressed="${r[i]}" aria-label="${i + 1}번째 공부"></button>`).join("")}
           </div>
-          <div class="hw">
-            <button class="hz zh mask" data-say="${esc(w.word)}" lang="zh-CN">${esc(w.word)}</button>
-            <span class="py zh mask">${esc(w.pinyin)}</span>
-            <button class="speak" data-say="${esc(w.word)}" aria-label="발음 듣기">${SPEAKER}</button>
-          </div>
-          <div class="mean ko mask">${esc(w.meaning)}</div>
         </div>
-        <ol class="pairs">
-          ${w.pairs.map((p, i) => `
-            <li class="pair">
-              <span class="n">${i + 1}</span>
-              <button class="pz zh mask" data-say="${esc(p[0])}" lang="zh-CN">${highlight(p[0], w.word)}</button>
-              <span class="pp zh mask">${esc(p[1])}</span>
-              <span class="pk ko mask">${esc(p[2])}</span>
-            </li>`).join("")}
-        </ol>
+        <div class="body">
+          <div class="word-head">
+            <div class="hw">
+              <button class="hz zh mask" data-say="${esc(w.word)}" lang="zh-CN">${esc(w.word)}</button>
+              <span class="py zh mask">${esc(w.pinyin)}</span>
+              <button class="speak" data-say="${esc(w.word)}" aria-label="발음 듣기">${SPEAKER}</button>
+            </div>
+            <div class="mean ko mask">${esc(w.meaning)}</div>
+          </div>
+          <ol class="pairs">
+            ${w.pairs.map((p, i) => `
+              <li class="pair">
+                <span class="n">${CIRCLED[i]}</span>
+                <button class="pz zh mask" data-say="${esc(p[0])}" lang="zh-CN">${highlight(p[0], w.word)}</button>
+                <span class="pp zh mask">${esc(p[1])}</span>
+                <span class="pk ko mask">${esc(p[2])}</span>
+              </li>`).join("")}
+          </ol>
+        </div>
       </article>`;
+  }
+
+  // 단어장처럼 50개 구간마다 빨간 띠, 10개마다 작은 구분선
+  function sectionListHTML(list) {
+    const first = list[0].no, last = list[list.length - 1].no;
+    const done = list.filter((w) => roundsOf(w.no).every(Boolean)).length;
+    let html = `<div class="band"><b>구간 ${pad(first)} – ${pad(last)}</b><span>3번 공부 완료 ${done} / ${list.length}</span></div>`;
+    list.forEach((w, i) => {
+      if (i % 10 === 0) {
+        const end = list[Math.min(i + 9, list.length - 1)].no;
+        html += `<p class="sub-band">${pad(w.no)} – ${pad(end)}</p>`;
+      }
+      html += wordHTML(w);
+    });
+    return html;
   }
 
   function renderSections() {
@@ -128,7 +153,9 @@
       main.innerHTML = `<div class="card-stage">${wordHTML(list[state.cardIdx])}
         <p class="card-hint">${state.mode === "all" ? "위의 ‘가리기’를 켜고 먼저 말해 본 뒤 확인해요" : "가려진 부분을 누르면 정답이 보여요"} · 옆으로 밀어 넘기기</p></div>`;
     } else {
-      main.innerHTML = (state.query ? `<p class="result-head">검색 결과 ${list.length}개</p>` : "") + list.map(wordHTML).join("");
+      main.innerHTML = state.query
+        ? `<p class="result-head">검색 결과 ${list.length}개</p>` + list.map(wordHTML).join("")
+        : sectionListHTML(list);
     }
   }
 
@@ -148,12 +175,12 @@
       ? `<b>${state.cardIdx + 1}</b> / ${list.length}`
       : state.query ? "검색 결과" : `구간 <b>${pad(sections[state.section][0].no)}</b>`;
     $("#progress").innerHTML = `
-      <div class="label"><span>${left}</span><span>회독 ${counts.join(" · ")} / ${list.length}</span></div>
+      <div class="label"><span>${left}</span><span>${counts.map((c, i) => `${i + 1}회 <b>${c}</b>`).join(" · ")}</span></div>
       <div class="bars">${counts.map((c) => `<div class="bar"><i style="width:${(c / total) * 100}%"></i></div>`).join("")}</div>`;
   }
 
   function renderToolbar() {
-    document.body.className = "mode-" + state.mode;
+    ["all", "hide-ko", "hide-zh"].forEach((m) => document.body.classList.toggle("mode-" + m, m === state.mode));
     document.querySelectorAll("#viewSeg button").forEach((b) => b.classList.toggle("on", b.dataset.view === state.view));
     document.querySelectorAll("#modeSeg button").forEach((b) => b.classList.toggle("on", b.dataset.mode === state.mode));
   }
@@ -213,7 +240,8 @@
     state.mode = b.dataset.mode;
     store.set("mode", state.mode);
     renderToolbar();
-    document.querySelectorAll(".mask.shown").forEach((el) => el.classList.remove("shown"));
+    if (state.view === "card") renderMain();
+    else document.querySelectorAll(".mask.shown").forEach((el) => el.classList.remove("shown"));
   });
 
   let searchTimer;
@@ -243,6 +271,11 @@
       round.setAttribute("aria-pressed", r[i]);
       renderSections();
       renderProgress();
+      const band = main.querySelector(".band span");
+      if (band) {
+        const list = currentList();
+        band.textContent = `3번 공부 완료 ${list.filter((w) => roundsOf(w.no).every(Boolean)).length} / ${list.length}`;
+      }
       return;
     }
     const mask = e.target.closest(".mask");
@@ -274,9 +307,19 @@
     if (e.key === "ArrowLeft") step(-1);
   });
 
-  const info = $("#info");
-  $("#infoBtn").addEventListener("click", () => info.showModal());
-  info.addEventListener("click", (e) => { if (e.target === info) info.close(); });
+  // 처음 화면(이렇게 공부해요): 첫 방문 때 보여 주고, ? 버튼으로 다시 열기
+  const intro = $("#intro");
+  function showIntro(open) {
+    intro.hidden = !open;
+    document.body.classList.toggle("intro-open", open);
+    if (open) intro.scrollTop = 0;
+  }
+  $("#infoBtn").addEventListener("click", () => showIntro(true));
+  $("#startBtn").addEventListener("click", () => {
+    store.set("introSeen", true);
+    showIntro(false);
+  });
+  showIntro(!store.get("introSeen", false));
 
   render();
 })();

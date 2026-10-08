@@ -1,0 +1,200 @@
+201|分数|fēnshù|점수|考试分数|kǎoshì fēnshù|시험 점수|分数很高|fēnshù hěn gāo|점수가 높다|提高分数|tígāo fēnshù|점수를 높이다
+202|分为|fēnwéi|~로 나뉘다, ~로 나누다|分为三部分|fēnwéi sān bùfen|세 부분으로 나뉘다|可以分为|kěyǐ fēnwéi|~로 나눌 수 있다|分为两类|fēnwéi liǎng lèi|두 종류로 나뉘다
+203|份|fèn|부, 건, 몫(양사)|一份工作|yí fèn gōngzuò|일자리 하나|一份礼物|yí fèn lǐwù|선물 하나|一份申请|yí fèn shēnqǐng|신청서 한 부
+204|丰富|fēngfù|풍부하다|丰富多彩|fēngfù-duōcǎi|다채롭다|内容丰富|nèiróng fēngfù|내용이 풍부하다|经验丰富|jīngyàn fēngfù|경험이 풍부하다
+205|风景|fēngjǐng|풍경|美丽的风景|měilì de fēngjǐng|아름다운 풍경|欣赏风景|xīnshǎng fēngjǐng|풍경을 감상하다|风景优美|fēngjǐng yōuměi|풍경이 아름답다
+206|否则|fǒuzé|그렇지 않으면|否则会迟到|fǒuzé huì chídào|그렇지 않으면 지각한다|否则来不及|fǒuzé láibují|그렇지 않으면 늦는다|否则就算了|fǒuzé jiùsuàn le|그렇지 않으면 그만두자
+207|幅|fú|폭, 장(그림 등의 양사)|一幅画|yì fú huà|그림 한 폭|一幅照片|yì fú zhàopiàn|사진 한 장|一幅地图|yì fú dìtú|지도 한 장
+208|符合|fúhé|부합하다|符合要求|fúhé yāoqiú|요구에 부합하다|符合规定|fúhé guīdìng|규정에 부합하다|符合实际|fúhé shíjì|실제에 부합하다
+209|付|fù|지불하다, 건네주다|付钱|fù qián|돈을 내다|付房租|fù fángzū|월세를 내다|付费用|fù fèiyong|비용을 지불하다
+210|父母|fùmǔ|부모|父母双方|fùmǔ shuāngfāng|부모 양쪽|父母同意|fùmǔ tóngyì|부모가 동의하다|和父母商量|hé fùmǔ shāngliang|부모와 상의하다
+211|父女|fùnǚ|부녀, 아버지와 딸|父女俩|fùnǚ liǎ|아버지와 딸 두 사람|父女关系|fùnǚ guānxì|부녀 관계|一对父女|yí duì fùnǚ|아버지와 딸 한 쌍
+212|父亲|fùqīn|부친, 아버지|我的父亲|wǒ de fùqīn|나의 아버지|父亲节|fùqīn jié|아버지의 날|尊敬父亲|zūnjìng fùqīn|아버지를 존경하다
+213|复印|fùyìn|복사하다|复印文件|fùyìn wénjiàn|문서를 복사하다|复印材料|fùyìn cáiliào|자료를 복사하다|复印机|fùyìnjī|복사기
+214|复杂|fùzá|복잡하다|很复杂|hěn fùzá|매우 복잡하다|问题复杂|wèntí fùzá|문제가 복잡하다|复杂关系|fùzá guānxì|복잡한 관계
+215|负责|fùzé|책임지다, 담당하다|负责这项工作|fùzé zhè xiàng gōngzuò|이 일을 책임지다|对工作负责|duì gōngzuò fùzé|일에 책임을 지다|负责管理|fùzé guǎnlǐ|관리를 담당하다
+216|负责人|fùzérén|책임자|项目负责人|xiàngmù fùzérén|프로젝트 책임자|主要负责人|zhǔyào fùzérén|주요 책임자|联系负责人|liánxì fùzérén|책임자에게 연락하다
+217|父子|fùzǐ|부자, 아버지와 아들|父子俩|fùzǐ liǎ|아버지와 아들 두 사람|父子关系|fùzǐ guānxì|부자 관계|一对父子|yí duì fùzǐ|아버지와 아들 한 쌍
+218|改|gǎi|고치다, 바꾸다|改时间|gǎi shíjiān|시간을 바꾸다|改名字|gǎi míngzi|이름을 바꾸다|改一改|gǎi yì gǎi|조금 고쳐 보다
+219|改变|gǎibiàn|바꾸다, 변화하다|改变主意|gǎibiàn zhǔyi|생각을 바꾸다|改变计划|gǎibiàn jìhuà|계획을 바꾸다|发生改变|fāshēng gǎibiàn|변화가 생기다
+220|干|gān|마르다, 건조하다|衣服干了|yīfu gān le|옷이 말랐다|把衣服晒干|bǎ yīfu shàigān|옷을 햇볕에 말리다|头发还没干|tóufa hái méi gān|머리가 아직 안 말랐다
+221|干杯|gānbēi|건배하다|为你干杯|wèi nǐ gānbēi|당신을 위해 건배|举杯干杯|jǔ bēi gānbēi|잔을 들어 건배하다|大家干杯|dàjiā gānbēi|모두 건배하다
+222|赶|gǎn|서두르다; 따라잡다|赶时间|gǎn shíjiān|시간에 쫓기다|赶火车|gǎn huǒchē|기차를 타려고 서두르다|赶回家|gǎn huí jiā|서둘러 집에 돌아가다
+223|敢|gǎn|감히 ~하다|不敢去|bù gǎn qù|감히 가지 못하다|敢说|gǎn shuō|감히 말하다|敢不敢试试|gǎn bù gǎn shì shì|감히 한번 해볼래
+224|感|gǎn|느낌, 감각; 감동(결합형)|感觉|gǎnjué|느낌|感动|gǎndòng|감동하다|感情|gǎnqíng|감정
+225|感动|gǎndòng|감동하다|非常感动|fēicháng gǎndòng|매우 감동하다|令人感动|lìng rén gǎndòng|감동을 주다|深受感动|shēn shòu gǎndòng|깊이 감동받다
+226|赶紧|gǎnjǐn|서둘러, 얼른|赶紧回去|gǎnjǐn huíqù|얼른 돌아가다|赶紧吃饭|gǎnjǐn chī fàn|얼른 밥을 먹다|赶紧准备|gǎnjǐn zhǔnbèi|서둘러 준비하다
+227|感觉|gǎnjué|느낌, 느끼다|有种感觉|yǒu zhǒng gǎnjué|어떤 느낌이 있다|感觉良好|gǎnjué liánghǎo|느낌이 좋다|感觉很累|gǎnjué hěn lèi|매우 피곤하게 느끼다
+228|赶快|gǎnkuài|빨리, 서둘러|赶快走|gǎnkuài zǒu|빨리 가다|赶快回来|gǎnkuài huílái|빨리 돌아오다|赶快准备|gǎnkuài zhǔnbèi|서둘러 준비하다
+229|感情|gǎnqíng|감정, 정|深厚感情|shēnhòu gǎnqíng|깊은 정|感情丰富|gǎnqíng fēngfù|감정이 풍부하다|表达感情|biǎodá gǎnqíng|감정을 표현하다
+230|感人|gǎnrén|감동적이다|感人的故事|gǎnrén de gùshi|감동적인 이야기|非常感人|fēicháng gǎnrén|매우 감동적이다|令人感动|lìng rén gǎndòng|사람을 감동시키다
+231|赶上|gǎnshàng|따라잡다; 제때에 맞추다|赶上火车|gǎnshàng huǒchē|기차를 제때 타다|赶上末班车|gǎnshàng mò bān chē|막차를 타다|赶上好机会|gǎnshàng hǎo jīhuì|좋은 기회를 잡다
+232|感受|gǎnshòu|느끼다; 느낌|感受生活|gǎnshòu shēnghuó|삶을 느끼다|亲身感受|qīnshēn gǎnshòu|직접 체험하고 느끼다|说说感受|shuō shuō gǎnshòu|느낀 점을 말해 보다
+233|感谢|gǎnxiè|감사하다|感谢帮助|gǎnxiè bāngzhù|도움에 감사하다|表示感谢|biǎoshì gǎnxiè|감사를 표하다|非常感谢|fēicháng gǎnxiè|매우 감사하다
+234|干活儿|gànhuór|일하다, 노동하다|出去干活儿|chūqù gànhuór|일하러 나가다|帮忙干活儿|bāngmáng gànhuór|일을 도와주다|干了一天活儿|gàn le yì tiān huór|하루 종일 일했다
+235|钢琴|gāngqín|피아노|弹钢琴|tán gāngqín|피아노를 치다|学钢琴|xué gāngqín|피아노를 배우다|钢琴老师|gāngqín lǎoshī|피아노 선생님
+236|高价|gāojià|고가, 높은 가격|高价出售|gāojià chūshòu|비싼 가격에 판매하다|高价商品|gāojià shāngpǐn|고가 상품|价格过高|jiàgé guò gāo|가격이 지나치게 높다
+237|高考|gāokǎo|가오카오, 중국 대학입학시험|参加高考|cānjiā gāokǎo|가오카오를 치르다|高考成绩|gāokǎo chéngjì|가오카오 성적|准备高考|zhǔnbèi gāokǎo|가오카오를 준비하다
+238|高速|gāosù|고속의|高速公路|gāosù gōnglù|고속도로|高速发展|gāosù fāzhǎn|고속으로 발전하다|高速列车|gāosù lièchē|고속열차
+239|高温|gāowēn|고온|高温天气|gāowēn tiānqì|고온 날씨|高温环境|gāowēn huánjìng|고온 환경|持续高温|chíxù gāowēn|고온이 계속되다
+240|高于|gāoyú|~보다 높다|高于标准|gāoyú biāozhǔn|기준보다 높다|高于平均水平|gāoyú píngjūn shuǐpíng|평균 수준보다 높다|温度高于三十度|wēndù gāoyú sān shí dù|온도가 30도보다 높다
+241|胳膊|gēbo|팔, 팔뚝|胳膊疼|gēbo téng|팔이 아프다|抬起胳膊|tái qǐ gēbo|팔을 들어 올리다|挽着胳膊|wǎn zhe gēbo|팔짱을 끼다
+242|歌声|gēshēng|노랫소리|优美的歌声|yōuměi de gēshēng|아름다운 노랫소리|听到歌声|tīng dào gēshēng|노랫소리를 듣다|歌声响起|gēshēng xiǎng qǐ|노랫소리가 울려 퍼지다
+243|歌手|gēshǒu|가수|著名歌手|zhùmíng gēshǒu|유명 가수|一名歌手|yì míng gēshǒu|가수 한 명|当歌手|dāng gēshǒu|가수가 되다
+244|各|gè|각, 각각|各学校|gè xuéxiào|각 학교|各地区|gèdì qū|각 지역|各有不同|gè yǒu bù tóng|각각 다르다
+245|各地|gèdì|각지, 여러 지역|全国各地|quán guó gèdì|전국 각지|来自各地|láizì gèdì|각지에서 오다|各地游客|gèdì yóukè|각지의 관광객
+246|各个|gègè|각각의, 각|各个方面|gègè fāngmiàn|각 방면|各个国家|gègè guójiā|각 나라|各个部门|gègè bùmén|각 부서
+247|各位|gèwèi|여러분, 각 분|各位老师|gèwèi lǎoshī|선생님 여러분|各位同学|gèwèi tóngxué|학생 여러분|各位朋友|gèwèi péngyou|친구 여러분
+248|各种|gèzhǒng|각종, 여러 종류의|各种问题|gèzhǒng wèntí|각종 문제|各种活动|gèzhǒng huódòng|각종 활동|各种方法|gèzhǒng fāngfǎ|여러 방법
+249|更加|gèngjiā|더욱, 한층 더|更加努力|gèngjiā nǔlì|더욱 노력하다|更加重要|gèngjiā zhòngyào|더욱 중요하다|更加方便|gèngjiā fāngbiàn|더욱 편리하다
+250|工厂|gōngchǎng|공장|工厂工人|gōngchǎng gōngrén|공장 노동자|在工厂工作|zài gōngchǎng gōngzuò|공장에서 일하다|参观工厂|cānguān gōngchǎng|공장을 견학하다
+251|功夫|gōngfu|공부, 기술; 시간과 노력|练功夫|liàn gōngfu|기술을 연마하다|花功夫|huā gōngfu|시간과 노력을 들이다|真功夫|zhēn gōngfu|진짜 실력
+252|公共|gōnggòng|공공의, 공동의|公共交通|gōnggòng jiāotōng|대중교통|公共场所|gōnggòng chǎngsuǒ|공공장소|公共服务|gōnggòng fúwù|공공 서비스
+253|功课|gōngkè|공부, 과제|做功课|zuò gōngkè|공부하다·과제를 하다|功课很多|gōngkè hěn duō|과제가 많다|复习功课|fùxí gōngkè|공부한 내용을 복습하다
+254|公里|gōnglǐ|킬로미터|十公里|shí gōnglǐ|10킬로미터|跑五公里|pǎo wǔ gōnglǐ|5킬로미터를 달리다|公里数|gōnglǐ shù|킬로미터 수
+255|公路|gōnglù|도로, 공로|高速公路|gāosù gōnglù|고속도로|公路交通|gōnglù jiāotōng|도로 교통|公路两旁|gōnglù liǎngpáng|도로 양옆
+256|工人|gōngrén|노동자, 근로자|工厂工人|gōngchǎng gōngrén|공장 노동자|一名工人|yì míng gōngrén|노동자 한 명|工人们|gōngrén men|노동자들
+257|工资|gōngzī|임금, 월급|发工资|fā gōngzī|월급을 지급하다|工资待遇|gōngzī dàiyù|임금 대우|涨工资|zhǎng gōngzī|월급이 오르다
+258|共|gòng|합계, 모두|共十人|gòng shí rén|모두 열 명|共收到十份申请|gòng shōudào shí fèn shēnqǐng|신청서 열 건을 모두 받다|总共需要三天|zǒnggòng xūyào sān tiān|모두 사흘이 필요하다
+259|共同|gòngtóng|공동의, 함께|共同努力|gòngtóng nǔlì|함께 노력하다|共同点|gòngtóng diǎn|공통점|共同生活|gòngtóng shēnghuó|함께 생활하다
+260|够|gòu|충분하다|够了|gòu le|됐다, 충분하다|不够|búgòu|부족하다|足够|zúgòu|충분하다
+261|购买|gòumǎi|구매하다|购买商品|gòumǎi shāngpǐn|상품을 구매하다|购买车票|gòumǎi chē piào|표를 구매하다|网上购买|wǎngshang gòumǎi|온라인으로 구매하다
+262|购物|gòuwù|쇼핑하다|网上购物|wǎngshang gòuwù|온라인 쇼핑|购物中心|gòuwù zhōngxīn|쇼핑센터|购物清单|gòuwù qīngdān|쇼핑 목록
+263|估计|gūjì|추측하다, 예상하다|我估计|wǒ gūjì|내 생각에는|估计时间|gūjì shíjiān|시간을 예상하다|据估计|jù gūjì|추산에 따르면
+264|姑娘|gūniang|아가씨, 젊은 여성|年轻姑娘|niánqīng gūniang|젊은 여성|一个姑娘|yí gè gūniang|젊은 여성 한 명|漂亮姑娘|piàoliang gūniang|예쁜 아가씨
+265|鼓励|gǔlì|격려하다|鼓励学生|gǔlì xuéshēng|학생을 격려하다|互相鼓励|hùxiāng gǔlì|서로 격려하다|得到鼓励|dédào gǔlì|격려를 받다
+266|顾客|gùkè|고객|招待顾客|zhāodài gùkè|고객을 응대하다|顾客满意|gùkè mǎnyì|고객이 만족하다|顾客服务|gùkè fúwù|고객 서비스
+267|故意|gùyì|고의로|故意的|gùyì de|고의다|故意迟到|gùyì chídào|고의로 지각하다|不是故意|bú shì gùyì|고의가 아니다
+268|挂|guà|걸다|挂电话|guà diànhuà|전화를 끊다|挂衣服|guà yīfu|옷을 걸다|挂在墙上|guà zài qiáng shàng|벽에 걸다
+269|关键|guānjiàn|관건, 핵심|关键问题|guānjiàn wèntí|핵심 문제|最关键的|zuì guānjiàn de|가장 관건인 것|关键时刻|guānjiàn shíkè|결정적인 순간
+270|观看|guānkàn|관람하다, 시청하다|观看比赛|guānkàn bǐsài|경기를 관람하다|观看演出|guānkàn yǎnchū|공연을 관람하다|在线观看|zàixiàn guānkàn|온라인으로 시청하다
+271|观众|guānzhòng|관중, 시청자|现场观众|xiànchǎng guānzhòng|현장 관중|观众人数|guānzhòng rénshù|관중 수|受到观众欢迎|shòudào guānzhòng huānyíng|관중에게 인기를 얻다
+272|管|guǎn|관리하다; 상관하다|管理公司|guǎnlǐ gōngsī|회사를 관리하다|管孩子|guǎn háizi|아이를 돌보고 관리하다|别管我|bié guǎn wǒ|나한테 상관하지 마
+273|管理|guǎnlǐ|관리하다|管理公司|guǎnlǐ gōngsī|회사를 관리하다|管理制度|guǎnlǐ zhìdù|관리 제도|科学管理|kēxué guǎnlǐ|과학적 관리
+274|光|guāng|빛|一道光|yídào guāng|한 줄기 빛|光太强|guāng tài qiáng|빛이 너무 강하다|灯光|dēngguāng|조명, 불빛
+275|广播|guǎngbō|방송|听广播|tīng guǎngbō|라디오를 듣다|广播电台|guǎngbō diàntái|방송국|广播通知|guǎngbō tōngzhī|방송으로 알리다
+276|广告|guǎnggào|광고|电视广告|diànshì guǎnggào|텔레비전 광고|做广告|zuò guǎnggào|광고를 하다|广告宣传|guǎnggào xuānchuán|광고 홍보
+277|逛|guàng|거닐다, 구경하다|逛街|guàng jiē|거리를 구경하다|逛商店|guàng shāngdiàn|상점을 구경하다|逛公园|guàng gōngyuán|공원을 거닐다
+278|规定|guīdìng|규정, 규정하다|遵守规定|zūnshǒu guīdìng|규정을 지키다|按照规定|ànzhào guīdìng|규정에 따라|学校规定|xuéxiào guīdìng|학교 규정
+279|国籍|guójí|국적|中国国籍|Zhōngguó guójí|중국 국적|申请国籍|shēnqǐng guójí|국적을 신청하다|拥有国籍|yōngyǒu guójí|국적을 보유하다
+280|国际|guójì|국제의|国际会议|guójì huìyì|국제 회의|国际关系|guójì guānxì|국제 관계|走向国际市场|zǒu xiàng guójì shìchǎng|국제 시장으로 진출하다
+281|果汁|guǒzhī|과일 주스|喝果汁|hē guǒzhī|주스를 마시다|一杯果汁|yì bēi guǒzhī|주스 한 잔|新鲜果汁|xīnxiān guǒzhī|신선한 주스
+282|过程|guòchéng|과정|学习过程|xuéxí guòchéng|학습 과정|发展过程|fāzhǎn guòchéng|발전 과정|整个过程|zhěnggè guòchéng|전체 과정
+283|海洋|hǎiyáng|해양, 바다|海洋生物|hǎiyáng shēngwù|해양 생물|保护海洋|bǎohù hǎiyáng|해양을 보호하다|广阔的海洋|guǎngkuò de hǎiyáng|광활한 바다
+284|害羞|hàixiū|부끄러워하다|有点害羞|yǒu diǎn hàixiū|조금 부끄러워하다|害羞的孩子|hàixiū de háizi|부끄러움을 타는 아이|感到害羞|gǎndào hàixiū|부끄러움을 느끼다
+285|寒假|hánjià|겨울방학|放寒假|fàng hánjià|겨울방학을 하다|寒假作业|hánjià zuòyè|겨울방학 숙제|寒假计划|hánjià jìhuà|겨울방학 계획
+286|寒冷|hánlěng|춥다, 차갑다|天气寒冷|tiānqì hánlěng|날씨가 춥다|寒冷的冬天|hánlěng de dōngtiān|추운 겨울|气候寒冷|qìhòu hánlěng|기후가 춥다
+287|喊|hǎn|외치다, 소리치다|大声喊|dà shēng hǎn|큰 소리로 외치다|喊名字|hǎn míngzi|이름을 부르다|喊救命|hǎn jiùmìng|살려 달라고 외치다
+288|汗|hàn|땀|出汗|chū hàn|땀이 나다|满头大汗|mǎn tóu dà hàn|머리가 온통 땀투성이다|擦汗|cā hàn|땀을 닦다
+289|航班|hángbān|항공편|国际航班|guójì hángbān|국제선 항공편|航班延误|hángbān yánwù|항공편이 지연되다|航班动态|hángbān dòngtài|항공편 운항 정보
+290|好处|hǎochù|좋은 점, 이점|有好处|yǒu hǎochù|장점이 있다|带来好处|dài lái hǎochù|이점을 가져오다|运动的好处|yùndòng de hǎochù|운동의 좋은 점
+291|好好|hǎohǎo|잘, 제대로|好好学习|hǎohǎo xuéxí|열심히 공부하다|好好休息|hǎohǎo xiūxi|푹 쉬다|好好想想|hǎohǎo xiǎng xiǎng|잘 생각해 보다
+292|好笑|hǎoxiào|웃기다, 우습다|很好笑|hěn hǎoxiào|매우 웃기다|太好笑了|tài hǎoxiào le|너무 웃기다|好笑的故事|hǎoxiào de gùshi|웃긴 이야기
+293|合格|hégé|합격하다, 기준에 맞다|考试合格|kǎoshì hégé|시험에 합격하다|产品合格|chǎnpǐn hégé|제품이 기준에 맞다|检查合格|jiǎnchá hégé|검사에 합격하다
+294|盒子|hézi|상자|一个盒子|yí gè hézi|상자 하나|打开盒子|dǎkāi hézi|상자를 열다|装进盒子|zhuāng jìn hézi|상자에 담다
+295|红包|hóngbāo|홍바오, 세뱃돈·축의금 봉투|发红包|fā hóngbāo|홍바오를 보내다|收红包|shōu hóngbāo|홍바오를 받다|抢红包|qiǎng hóngbāo|온라인 홍바오를 선착순으로 받다
+296|厚|hòu|두껍다|很厚|hěn hòu|매우 두껍다|厚衣服|hòu yīfu|두꺼운 옷|书很厚|shū hěn hòu|책이 두껍다
+297|后悔|hòuhuǐ|후회하다|感到后悔|gǎndào hòuhuǐ|후회를 느끼다|很后悔|hěn hòuhuǐ|매우 후회하다|来不及后悔|láibují hòuhuǐ|후회해도 늦었다
+298|忽然|hūrán|갑자기|忽然想起|hūrán xiǎng qǐ|갑자기 생각나다|忽然下雨|hūrán xià yǔ|갑자기 비가 오다|忽然出现|hūrán chūxiàn|갑자기 나타나다
+299|互联网|hùliánwǎng|인터넷|互联网时代|hùliánwǎng shídài|인터넷 시대|互联网公司|hùliánwǎng gōngsī|인터넷 기업|互联网发展|hùliánwǎng fāzhǎn|인터넷 발전
+300|护士|hùshi|간호사|一名护士|yì míng hùshi|간호사 한 명|当护士|dāng hùshi|간호사가 되다|护士照顾病人|hùshi zhàogù bìngrén|간호사가 환자를 돌보다
+301|互相|hùxiāng|서로|互相帮助|hùxiāng bāngzhù|서로 돕다|互相学习|hùxiāng xuéxí|서로 배우다|互相了解|hùxiāng liǎojiě|서로 이해하다
+302|话剧|huàjù|연극|看话剧|kàn huàjù|연극을 보다|一场话剧|yì chǎng huàjù|연극 한 편|话剧演员|huàjù yǎnyuán|연극 배우
+303|怀疑|huáiyí|의심하다|表示怀疑|biǎoshì huáiyí|의심을 표시하다|怀疑他|huáiyí tā|그를 의심하다|有点怀疑|yǒu diǎn huáiyí|조금 의심스럽다
+304|坏处|huàichù|나쁜 점, 단점|有坏处|yǒu huàichù|나쁜 점이 있다|对身体有坏处|duì shēntǐ yǒu huàichù|몸에 해롭다|没什么坏处|méi shénme huàichù|별다른 단점이 없다
+305|环保|huánbǎo|환경 보호; 친환경의|环保意识|huánbǎo yìshí|환경 보호 의식|环保产品|huánbǎo chǎnpǐn|친환경 제품|环保活动|huánbǎo huódòng|환경 보호 활동
+306|换乘|huànchéng|환승하다, 갈아타다|换乘地铁|huànchéng dìtiě|지하철로 환승하다|换乘公交车|huànchéng gōngjiāochē|버스로 갈아타다|在下一站换乘|zài xià yí zhàn huànchéng|다음 역에서 환승하다
+307|回复|huífù|답변하다, 회신하다|回复消息|huífù xiāoxi|메시지에 답하다|回复邮件|huífù yóujiàn|이메일에 회신하다|及时回复|jíshí huífù|제때 답변하다
+308|回信|huíxìn|답장하다; 답장|给朋友回信|gěi péngyou huíxìn|친구에게 답장하다|收到回信|shōudào huíxìn|답장을 받다|等待回信|děngdài huíxìn|답장을 기다리다
+309|回忆|huíyì|추억, 회상하다|美好回忆|měihǎo huíyì|아름다운 추억|回忆过去|huíyì guòqù|과거를 회상하다|童年回忆|tóngnián huíyì|어린 시절 추억
+310|会员|huìyuán|회원|成为会员|chéngwéi huìyuán|회원이 되다|会员卡|huìyuán kǎ|회원카드|会员服务|huìyuán fúwù|회원 서비스
+311|活|huó|살다; 살아 있는; 일|活下去|huó xiàqù|살아가다|活鱼|huó yú|살아 있는 생선|干活儿|gànhuór|일하다
+312|活动|huódòng|활동|举办活动|jǔbàn huódòng|행사를 개최하다|参加活动|cānjiā huódòng|활동에 참가하다|户外活动|hùwài huódòng|야외 활동
+313|活泼|huópō|활발하다|活泼可爱|huópō kě'ài|활발하고 귀엽다|性格活泼|xìnggé huópō|성격이 활발하다|活泼开朗|huópō kāilǎng|활발하고 명랑하다
+314|火|huǒ|불; 인기 있다|着火|zháohuǒ|불이 나다|生火|shēng huǒ|불을 피우다|火很大|huǒ hěn dà|불길이 세다
+315|货|huò|상품, 물건|送货|sòng huò|물건을 배송하다|收货|shōu huò|물건을 받다|货到了|huò dào le|물건이 도착했다
+316|获得|huòdé|얻다, 획득하다|获得成功|huòdé chénggōng|성공을 얻다|获得机会|huòdé jīhuì|기회를 얻다|获得奖励|huòdé jiǎnglì|상을 받다
+317|获奖|huòjiǎng|수상하다|在比赛中获奖|zài bǐsài zhōng huòjiǎng|대회에서 수상하다|获奖作品|huòjiǎng zuòpǐn|수상 작품|获奖名单|huòjiǎng míngdān|수상자 명단
+318|获取|huòqǔ|얻다, 획득하다|获取信息|huòqǔ xìnxī|정보를 얻다|获取知识|huòqǔ zhīshi|지식을 얻다|获取资料|huòqǔ zīliào|자료를 얻다
+319|基本|jīběn|기본적인; 기본적으로|基本要求|jīběn yāoqiú|기본 요구 사항|基本情况|jīběn qíngkuàng|기본 상황|基本完成|jīběn wánchéng|대체로 완료하다
+320|基本上|jīběnshàng|기본적으로, 대체로|基本上同意|jīběnshàng tóngyì|기본적으로 동의하다|基本上完成|jīběnshàng wánchéng|대체로 완료하다|基本上一样|jīběnshàng yíyàng|대체로 같다
+321|基础|jīchǔ|기초|打好基础|dǎ hǎo jīchǔ|기초를 다지다|基础知识|jīchǔ zhīshi|기초 지식|基础教育|jīchǔ jiàoyù|기초 교육
+322|激动|jīdòng|흥분하다, 감격하다|非常激动|fēicháng jīdòng|매우 흥분하다|激动地说|jīdòng de shuō|감격해서 말하다|让人激动|ràng rén jīdòng|사람을 감격시키다
+323|积极|jījí|적극적이다|积极参加|jījí cānjiā|적극적으로 참가하다|态度积极|tàidù jījí|태도가 적극적이다|积极努力|jījí nǔlì|적극적으로 노력하다
+324|积累|jīlěi|쌓다, 축적하다|积累经验|jīlěi jīngyàn|경험을 쌓다|积累知识|jīlěi zhīshi|지식을 쌓다|长期积累|chángqī jīlěi|오랫동안 축적하다
+325|及时|jíshí|제때에|及时完成|jíshí wánchéng|제때에 완성하다|及时通知|jíshí tōngzhī|제때에 통지하다|及时处理|jíshí chǔlǐ|제때에 처리하다
+326|即使|jíshǐ|설령 ~하더라도|即使……也……|jíshǐ …… yě ……|설령 ~해도|即使很忙，也……|jíshǐ hěn máng, yě ……|아무리 바빠도…|即使遇到困难，也……|jíshǐ yùdào kùnnan, yě ……|어려움을 만나더라도…
+327|既|jì|~이기도 하고; 이미(문어 구조)|既方便又便宜|jì fāngbiàn yòu piányi|편리하면서 저렴하다|既是老师也是朋友|jì shì lǎoshī yě shì péngyou|선생님이면서 친구이기도 하다|既不……也不……|jì bù …… yě bù ……|~도 아니고 …도 아니다
+328|寄|jì|부치다, 보내다|寄信|jì xìn|편지를 부치다|寄包裹|jì bāoguǒ|소포를 부치다|寄东西|jì dōngxi|물건을 보내다
+329|计划|jìhuà|계획|制定计划|zhìdìng jìhuà|계획을 세우다|旅游计划|lǚyóu jìhuà|여행 계획|按计划完成|àn jìhuà wánchéng|계획대로 완성하다
+330|既然|jìrán|기왕 ~한 이상|既然……就……|jìrán …… jiù ……|기왕 ~하니 ~하다|既然来了|jìrán lái le|온 이상|既然决定了|jìrán juédìng le|결정한 이상
+331|技术|jìshù|기술|技术水平|jìshù shuǐpíng|기술 수준|掌握技术|zhǎngwò jìshù|기술을 익히다|新技术|xīn jìshù|신기술
+332|继续|jìxù|계속하다|继续努力|jìxù nǔlì|계속 노력하다|继续工作|jìxù gōngzuò|계속 일하다|继续前进|jìxù qiánjìn|계속 전진하다
+333|记者|jìzhě|기자|新闻记者|xīnwén jìzhě|뉴스 기자|一名记者|yì míng jìzhě|기자 한 명|接受记者采访|jiēshòu jìzhě cǎifǎng|기자의 인터뷰를 받다
+334|加班|jiābān|야근하다, 초과 근무하다|经常加班|jīngcháng jiābān|자주 야근하다|晚上加班|wǎnshang jiābān|밤에 야근하다|加班到十点|jiābān dào shí diǎn|10시까지 야근하다
+335|家具|jiājù|가구|买家具|mǎi jiājù|가구를 사다|家具店|jiājù diàn|가구점|新家具|xīn jiājù|새 가구
+336|加快|jiākuài|속도를 높이다, 가속하다|加快速度|jiākuài sùdù|속도를 높이다|加快发展|jiākuài fāzhǎn|발전을 가속하다|加快建设|jiākuài jiànshè|건설을 가속하다
+337|加强|jiāqiáng|강화하다|加强管理|jiāqiáng guǎnlǐ|관리를 강화하다|加强合作|jiāqiáng hézuò|협력을 강화하다|加强锻炼|jiāqiáng duànliàn|운동을 강화하다
+338|加入|jiārù|가입하다, 참가하다|加入团队|jiārù tuánduì|팀에 합류하다|加入我们|jiārù wǒmen|우리와 함께하다|加入讨论|jiārù tǎolùn|토론에 참여하다
+339|加上|jiāshàng|더하다; 게다가|再加上|zài jiāshàng|게다가|加上运费|jiāshàng yùnfèi|배송비를 더하다|加上这一点|jiāshàng zhè yì diǎn|이 점까지 더하다
+340|家庭|jiātíng|가정, 가족|家庭成员|jiātíng chéngyuán|가족 구성원|家庭生活|jiātíng shēnghuó|가정생활|家庭教育|jiātíng jiàoyù|가정교육
+341|家乡|jiāxiāng|고향|回家乡|huí jiāxiāng|고향에 돌아가다|离开家乡|líkāi jiāxiāng|고향을 떠나다|我的家乡|wǒ de jiāxiāng|나의 고향
+342|加油|jiāyóu|기름을 넣다; 힘내다, 응원하다|给汽车加油|gěi qìchē jiāyóu|자동차에 기름을 넣다|加油吧|jiāyóu ba|힘내|为你加油|wèi nǐ jiāyóu|너를 응원하다
+343|加油站|jiāyóuzhàn|주유소|去加油站|qù jiāyóuzhàn|주유소에 가다|附近的加油站|fùjìn de jiāyóuzhàn|근처 주유소|在加油站加油|zài jiāyóuzhàn jiāyóu|주유소에서 주유하다
+344|家长|jiāzhǎng|학부모, 보호자|学生家长|xuéshēng jiāzhǎng|학생의 학부모|家长会|jiāzhǎng huì|학부모회|家长同意|jiāzhǎng tóngyì|학부모가 동의하다
+345|假|jiǎ|가짜의|假消息|jiǎ xiāoxi|가짜 뉴스·정보|假证件|jiǎ zhèngjiàn|가짜 증명서|假货|jiǎ huò|가짜 상품
+346|价格|jiàgé|가격|价格便宜|jiàgé piányi|가격이 싸다|商品价格|shāngpǐn jiàgé|상품 가격|价格上涨|jiàgé shàngzhǎng|가격이 오르다
+347|价钱|jiàqián|가격, 값|问价钱|wèn jiàqián|가격을 묻다|价钱合适|jiàqián héshì|가격이 적당하다|价钱太贵|jiàqián tài guì|값이 너무 비싸다
+348|假日|jiàrì|휴일|假日生活|jiàrì shēnghuó|휴일 생활|假日活动|jiàrì huódòng|휴일 행사|假日旅游|jiàrì lǚyóu|휴일 여행
+349|减|jiǎn|줄이다, 빼다|减一半|jiǎn yíbàn|절반으로 줄이다|减五块钱|jiǎn wǔ kuài qián|5위안을 깎다|减到五十元|jiǎn dào wǔ shí yuán|50위안까지 낮추다
+350|减轻|jiǎnqīng|줄이다, 경감하다|减轻压力|jiǎnqīng yālì|스트레스를 줄이다|减轻负担|jiǎnqīng fùdān|부담을 줄이다|减轻疼痛|jiǎnqīng téngtòng|통증을 완화하다
+351|减少|jiǎnshǎo|줄이다, 감소하다|减少污染|jiǎnshǎo wūrǎn|오염을 줄이다|数量减少|shùliàng jiǎnshǎo|수량이 감소하다|减少浪费|jiǎnshǎo làngfèi|낭비를 줄이다
+352|健身|jiànshēn|운동하다, 몸을 단련하다|去健身|qù jiànshēn|운동하러 가다|坚持健身|jiānchí jiànshēn|꾸준히 운동하다|健身运动|jiànshēn yùndòng|피트니스 운동
+353|健身房|jiànshēnfáng|헬스장|去健身房|qù jiànshēnfáng|헬스장에 가다|健身房会员|jiànshēnfáng huìyuán|헬스장 회원|在健身房锻炼|zài jiànshēnfáng duànliàn|헬스장에서 운동하다
+354|建议|jiànyì|제안하다; 제안, 의견|提出建议|tíchū jiànyì|제안을 제시하다|接受建议|jiēshòu jiànyì|제안을 받아들이다|建议你早点儿休息|jiànyì nǐ zǎodiǎnr xiūxi|일찍 쉬라고 권하다
+355|江|jiāng|큰 강|长江|Chángjiāng|창장강, 양쯔강|江边|jiāng biān|강가|江水|jiāng shuǐ|강물
+356|将|jiāng|~을/를; ~할 것이다|将文件发给老师|jiāng wénjiàn fā gěi lǎoshī|파일을 선생님께 보내다|将于明天举行|jiāng yú míngtiān jǔxíng|내일 열릴 예정이다|将成为|jiāng chéngwéi|~이 될 것이다
+357|将来|jiānglái|미래, 장래|将来想当医生|jiānglái xiǎng dāng yīshēng|장래에 의사가 되고 싶다|为将来做准备|wèi jiānglái zuò zhǔnbèi|미래를 위해 준비하다|将来有一天|jiānglái yǒu yì tiān|언젠가 미래에
+358|将要|jiāngyào|곧 ~하려 하다, ~할 예정이다|将要开始|jiāngyào kāishǐ|곧 시작하려 하다|将要毕业|jiāngyào bìyè|곧 졸업할 예정이다|将要发生|jiāngyào fāshēng|곧 발생하려 하다
+359|奖|jiǎng|상, 상품|一等奖|yì děng jiǎng|1등상|大奖|dà jiǎng|대상|得奖|dé jiǎng|상을 받다
+360|奖金|jiǎngjīn|상금, 보너스|发奖金|fā jiǎngjīn|보너스를 지급하다|年终奖金|niánzhōng jiǎngjīn|연말 보너스|获得奖金|huòdé jiǎngjīn|상금을 받다
+361|奖学金|jiǎngxuéjīn|장학금|申请奖学金|shēnqǐng jiǎngxuéjīn|장학금을 신청하다|获得奖学金|huòdé jiǎngxuéjīn|장학금을 받다|拿到奖学金|ná dào jiǎngxuéjīn|장학금을 받다
+362|降|jiàng|내리다, 낮아지다|降温了|jiàngwēn le|기온이 내려갔다|降到零度|jiàng dào líng dù|0도까지 내려가다|价格降了|jiàgé jiàng le|가격이 내려갔다
+363|降低|jiàngdī|낮추다, 낮아지다|降低价格|jiàngdī jiàgé|가격을 낮추다|降低标准|jiàngdī biāozhǔn|기준을 낮추다|成本降低|chéngběn jiàngdī|원가가 낮아지다
+364|降价|jiàngjià|가격을 내리다|商品降价|shāngpǐn jiàngjià|상품 가격이 내려가다|降价出售|jiàngjià chūshòu|가격을 내려 판매하다|已经降价了|yǐjīng jiàngjià le|이미 가격이 내려갔다
+365|降落|jiàngluò|착륙하다, 내려앉다|飞机降落|fēijī jiàngluò|비행기가 착륙하다|安全降落|ānquán jiàngluò|안전하게 착륙하다|降落在机场|jiàngluò zài jīchǎng|공항에 착륙하다
+366|降温|jiàngwēn|기온이 내려가다; 온도를 낮추다|天气开始降温|tiānqì kāishǐ jiàngwēn|날씨가 추워지기 시작하다|突然降温|tūrán jiàngwēn|갑자기 기온이 내려가다|给房间降温|gěi fángjiān jiàngwēn|방의 온도를 낮추다
+367|交|jiāo|제출하다, 사귀다|交作业|jiāo zuòyè|숙제를 제출하다|交朋友|jiāo péngyou|친구를 사귀다|交钱|jiāo qián|돈을 내다
+368|骄傲|jiāo'ào|자랑스럽다; 교만하다|感到骄傲|gǎndào jiāo'ào|자랑스럽게 느끼다|为你骄傲|wèi nǐ jiāo'ào|너를 자랑스럽게 여기다|不要骄傲|búyào jiāo'ào|교만해지지 마
+369|交警|jiāojǐng|교통경찰|交警指挥交通|jiāojǐng zhǐhuī jiāotōng|교통경찰이 교통을 지휘하다|向交警求助|xiàng jiāojǐng qiúzhù|교통경찰에게 도움을 요청하다|交警检查证件|jiāojǐng jiǎnchá zhèngjiàn|교통경찰이 증명서를 확인하다
+370|交流|jiāoliú|교류하다|互相交流|hùxiāng jiāoliú|서로 교류하다|文化交流|wénhuà jiāoliú|문화 교류|交流经验|jiāoliú jīngyàn|경험을 교류하다
+371|郊区|jiāoqū|교외|住在郊区|zhù zài jiāoqū|교외에 살다|城市郊区|chéngshì jiāoqū|도시 교외|郊区生活|jiāoqū shēnghuó|교외 생활
+372|交通|jiāotōng|교통|交通安全|jiāotōng ānquán|교통안전|交通工具|jiāotōng gōngjù|교통수단|交通规则|jiāotōng guīzé|교통 규칙
+373|教练|jiàoliàn|코치, 트레이너|足球教练|zúqiú jiàoliàn|축구 코치|健身教练|jiànshēn jiàoliàn|헬스 트레이너|跟教练学习|gēn jiàoliàn xuéxí|코치에게 배우다
+374|教师|jiàoshī|교사|一名教师|yì míng jiàoshī|교사 한 명|当教师|dāng jiàoshī|교사가 되다|教师节|jiàoshī jié|교사의 날
+375|教授|jiàoshòu|교수|大学教授|dàxué jiàoshòu|대학 교수|教授讲课|jiàoshòu jiǎng kè|교수가 강의하다|李教授|Lǐ jiàoshòu|이 교수님
+376|教学|jiàoxué|교육, 교수·수업 활동|教学方法|jiàoxué fāngfǎ|교수법|教学活动|jiàoxué huódòng|수업 활동|教学经验|jiàoxué jīngyàn|수업 경험
+377|教育|jiàoyù|교육|教育孩子|jiàoyù háizi|아이를 교육하다|接受教育|jiēshòu jiàoyù|교육을 받다|教育方式|jiàoyù fāngshì|교육 방식
+378|叫作|jiàozuò|~라고 부르다|叫作什么|jiàozuò shénme|무엇이라고 부르다|也叫作|yě jiàozuò|또 ~라고도 부르다|被叫作|bèi jiàozuò|~라고 불리다
+379|街道|jiēdào|거리, 도로|宽阔的街道|kuānkuò de jiēdào|넓은 거리|街道两旁|jiēdào liǎngpáng|거리 양쪽|打扫街道|dǎsǎo jiēdào|거리를 청소하다
+380|接受|jiēshòu|받아들이다|接受意见|jiēshòu yìjiàn|의견을 받아들이다|接受采访|jiēshòu cǎifǎng|인터뷰를 받다|无法接受|wúfǎ jiēshòu|받아들이기 어렵다
+381|接着|jiēzhe|이어서, 계속해서|接着说|jiēzhe shuō|이어서 말하다|接着做|jiēzhe zuò|계속해서 하다|接着往下看|jiēzhe wǎng xià kàn|이어서 아래를 보다
+382|结果|jiéguǒ|결과; 결국|考试结果|kǎoshì jiéguǒ|시험 결과|结果出来了|jiéguǒ chūlái le|결과가 나왔다|结果还是失败了|jiéguǒ háishi shībài le|결국 여전히 실패했다
+383|节假日|jiéjiàrì|공휴일, 휴일|法定节假日|fǎdìng jiéjiàrì|법정 공휴일|节假日期间|jiéjiàrì qījiān|공휴일 기간|节假日出行|jiéjiàrì chūxíng|공휴일에 이동하다
+384|节约|jiéyuē|절약하다|节约用水|jiéyuē yòng shuǐ|물을 절약하다|节约时间|jiéyuē shíjiān|시간을 절약하다|勤俭节约|qínjiǎn jiéyuē|근검절약하다
+385|结账|jiézhàng|계산하다|去结账|qù jiézhàng|계산하러 가다|扫码结账|sǎomǎ jiézhàng|QR코드로 계산하다|结账时|jiézhàng shí|계산할 때
+386|解释|jiěshì|설명하다|解释原因|jiěshì yuányīn|이유를 설명하다|向他解释|xiàng tā jiěshì|그에게 설명하다|解释清楚|jiěshì qīngchu|분명하게 설명하다
+387|今后|jīnhòu|앞으로, 향후|今后要注意|jīnhòu yào zhùyì|앞으로 주의해야 한다|今后的工作|jīnhòu de gōngzuò|향후 업무|今后几年|jīnhòu jǐ nián|앞으로 몇 년
+388|仅|jǐn|단지, 오직|仅供参考|jǐn gōng cānkǎo|참고용으로만 제공하다|仅有三人|jǐn yǒu sān rén|단 세 명만 있다|仅此一次|jǐn cǐ yí cì|이번 한 번뿐이다
+389|尽管|jǐnguǎn|비록 ~이지만; 얼마든지|尽管如此|jǐnguǎn rúcǐ|그럼에도 불구하고|尽管很累|jǐnguǎn hěn lèi|비록 매우 피곤하지만|有问题尽管问|yǒu wèntí jǐnguǎn wèn|질문 있으면 얼마든지 물어봐
+390|仅仅|jǐnjǐn|단지, 겨우|仅仅是开始|jǐnjǐn shì kāishǐ|단지 시작일 뿐이다|不仅仅是|bù jǐnjǐn shì|단지 ~만은 아니다|仅仅因为|jǐnjǐn yīnwèi|단지 ~때문에
+391|紧张|jǐnzhāng|긴장하다; 빠듯하다|有点儿紧张|yǒudiǎnr jǐnzhāng|조금 긴장하다|考试前很紧张|kǎoshì qián hěn jǐnzhāng|시험 전에 매우 긴장하다|时间很紧张|shíjiān hěn jǐnzhāng|시간이 빠듯하다
+392|进入|jìnrù|들어가다, 진입하다|进入房间|jìnrù fángjiān|방에 들어가다|进入大学|jìnrù dàxué|대학에 들어가다|进入社会|jìnrù shèhuì|사회에 진출하다
+393|进行|jìnxíng|진행하다|正在进行|zhèngzài jìnxíng|진행 중이다|进行讨论|jìnxíng tǎolùn|토론을 진행하다|顺利进行|shùnlì jìnxíng|순조롭게 진행되다
+394|禁止|jìnzhǐ|금지하다|禁止吸烟|jìnzhǐ xī yān|흡연을 금지하다|禁止停车|jìnzhǐ tíngchē|주차를 금지하다|禁止进入|jìnzhǐ jìnrù|출입을 금지하다
+395|精彩|jīngcǎi|훌륭하다, 멋지다|精彩表演|jīngcǎi biǎoyǎn|훌륭한 공연|非常精彩|fēicháng jīngcǎi|매우 훌륭하다|精彩的比赛|jīngcǎi de bǐsài|멋진 경기
+396|经济|jīngjì|경제|经济发展|jīngjì fāzhǎn|경제 발전|经济状况|jīngjì zhuàngkuàng|경제 상황|经济危机|jīngjì wēijī|경제 위기
+397|京剧|jīngjù|경극|看京剧|kàn jīngjù|경극을 보다|京剧表演|jīngjù biǎoyǎn|경극 공연|学京剧|xué jīngjù|경극을 배우다
+398|经历|jīnglì|경력, 경험하다|丰富的经历|fēngfù de jīnglì|풍부한 경험|亲身经历|qīnshēn jīnglì|직접 경험하다|人生经历|rénshēng jīnglì|인생 경험
+399|经验|jīngyàn|경험|工作经验|gōngzuò jīngyàn|업무 경험|积累经验|jīlěi jīngyàn|경험을 쌓다|经验丰富|jīngyàn fēngfù|경험이 풍부하다
+400|警察|jǐngchá|경찰|一名警察|yì míng jǐngchá|경찰 한 명|交通警察|jiāotōng jǐngchá|교통경찰|向警察求助|xiàng jǐngchá qiúzhù|경찰에게 도움을 요청하다

@@ -1,0 +1,200 @@
+801|现有|xiànyǒu|현재 있는, 기존의|现有条件|xiànyǒu tiáojiàn|현재의 조건|现有资源|xiànyǒu zīyuán|기존 자원|现有问题|xiànyǒu wèntí|현재 존재하는 문제
+802|香|xiāng|향기롭다, 맛있는 냄새가 나다|闻起来很香|wén qǐlái hěn xiāng|냄새가 아주 좋다|饭菜很香|fàn cài hěn xiāng|음식 냄새가 맛있다|香味很浓|xiāng wèi hěn nóng|향이 진하다
+803|相比|xiāngbǐ|비교하다, ~와 비교하면|与以前相比|yǔ yǐqián xiāngbǐ|이전과 비교하면|跟去年相比|gēn qùnián xiāngbǐ|작년과 비교하면|相比之下|xiāngbǐ zhī xià|비교해 보면
+804|相反|xiāngfǎn|반대로, 상반되다|恰恰相反|qiàqià xiāngfǎn|오히려 반대로|相反的意见|xiāngfǎn de yìjiàn|반대 의견|结果相反|jiéguǒ xiāngfǎn|결과가 반대다
+805|相互|xiānghù|서로, 상호 간에|相互帮助|xiānghù bāngzhù|서로 돕다|相互理解|xiānghù lǐjiě|서로 이해하다|相互影响|xiānghù yǐngxiǎng|서로 영향을 주다
+806|相同|xiāngtóng|같다, 동일하다|完全相同|wánquán xiāngtóng|완전히 같다|相同的问题|xiāngtóng de wèntí|같은 문제|与……相同|yǔ …… xiāngtóng|~와 같다
+807|详细|xiángxì|상세하다|详细说明|xiángxì shuōmíng|상세히 설명하다|详细介绍|xiángxì jièshào|자세히 소개하다|详细情况|xiángxì qíngkuàng|자세한 상황
+808|响|xiǎng|소리가 나다, 울리다; 소리가 크다|电话响了|diànhuà xiǎng le|전화가 울렸다|门铃响了|mén líng xiǎng le|초인종이 울렸다|声音很响|shēngyīn hěn xiǎng|소리가 크다
+809|想法|xiǎngfǎ|생각, 아이디어|有个想法|yǒu gè xiǎngfǎ|생각이 하나 있다|改变想法|gǎibiàn xiǎngfǎ|생각을 바꾸다|说说你的想法|shuō shuō nǐ de xiǎngfǎ|네 생각을 말해 보다
+810|项|xiàng|항목, 건(일·사업 등의 양사)|一项工作|yí xiàng gōngzuò|업무 한 가지|一项调查|yí xiàng diàochá|조사 한 건|一项活动|yí xiàng huódòng|활동 한 가지
+811|消息|xiāoxi|소식|好消息|hǎo xiāoxi|좋은 소식|听到消息|tīng dào xiāoxi|소식을 듣다|传播消息|chuánbō xiāoxi|소식을 전하다
+812|小吃|xiǎochī|간단한 먹거리, 지역 음식|当地小吃|dāngdì xiǎochī|현지 먹거리|特色小吃|tèsè xiǎochī|특색 있는 간식·음식|吃小吃|chī xiǎochī|간식을 먹다
+813|小伙子|xiǎohuǒzi|젊은 남자, 청년|年轻小伙子|niánqīng xiǎohuǒzi|젊은 청년|一个小伙子|yí gè xiǎohuǒzi|청년 한 명|帅小伙子|shuài xiǎohuǒzi|잘생긴 청년
+814|小说|xiǎoshuō|소설|看小说|kàn xiǎoshuō|소설을 읽다|写小说|xiě xiǎoshuō|소설을 쓰다|一本小说|yì běn xiǎoshuō|소설 한 권
+815|小组|xiǎozǔ|소그룹, 조|学习小组|xuéxí xiǎozǔ|학습 그룹|小组讨论|xiǎozǔ tǎolùn|조별 토론|分成小组|fēnchéng xiǎozǔ|소그룹으로 나누다
+816|效果|xiàoguǒ|효과, 결과|效果很好|xiàoguǒ hěn hǎo|효과가 좋다|学习效果|xuéxí xiàoguǒ|학습 효과|取得很好的效果|qǔdé hěn hǎo de xiàoguǒ|좋은 효과를 거두다
+817|笑话|xiàohua|농담, 우스운 이야기|讲笑话|jiǎng xiàohua|농담을 하다|一个笑话|yí gè xiàohua|농담 하나|闹笑话|nào xiàohua|우스운 실수를 하다
+818|血|xiě|피|流血|liúxuè|피가 나다|一滴血|yì dī xiě|피 한 방울|血流出来了|xiě liú chūlái le|피가 흘러나왔다
+819|心|xīn|마음, 심장|心里想|xīnlǐ xiǎng|마음속으로 생각하다|心跳得很快|xīn tiào de hěn kuài|심장이 빨리 뛰다|心里难受|xīnlǐ nánshòu|마음이 괴롭다
+820|辛苦|xīnkǔ|고생하다, 수고롭다|工作辛苦|gōngzuò xīnkǔ|일이 고되다|很辛苦|hěn xīnkǔ|매우 고생스럽다|辛苦了|xīnkǔ le|수고하셨습니다
+821|心情|xīnqíng|기분, 심정|心情愉快|xīnqíng yúkuài|기분이 유쾌하다|心情不好|xīnqíng bú hǎo|기분이 나쁘다|调节心情|tiáojié xīnqíng|기분을 조절하다
+822|信号|xìnhào|신호|手机信号|shǒujī xìnhào|휴대전화 신호|信号不好|xìnhào bú hǎo|신호가 좋지 않다|没有信号|méiyǒu xìnhào|신호가 없다
+823|信息|xìnxī|정보|获取信息|huòqǔ xìnxī|정보를 얻다|个人信息|gèrén xìnxī|개인정보|提供信息|tígōng xìnxī|정보를 제공하다
+824|信心|xìnxīn|자신감|充满信心|chōngmǎn xìnxīn|자신감이 넘치다|有信心|yǒu xìnxīn|자신감이 있다|增强信心|zēngqiáng xìnxīn|자신감을 강화하다
+825|兴奋|xīngfèn|흥분하다|非常兴奋|fēicháng xīngfèn|매우 흥분하다|感到兴奋|gǎndào xīngfèn|흥분을 느끼다|兴奋地跳起来|xīngfèn de tiào qǐlái|흥분해서 뛰어오르다
+826|星星|xīngxing|별|看星星|kàn xīngxing|별을 보다|满天星星|mǎn tiān xīngxing|하늘 가득한 별|一颗星星|yì kē xīngxing|별 하나
+827|醒|xǐng|깨다, 정신을 차리다|醒了|xǐng le|잠에서 깼다|睡醒|shuì xǐng|잠에서 깨다|醒过来|xǐng guòlái|정신을 차리다
+828|性|xìng|~성(접미사)|可能性|kěnéng xìng|가능성|重要性|zhòngyào xìng|중요성|安全性|ānquán xìng|안전성
+829|性别|xìngbié|성별|性别不同|xìngbié bù tóng|성별이 다르다|填写性别|tiánxiě xìngbié|성별을 기입하다|性别平等|xìngbié píngděng|성별 평등
+830|幸福|xìngfú|행복하다|幸福生活|xìngfú shēnghuó|행복한 생활|感到幸福|gǎndào xìngfú|행복을 느끼다|幸福的家庭|xìngfú de jiātíng|행복한 가정
+831|性格|xìnggé|성격|性格活泼|xìnggé huópō|성격이 활발하다|性格开朗|xìnggé kāilǎng|성격이 쾌활하다|了解性格|liǎojiě xìnggé|성격을 파악하다
+832|兄弟|xiōngdì|형제|兄弟俩|xiōngdì liǎ|형제 두 사람|亲兄弟|qīn xiōngdì|친형제|兄弟关系|xiōngdì guānxì|형제 관계
+833|熊|xióng|곰|一只熊|yì zhī xióng|곰 한 마리|黑熊|hēi xióng|흑곰|棕熊|zōngxióng|불곰
+834|修|xiū|고치다, 수리하다|修电脑|xiū diànnǎo|컴퓨터를 고치다|修车|xiū chē|차를 수리하다|修路|xiū lù|길을 보수하다
+835|修理|xiūlǐ|수리하다|修理电脑|xiūlǐ diànnǎo|컴퓨터를 수리하다|修理汽车|xiūlǐ qìchē|자동차를 수리하다|修理机器|xiūlǐ jīqì|기계를 수리하다
+836|许多|xǔduō|매우 많은|许多人|xǔduō rén|많은 사람|许多问题|xǔduō wèntí|많은 문제|许多年前|xǔduō nián qián|여러 해 전
+837|学费|xuéfèi|학비|交学费|jiāo xuéfèi|학비를 내다|学费很贵|xuéfèi hěn guì|학비가 비싸다|一年的学费|yì nián de xuéfèi|1년 학비
+838|学院|xuéyuàn|단과대학, 학원·교육기관|医学院|yīxué yuàn|의과대학|音乐学院|yīnyuè xuéyuàn|음악대학|学院老师|xuéyuàn lǎoshī|단과대학 선생님
+839|压|yā|누르다, 압박하다|压一下|yā yíxià|한번 누르다|压在下面|yā zài xiàmiàn|아래에 눌러 두다|压住|yā zhù|눌러 고정하다
+840|压力|yālì|스트레스, 압력|工作压力|gōngzuò yālì|업무 스트레스|感到压力|gǎndào yālì|스트레스를 느끼다|缓解压力|huǎnjiě yālì|스트레스를 해소하다
+841|牙膏|yágāo|치약|挤牙膏|jǐ yágāo|치약을 짜다|一管牙膏|yì guǎn yágāo|치약 한 통|买牙膏|mǎi yágāo|치약을 사다
+842|亚洲|Yàzhōu|아시아|亚洲国家|Yàzhōu guójiā|아시아 국가|亚洲地区|Yàzhōu dìqū|아시아 지역|来自亚洲|láizì Yàzhōu|아시아에서 오다
+843|烟|yān|담배; 연기|抽烟|chōuyān|담배를 피우다|一支烟|yì zhī yān|담배 한 개비|烟味|yān wèi|담배 냄새
+844|盐|yán|소금|加盐|jiā yán|소금을 넣다|少放盐|shǎo fàng yán|소금을 적게 넣다|一勺盐|yì sháo yán|소금 한 숟갈
+845|严格|yángé|엄격하다|严格要求|yángé yāoqiú|엄격하게 요구하다|严格管理|yángé guǎnlǐ|엄격하게 관리하다|对自己严格|duì zìjǐ yángé|자신에게 엄격하다
+846|研究|yánjiū|연구하다, 살펴보다|研究问题|yánjiū wèntí|문제를 연구하다|研究中国文化|yánjiū Zhōngguó wénhuà|중국 문화를 연구하다|认真研究|rènzhēn yánjiū|진지하게 연구하다
+847|研究生|yánjiūshēng|대학원생|读研究生|dú yánjiūshēng|대학원생이 되다|研究生考试|yánjiūshēng kǎoshì|대학원 시험|研究生导师|yánjiūshēng dǎoshī|대학원 지도교수
+848|严重|yánzhòng|심각하다|情况严重|qíngkuàng yánzhòng|상황이 심각하다|污染严重|wūrǎn yánzhòng|오염이 심각하다|后果严重|hòuguǒ yánzhòng|결과가 심각하다
+849|演|yǎn|연기하다, 공연하다|演电影|yǎn diànyǐng|영화에 출연하다|演节目|yǎn jiémù|공연 프로그램을 하다|演得很好|yǎn de hěn hǎo|연기를 잘하다
+850|演唱|yǎnchàng|노래하다, 가창하다|演唱歌曲|yǎnchàng gēqǔ|노래를 부르다|现场演唱|xiànchǎng yǎnchàng|현장에서 노래하다|演唱一首歌|yǎnchàng yì shǒu gē|노래 한 곡을 부르다
+851|演出|yǎnchū|공연하다|演出节目|yǎnchū jiémù|프로그램을 공연하다|在剧院演出|zài jùyuàn yǎnchū|극장에서 공연하다|上台演出|shàngtái yǎnchū|무대에 올라 공연하다
+852|眼镜|yǎnjìng|안경|戴眼镜|dài yǎnjìng|안경을 쓰다|一副眼镜|yí fù yǎnjìng|안경 한 개|太阳眼镜|tàiyáng yǎnjìng|선글라스
+853|眼前|yǎnqián|눈앞, 바로 앞|就在眼前|jiù zài yǎnqián|바로 눈앞에 있다|眼前的景色|yǎnqián de jǐngsè|눈앞의 경치|眼前的问题|yǎnqián de wèntí|당면한 문제
+854|演员|yǎnyuán|배우|电影演员|diànyǐng yǎnyuán|영화배우|著名演员|zhùmíng yǎnyuán|유명 배우|当演员|dāng yǎnyuán|배우가 되다
+855|阳光|yángguāng|햇빛, 햇살|阳光充足|yángguāng chōngzú|햇빛이 충분하다|阳光很好|yángguāng hěn hǎo|햇살이 좋다|享受阳光|xiǎngshòu yángguāng|햇볕을 즐기다
+856|养成|yǎngchéng|기르다, 길들이다(습관)|养成习惯|yǎngchéng xíguàn|습관을 기르다|从小养成|cóngxiǎo yǎngchéng|어릴 때부터 기르다|养成好习惯|yǎngchéng hǎo xíguàn|좋은 습관을 기르다
+857|样子|yàngzi|모양, 모습|什么样子|shénme yàngzi|어떤 모습인가|长什么样子|zhǎng shénme yàngzi|어떻게 생겼나|看样子|kàn yàngzi|보아하니
+858|邀请|yāoqǐng|초대하다|邀请朋友|yāoqǐng péngyou|친구를 초대하다|接受邀请|jiēshòu yāoqǐng|초대를 받아들이다|发出邀请|fāchū yāoqǐng|초대장을 보내다
+859|要是|yàoshi|만약 ~라면|要是有时间|yàoshi yǒu shíjiān|시간이 있다면|要是下雨|yàoshi xià yǔ|비가 온다면|要是……就……|yàoshi …… jiù ……|만약 ~라면 …하다
+860|钥匙|yàoshi|열쇠|一把钥匙|yì bǎ yàoshi|열쇠 하나|找钥匙|zhǎo yàoshi|열쇠를 찾다|忘带钥匙|wàng dài yàoshi|열쇠를 깜빡하고 안 가져오다
+861|也许|yěxǔ|아마, 어쩌면|也许可以|yěxǔ kěyǐ|어쩌면 가능하다|也许会下雨|yěxǔ huì xià yǔ|아마 비가 올 것이다|也许是这样|yěxǔ shì zhèyàng|아마 그런 것 같다
+862|夜|yè|밤; 밤을 세는 양사|夜里很安静|yè lǐ hěn ānjìng|밤에는 매우 조용하다|一夜没睡|yí yè méi shuì|밤새 잠을 못 잤다|夜深了|yè shēn le|밤이 깊었다
+863|夜晚|yèwǎn|밤, 야간|安静的夜晚|ānjìng de yèwǎn|조용한 밤|夜晚的天空|yèwǎn de tiānkōng|밤하늘|夜晚出行|yèwǎn chūxíng|밤에 이동하다
+864|叶子|yèzi|잎, 나뭇잎|一片叶子|yí piàn yèzi|잎 한 장|叶子黄了|yèzi huáng le|잎이 노랗게 변했다|叶子掉了|yèzi diào le|잎이 떨어졌다
+865|一切|yíqiè|일체, 모든 것|一切顺利|yíqiè shùnlì|모든 일이 순조롭다|一切都好|yíqiè dōu hǎo|모든 게 좋다|一切正常|yíqiè zhèngcháng|모든 것이 정상이다
+866|已|yǐ|이미|已完成|yǐ wánchéng|이미 완료했다|已收到|yǐ shōudào|이미 받았다|已通知|yǐ tōngzhī|이미 알렸다
+867|以内|yǐnèi|이내, 범위 안|三天以内|sān tiān yǐnèi|3일 이내|五公里以内|wǔ gōnglǐ yǐnèi|5km 이내|一百元以内|yì bǎi yuán yǐnèi|100위안 이내
+868|意见|yìjiàn|의견, 견해|提出意见|tíchū yìjiàn|의견을 제시하다|听取意见|tīngqǔ yìjiàn|의견을 듣다|不同意见|bù tóng yìjiàn|서로 다른 의견
+869|一生|yìshēng|일생, 평생|人的一生|rén de yìshēng|사람의 일생|一生中|yìshēng zhōng|일생 동안|一生难忘|yìshēng nánwàng|평생 잊지 못하다
+870|艺术|yìshù|예술|艺术作品|yìshù zuòpǐn|예술 작품|艺术展览|yìshù zhǎnlǎn|예술 전시|艺术教育|yìshù jiàoyù|예술 교육
+871|因此|yīncǐ|그러므로, 따라서|因此决定|yīncǐ juédìng|그래서 결정하다|因此需要|yīncǐ xūyào|따라서 필요하다|因此可以|yīncǐ kěyǐ|그러므로 ~할 수 있다
+872|引起|yǐnqǐ|야기하다, 불러일으키다|引起注意|yǐnqǐ zhùyì|주의를 끌다|引起重视|yǐnqǐ zhòngshì|중시를 불러일으키다|引起兴趣|yǐnqǐ xìngqù|흥미를 유발하다
+873|印象|yìnxiàng|인상|印象深刻|yìnxiàng shēnkè|인상이 깊다|留下印象|liúxia yìnxiàng|인상을 남기다|第一印象|dìyī yìnxiàng|첫인상
+874|赢|yíng|이기다|赢了比赛|yíng le bǐsài|경기에서 이겼다|赢了一场|yíng le yì chǎng|한 경기를 이겼다|赢了对方|yíng le duìfāng|상대를 이겼다
+875|赢得|yíngdé|얻다, 획득하다; 이겨서 얻다|赢得比赛|yíngdé bǐsài|경기에서 이기다|赢得支持|yíngdé zhīchí|지지를 얻다|赢得信任|yíngdé xìnrèn|신뢰를 얻다
+876|应聘|yìngpìn|지원하다, 구직 지원하다|应聘职位|yìngpìn zhíwèi|직무에 지원하다|应聘教师|yìngpìn jiàoshī|교사직에 지원하다|去公司应聘|qù gōngsī yìngpìn|회사에 면접·지원하러 가다
+877|勇敢|yǒnggǎn|용감하다|很勇敢|hěn yǒnggǎn|매우 용감하다|勇敢面对|yǒnggǎn miànduì|용감하게 맞서다|勇敢的孩子|yǒnggǎn de háizi|용감한 아이
+878|永远|yǒngyuǎn|영원히|永远记得|yǒngyuǎn jìde|영원히 기억하다|永远支持|yǒngyuǎn zhīchí|영원히 지지하다|永远不变|yǒngyuǎn bú biàn|영원히 변하지 않다
+879|用来|yònglái|~하는 데 쓰다|用来学习|yònglái xuéxí|공부하는 데 쓰다|用来做什么|yònglái zuò shénme|무엇에 쓰는가|用来解决问题|yònglái jiějué wèntí|문제를 해결하는 데 쓰다
+880|用于|yòngyú|~에 사용되다, ~에 쓰이다|用于学习|yòngyú xuéxí|학습에 사용되다|用于生产|yòngyú shēngchǎn|생산에 사용되다|用于工作|yòngyú gōngzuò|업무에 사용되다
+881|优点|yōudiǎn|장점|最大的优点|zuì dà de yōudiǎn|가장 큰 장점|有很多优点|yǒu hěn duō yōudiǎn|장점이 많다|优点和缺点|yōudiǎn hé quēdiǎn|장점과 단점
+882|幽默|yōumò|유머러스하다|很幽默|hěn yōumò|매우 유머러스하다|幽默感|yōumò gǎn|유머 감각|幽默风趣|yōumò fēngqù|유머러스하고 재미있다
+883|优秀|yōuxiù|우수하다|非常优秀|fēicháng yōuxiù|매우 우수하다|优秀学生|yōuxiù xuéshēng|우수한 학생|成绩优秀|chéngjì yōuxiù|성적이 우수하다
+884|由|yóu|~이/가, ~에 의해|由我负责|yóu wǒ fùzé|내가 담당하다|由老师介绍|yóu lǎoshī jièshào|선생님이 소개하다|由三部分组成|yóu sān bùfen zǔchéng|세 부분으로 구성되다
+885|油|yóu|기름|食用油|shíyòng yóu|식용유|一桶油|yì tǒng yóu|기름 한 통|油太多了|yóu tài duō le|기름이 너무 많다
+886|尤其|yóuqí|특히|尤其喜欢|yóuqí xǐhuan|특히 좋아하다|尤其是他|yóuqí shì tā|특히 그가|尤其重要|yóuqí zhòngyào|특히 중요하다
+887|游玩|yóuwán|놀러 다니다, 관광하다|出去游玩|chūqù yóuwán|놀러 나가다|到北京游玩|dào Běijīng yóuwán|베이징에 관광하러 가다|游玩一天|yóuwán yì tiān|하루 동안 놀러 다니다
+888|由于|yóuyú|~때문에|由于下雨|yóuyú xià yǔ|비 때문에|由于某种原因|yóuyú mǒu zhǒng yuányīn|어떤 원인으로 인해|由于疏忽|yóuyú shūhu|부주의로 인해
+889|友好|yǒuhǎo|우호적이다, 친절하다|对人友好|duì rén yǒuhǎo|사람에게 친절하다|友好交流|yǒuhǎo jiāoliú|우호적으로 교류하다|友好相处|yǒuhǎo xiāngchǔ|사이좋게 지내다
+890|友情|yǒuqíng|우정|珍惜友情|zhēnxī yǒuqíng|우정을 소중히 여기다|深厚的友情|shēnhòu de yǒuqíng|깊은 우정|友情长久|yǒuqíng chángjiǔ|우정이 오래가다
+891|有趣|yǒuqù|재미있다|很有趣|hěn yǒuqù|매우 재미있다|有趣的故事|yǒuqù de gùshi|재미있는 이야기|内容有趣|nèiróng yǒuqù|내용이 재미있다
+892|有效|yǒuxiào|효과가 있다, 유효하다|非常有效|fēicháng yǒuxiào|매우 효과적이다|有效方法|yǒuxiào fāngfǎ|효과적인 방법|有效解决问题|yǒuxiào jiějué wèntí|문제를 효과적으로 해결하다
+893|友谊|yǒuyì|우정|深厚友谊|shēnhòu yǒuyì|깊은 우정|珍惜友谊|zhēnxī yǒuyì|우정을 소중히 하다|友谊长存|yǒuyì cháng cún|우정이 오래 지속되다
+894|有着|yǒuzhe|~을 가지고 있다, ~이 있다|有着丰富经验|yǒuzhe fēngfù jīngyàn|풍부한 경험을 가지고 있다|有着共同目标|yǒuzhe gòngtóng mùbiāo|공동의 목표가 있다|有着重要作用|yǒuzhe zhòngyào zuòyòng|중요한 역할을 가지고 있다
+895|愉快|yúkuài|유쾌하다, 즐겁다|心情愉快|xīnqíng yúkuài|기분이 유쾌하다|度过愉快的时光|dù guò yúkuài de shíguāng|즐거운 시간을 보내다|愉快的旅行|yúkuài de lǚxíng|즐거운 여행
+896|于是|yúshì|그래서, 그리하여|于是就|yúshì jiù|그래서 곧|于是决定|yúshì juédìng|그래서 결정했다|于是出发|yúshì chūfā|그리하여 출발하다
+897|与|yǔ|~와, ~과|与朋友一起|yǔ péngyou yìqǐ|친구와 함께|与……相比|yǔ …… xiāngbǐ|~와 비교하면|与……有关|yǔ …… yǒuguān|~와 관련이 있다
+898|语法|yǔfǎ|어법, 문법|学语法|xué yǔfǎ|문법을 배우다|语法规则|yǔfǎ guīzé|문법 규칙|语法错误|yǔfǎ cuòwù|문법 오류
+899|预习|yùxí|예습하다|预习课文|yùxí kèwén|본문을 예습하다|提前预习|tíqián yùxí|미리 예습하다|预习功课|yùxí gōngkè|수업 내용을 예습하다
+900|原来|yuánlái|원래; 알고 보니|原来如此|yuánlái rúcǐ|알고 보니 그렇구나|原来的计划|yuánlái de jìhuà|원래 계획|原来住在北京|yuánlái zhù zài Běijīng|원래 베이징에 살았다
+901|原谅|yuánliàng|용서하다|原谅我|yuánliàng wǒ|나를 용서하다|请原谅|qǐng yuánliàng|용서해 주세요|得到原谅|dédào yuánliàng|용서를 받다
+902|原因|yuányīn|원인|主要原因|zhǔyào yuányīn|주요 원인|找出原因|zhǎo chū yuányīn|원인을 찾다|什么原因|shénme yuányīn|무슨 원인인가
+903|远离|yuǎnlí|멀리하다, 멀리 떨어지다|远离城市|yuǎnlí chéngshì|도시에서 멀리 떨어지다|远离危险|yuǎnlí wēixiǎn|위험을 멀리하다|远离家乡|yuǎnlí jiāxiāng|고향을 멀리 떠나다
+904|院长|yuànzhǎng|원장, 학장|医院院长|yīyuàn yuànzhǎng|병원장|学院院长|xuéyuàn yuànzhǎng|학장|一位院长|yí wèi yuànzhǎng|원장 한 분
+905|院子|yuànzi|마당|院子里|yuànzi lǐ|마당 안에|打扫院子|dǎsǎo yuànzi|마당을 청소하다|一个小院子|yí gè xiǎo yuànzi|작은 마당 하나
+906|约|yuē|약속하다, 만나기로 하다; 대략|约朋友吃饭|yuē péngyou chī fàn|친구와 밥 먹기로 약속하다|约个时间|yuē gè shíjiān|시간을 잡다|约在三点见面|yuē zài sān diǎn jiànmiàn|3시에 만나기로 하다
+907|约会|yuēhuì|데이트하다; 데이트, 약속|去约会|qù yuēhuì|데이트하러 가다|跟女朋友约会|gēn nǚpéngyou yuēhuì|여자친구와 데이트하다|第一次约会|dìyī cì yuēhuì|첫 데이트
+908|月饼|yuèbing|월병|吃月饼|chī yuèbing|월병을 먹다|一盒月饼|yì hé yuèbing|월병 한 상자|中秋月饼|zhōng qiū yuèbing|중추절 월병
+909|阅读|yuèdú|읽다, 열독하다|阅读文章|yuèdú wénzhāng|글을 읽다|阅读理解|yuèdú lǐjiě|독해|喜欢阅读|xǐhuan yuèdú|읽기를 좋아하다
+910|月份|yuèfèn|월, 달|三月份|sān yuèfèn|3월|几月份|jǐ yuèfèn|몇 월|这个月份|zhège yuèfèn|이달, 이 시기
+911|云|yún|구름|白云|bái yún|흰 구름|乌云|wūyún|먹구름|云朵|yún duǒ|구름송이
+912|允许|yǔnxǔ|허락하다|不允许|bù yǔnxǔ|허락하지 않다|允许进入|yǔnxǔ jìnrù|입장을 허락하다|得到允许|dédào yǔnxǔ|허락을 받다
+913|杂志|zázhì|잡지|看杂志|kàn zázhì|잡지를 보다|订杂志|dìng zázhì|잡지를 구독하다|一本杂志|yì běn zázhì|잡지 한 권
+914|再次|zàicì|다시 한번|再次感谢|zàicì gǎnxiè|다시 한번 감사하다|再次见面|zàicì jiànmiàn|다시 만나다|再次确认|zàicì quèrèn|다시 확인하다
+915|再说|zàishuō|다시 말하다; 나중에 이야기하다; 게다가|再说一遍|zàishuō yí biàn|다시 한번 말하다|以后再说|yǐhòu zàishuō|나중에 이야기하다|再说吧|zàishuō ba|나중에 얘기하자
+916|暂时|zànshí|잠시, 잠깐|暂时不去|zànshí bú qù|잠시 가지 않다|暂时休息|zànshí xiūxi|잠시 쉬다|暂时保存|zànshí bǎocún|잠시 보관하다
+917|暂停|zàntíng|일시 중지하다|暂停营业|zàntíng yíngyè|영업을 일시 중단하다|暂停使用|zàntíng shǐyòng|사용을 일시 중단하다|暂停比赛|zàntíng bǐsài|경기를 일시 중단하다
+918|早餐|zǎocān|아침 식사|吃早餐|chī zǎocān|아침을 먹다|准备早餐|zhǔnbèi zǎocān|아침 식사를 준비하다|早餐时间|zǎocān shíjiān|아침 식사 시간
+919|早晨|zǎochen|아침, 이른 아침|今天早晨|jīntiān zǎochen|오늘 아침|早晨起床|zǎochen qǐchuáng|아침에 일어나다|早晨六点|zǎochen liù diǎn|아침 6시
+920|责任|zérèn|책임|承担责任|chéngdān zérèn|책임을 지다|负责任|fù zérèn|책임감이 있다|责任感|zérèn gǎn|책임감
+921|增加|zēngjiā|늘리다, 증가하다|增加收入|zēngjiā shōurù|수입을 늘리다|增加机会|zēngjiā jīhuì|기회를 늘리다|数量增加|shùliàng zēngjiā|수량이 증가하다
+922|增长|zēngzhǎng|증가하다, 성장하다|经济增长|jīngjì zēngzhǎng|경제 성장|收入增长|shōurù zēngzhǎng|소득 증가|快速增长|kuàisù zēngzhǎng|빠르게 증가하다
+923|招聘|zhāopìn|채용하다, 모집하다|招聘员工|zhāopìn yuángōng|직원을 채용하다|招聘信息|zhāopìn xìnxī|채용 정보|公开招聘|gōngkāi zhāopìn|공개 채용하다
+924|着|zháo|붙다, 닿다; 결과보어로 쓰임|睡着了|shuìzháo le|잠이 들었다|找着了|zhǎozháo le|찾아냈다|没买着|méi mǎizháo|사지 못했다
+925|着火|zháohuǒ|불이 붙다, 화재가 나다|着火了|zháohuǒ le|불이 났다|房子着火|fángzi zháohuǒ|집에 불이 나다|突然着火|tūrán zháohuǒ|갑자기 불이 붙다
+926|者|zhě|~하는 사람, ~자(접미사)|消费者|xiāofèizhě|소비자|读者|dúzhě|독자|作者|zuòzhě|저자
+927|真正|zhēnzhèng|진정한|真正的朋友|zhēnzhèng de péngyou|진정한 친구|真正理解|zhēnzhèng lǐjiě|진정으로 이해하다|真正原因|zhēnzhèng yuányīn|진짜 원인
+928|整|zhěng|온, 전체의|整本书|zhěng běn shū|책 전체|整间房|zhěng jiān fáng|방 전체|整整一天|zhěngzhěng yì tiān|꼬박 하루
+929|整个|zhěnggè|전체의, 온|整个过程|zhěnggè guòchéng|전체 과정|整个城市|zhěnggè chéngshì|도시 전체|整个世界|zhěnggè shìjiè|전 세계
+930|整理|zhěnglǐ|정리하다|整理房间|zhěnglǐ fángjiān|방을 정리하다|整理资料|zhěnglǐ zīliào|자료를 정리하다|整理行李|zhěnglǐ xíngli|짐을 정리하다
+931|证|zhèng|증서, 증명서|学生证|xuéshēng zhèng|학생증|工作证|gōngzuò zhèng|사원증·업무증|身份证|shēnfènzhèng|신분증
+932|正常|zhèngcháng|정상적이다|一切正常|yíqiè zhèngcháng|모든 것이 정상이다|恢复正常|huīfù zhèngcháng|정상으로 회복하다|正常上班|zhèngcháng shàngbān|정상적으로 출근하다
+933|正好|zhènghǎo|마침, 딱 알맞다|正好有空|zhènghǎo yǒu kòng|마침 시간이 있다|正好路过|zhènghǎo lùguò|마침 지나가다|大小正好|dàxiǎo zhènghǎo|크기가 딱 맞다
+934|证件|zhèngjiàn|증명서류, 신분증명서|出示证件|chūshì zhèngjiàn|증명서를 제시하다|有效证件|yǒuxiào zhèngjiàn|유효한 증명서|身份证件|shēnfènzhèng jiàn|신분증명서
+935|证明|zhèngmíng|증명하다|证明身份|zhèngmíng shēnfèn|신분을 증명하다|事实证明了这一点|shìshí zhèngmíng le zhè yì diǎn|사실이 이 점을 증명한다|开证明|kāi zhèngmíng|증명서를 발급하다
+936|正确|zhèngquè|정확하다|正确答案|zhèngquè dá'àn|정답|正确方法|zhèngquè fāngfǎ|정확한 방법|回答正确|huídá zhèngquè|정확하게 대답하다
+937|正式|zhèngshì|정식의, 공식적인|正式开始|zhèngshì kāishǐ|정식으로 시작하다|正式场合|zhèngshì chǎnghé|공식적인 자리|正式通知|zhèngshì tōngzhī|정식 통지
+938|之|zhī|~의, ~중의(문어적 구조에 쓰임)|其中之一|qízhōng zhī yī|그중 하나|三分之一|sān fēn zhī yī|3분의 1|百分之十|bǎi fēn zhī shí|10퍼센트
+939|支持|zhīchí|지지하다|表示支持|biǎoshì zhīchí|지지를 표하다|互相支持|hùxiāng zhīchí|서로 지지하다|支持你|zhīchí nǐ|당신을 지지하다
+940|支付|zhīfù|지불하다, 결제하다|支付费用|zhīfù fèiyong|비용을 지불하다|在线支付|zàixiàn zhīfù|온라인 결제|支付成功|zhīfù chénggōng|결제에 성공하다
+941|之后|zhīhòu|~후, 이후|下班之后|xiàbān zhīhòu|퇴근 후|三天之后|sān tiān zhīhòu|사흘 후|之后再说|zhīhòu zàishuō|그 뒤에 다시 이야기하다
+942|之间|zhījiān|~사이|朋友之间|péngyou zhījiān|친구 사이|两国之间|liǎng guó zhījiān|두 나라 사이|工作和生活之间|gōngzuò hé shēnghuó zhījiān|일과 생활 사이
+943|之前|zhīqián|~전, 이전|出发之前|chūfā zhīqián|출발하기 전|三天之前|sān tiān zhīqián|사흘 전|之前说过|zhīqián shuō guò|전에 말한 적이 있다
+944|知识|zhīshi|지식|学习知识|xuéxí zhīshi|지식을 배우다|知识丰富|zhīshi fēngfù|지식이 풍부하다|科学知识|kēxué zhīshi|과학 지식
+945|之中|zhīzhōng|~가운데, ~중|在这些人之中|zài zhèxiē rén zhīzhōng|이 사람들 가운데|在三者之中|zài sān zhě zhīzhōng|세 가지 중에서|人群之中|rénqún zhīzhōng|사람들 가운데
+946|值|zhí|~의 값어치가 있다, ~값이다|值多少钱|zhí duōshao qián|얼마의 값어치가 있다|很值|hěn zhí|값어치를 한다|不值这个价|bù zhí zhège jià|이 가격만큼의 가치는 없다
+947|值得|zhídé|~할 만한 가치가 있다|值得学习|zhídé xuéxí|배울 만하다|值得信任|zhídé xìnrèn|신뢰할 만하다|非常值得|fēicháng zhídé|매우 가치가 있다
+948|直接|zhíjiē|직접적인, 직접|直接回答|zhíjiē huídá|직접 대답하다|直接联系|zhíjiē liánxì|직접 연락하다|直接告诉|zhíjiē gàosu|직접 알려주다
+949|植物|zhíwù|식물|种植物|zhòng zhíwù|식물을 심다|植物园|zhíwù yuán|식물원|保护植物|bǎohù zhíwù|식물을 보호하다
+950|职业|zhíyè|직업|选择职业|xuǎnzé zhíyè|직업을 선택하다|职业规划|zhíyè guīhuà|직업 계획|喜欢的职业|xǐhuan de zhíyè|좋아하는 직업
+951|指|zhǐ|가리키다|指着地图|zhǐ zhe dìtú|지도를 가리키다|指方向|zhǐ fāngxiàng|방향을 가리키다|指给我看|zhǐ gěi wǒ kàn|나에게 가리켜 보여 주다
+952|指出|zhǐchū|지적하다, 짚어 내다|指出问题|zhǐchū wèntí|문제를 지적하다|指出错误|zhǐchū cuòwù|오류를 지적하다|明确指出|míngquè zhǐchū|명확히 지적하다
+953|只好|zhǐhǎo|어쩔 수 없이|只好放弃|zhǐhǎo fàngqì|어쩔 수 없이 포기하다|只好等待|zhǐhǎo děngdài|어쩔 수 없이 기다리다|只好这样|zhǐhǎo zhèyàng|어쩔 수 없이 이렇게 하다
+954|纸巾|zhǐjīn|휴지, 티슈|一张纸巾|yì zhāng zhǐjīn|티슈 한 장|用纸巾擦|yòng zhǐjīn cā|티슈로 닦다|湿纸巾|shī zhǐjīn|물티슈
+955|质量|zhìliàng|품질|产品质量|chǎnpǐn zhìliàng|제품 품질|提高质量|tígāo zhìliàng|품질을 높이다|质量问题|zhìliàng wèntí|품질 문제
+956|至少|zhìshǎo|적어도|至少三个|zhìshǎo sān gè|적어도 세 개|至少需要三天|zhìshǎo xūyào sān tiān|적어도 사흘이 필요하다|至少两天|zhìshǎo liǎng tiān|적어도 이틀
+957|中餐|zhōngcān|중국 음식, 중식|吃中餐|chī zhōngcān|중식을 먹다|中餐厅|zhōngcāntīng|중식당|中餐文化|zhōngcān wénhuà|중국 음식 문화
+958|中年|zhōngnián|중년|中年人|zhōngnián rén|중년인|中年男性|zhōngnián nánxìng|중년 남성|步入中年|bùrù zhōngnián|중년에 접어들다
+959|种|zhòng|심다, 기르다|种树|zhòng shù|나무를 심다|种花|zhòng huā|꽃을 기르다|种菜|zhòng cài|채소를 재배하다
+960|重|zhòng|무겁다; 정도가 심하다|行李很重|xíngli hěn zhòng|짐이 무겁다|责任很重|zérèn hěn zhòng|책임이 무겁다|病得很重|bìng de hěn zhòng|병이 심하다
+961|重点|zhòngdiǎn|중점, 핵심; 중점적으로|重点内容|zhòngdiǎn nèiróng|핵심 내용|重点学习|zhòngdiǎn xuéxí|중점적으로 공부하다|抓住重点|zhuā zhù zhòngdiǎn|핵심을 잡다
+962|重视|zhòngshì|중시하다|受到重视|shòudào zhòngshì|중시를 받다|非常重视|fēicháng zhòngshì|매우 중시하다|重视教育|zhòngshì jiàoyù|교육을 중시하다
+963|周围|zhōuwéi|주변, 주위|学校周围|xuéxiào zhōuwéi|학교 주변|周围的人|zhōuwéi de rén|주변 사람|看看周围|kàn kàn zhōuwéi|주위를 둘러보다
+964|主意|zhǔyi|생각, 아이디어|拿主意|ná zhǔyi|결정을 내리다|好主意|hǎo zhǔyi|좋은 아이디어|改变主意|gǎibiàn zhǔyi|생각을 바꾸다
+965|祝|zhù|축원하다, 기원하다|祝你成功|zhù nǐ chénggōng|성공을 빌다|祝你生日快乐|zhù nǐ shēngrì kuàilè|생일 축하해|祝一路平安|zhù yílù píng'ān|가는 길 평안하기를 빌다
+966|祝贺|zhùhè|축하하다|祝贺你|zhùhè nǐ|축하해|表示祝贺|biǎoshì zhùhè|축하의 뜻을 전하다|祝贺你获奖|zhùhè nǐ huòjiǎng|수상을 축하하다
+967|著名|zhùmíng|저명하다, 유명하다|著名作家|zhùmíng zuòjiā|유명한 작가|非常著名|fēicháng zhùmíng|매우 유명하다|著名景点|zhùmíng jǐngdiǎn|유명한 명소
+968|专门|zhuānmén|특별히, 전문적으로|专门为你|zhuānmén wèi nǐ|특별히 너를 위해|专门研究|zhuānmén yánjiū|전문적으로 연구하다|专门负责|zhuānmén fùzé|전담하다
+969|专业|zhuānyè|전공; 전문적인|学什么专业|xué shénme zhuānyè|무슨 전공을 공부하다|专业知识|zhuānyè zhīshi|전문 지식|专业人员|zhuānyè rényuán|전문 인력
+970|转|zhuǎn|돌다, 방향을 바꾸다|向左转|xiàng zuǒ zhuǎn|왼쪽으로 돌다|转过来|zhuǎn guòlái|이쪽으로 돌아서다|转身|zhuǎnshēn|몸을 돌리다
+971|转发|zhuǎnfā|전달하다, 공유하다|转发消息|zhuǎnfā xiāoxi|메시지를 전달하다|转发视频|zhuǎnfā shìpín|영상을 공유하다|转发给朋友|zhuǎnfā gěi péngyou|친구에게 전달하다
+972|转机|zhuǎnjī|환승하다(비행기)|在北京转机|zài Běijīng zhuǎnjī|베이징에서 환승하다|需要转机|xūyào zhuǎnjī|환승해야 한다|中途转机|zhōngtú zhuǎnjī|중간에 환승하다
+973|赚|zhuàn|벌다|赚钱|zhuàn qián|돈을 벌다|赚了很多钱|zhuàn le hěn duō qián|돈을 많이 벌었다|赚不到钱|zhuàn bú dào qián|돈을 벌지 못하다
+974|装|zhuāng|담다, 넣다; 설치하다|装东西|zhuāng dōngxi|물건을 담다|装进箱子|zhuāng jìn xiāngzi|상자에 넣다|装满水|zhuāng mǎn shuǐ|물을 가득 채우다
+975|准|zhǔn|정확하다, 맞다|猜得准|cāi de zhǔn|정확히 맞히다|说得准|shuō de zhǔn|정확하게 말하다|这个表很准|zhège biǎo hěn zhǔn|이 시계가 정확하다
+976|准确|zhǔnquè|정확하다|回答准确|huídá zhǔnquè|정확하게 대답하다|准确无误|zhǔnquè wú wù|한 치의 오차 없이 정확하다|数据准确|shùjù zhǔnquè|데이터가 정확하다
+977|准时|zhǔnshí|제시간에|准时到达|zhǔnshí dàodá|제시간에 도착하다|准时上课|zhǔnshí shàngkè|제시간에 수업하다|准时完成|zhǔnshí wánchéng|제시간에 완성하다
+978|资料|zīliào|자료|查资料|chá zīliào|자료를 찾다|学习资料|xuéxí zīliào|학습 자료|收集资料|shōují zīliào|자료를 수집하다
+979|仔细|zǐxì|꼼꼼하다, 자세히|仔细看|zǐxì kàn|자세히 보다|仔细检查|zǐxì jiǎnchá|꼼꼼히 검사하다|工作仔细|gōngzuò zǐxì|일을 꼼꼼히 하다
+980|自|zì|~부터, ~에서|自今天起|zì jīntiān qǐ|오늘부터|自北京出发|zì Běijīng chūfā|베이징에서 출발하다|自那以后|zì nà yǐhòu|그때 이후로
+981|自然|zìrán|자연; 자연스럽다|保护自然|bǎohù zìrán|자연을 보호하다|自然环境|zìrán huánjìng|자연환경|表情自然|biǎoqíng zìrán|표정이 자연스럽다
+982|自习|zìxí|자습하다|上自习|shàng zìxí|자습하다|晚自习|wǎn zìxí|야간 자습|自习室|zìxí shì|자습실
+983|自信|zìxìn|자신감; 자신 있다|有自信|yǒu zìxìn|자신감이 있다|充满自信|chōngmǎn zìxìn|자신감에 차 있다|自信地回答|zìxìn de huídá|자신 있게 대답하다
+984|自学|zìxué|독학하다|自学汉语|zìxué Hànyǔ|중국어를 독학하다|在家自学|zài jiā zìxué|집에서 독학하다|通过自学|tōngguò zìxué|독학을 통해
+985|总结|zǒngjié|정리하다, 총괄하다; 총정리|总结经验|zǒngjié jīngyàn|경험을 정리하다|总结一下|zǒngjié yíxià|한번 정리해 보다|工作总结|gōngzuò zǒngjié|업무 총정리
+986|租|zū|빌리다, 임차하다|租房子|zū fángzi|집을 빌리다|租车|zū chē|차를 빌리다|租一个月|zū yí gè yuè|한 달 동안 빌리다
+987|组|zǔ|조, 그룹|第一组|dìyī zǔ|1조|我们组|wǒmen zǔ|우리 조|分成两组|fēnchéng liǎng zǔ|두 조로 나누다
+988|最终|zuìzhōng|최종, 최종적으로|最终决定|zuìzhōng juédìng|최종 결정|最终结果|zuìzhōng jiéguǒ|최종 결과|最终成功|zuìzhōng chénggōng|결국 성공하다
+989|尊重|zūnzhòng|존중하다|互相尊重|hùxiāng zūnzhòng|서로 존중하다|尊重别人|zūnzhòng biérén|타인을 존중하다|受到尊重|shòudào zūnzhòng|존중을 받다
+990|左右|zuǒyòu|좌우; ~정도, ~쯤|五点左右|wǔ diǎn zuǒyòu|5시쯤|三十岁左右|sān shí suì zuǒyòu|서른 살 정도|看看左右|kàn kàn zuǒyòu|좌우를 살펴보다
+991|座|zuò|채, 동(건물·산 등의 양사)|一座山|yí zuò shān|산 하나|一座城市|yí zuò chéngshì|도시 하나|一座大桥|yí zuò dà qiáo|큰 다리 하나
+992|做法|zuòfǎ|방법, 방식|这种做法|zhè zhǒng zuòfǎ|이런 방식|正确的做法|zhèngquè de zuòfǎ|올바른 방법|不同的做法|bù tóng de zuòfǎ|다른 방식
+993|作家|zuòjiā|작가|著名作家|zhùmíng zuòjiā|유명 작가|当作家|dàngzuò jiā|작가가 되다|一位作家|yí wèi zuòjiā|작가 한 명
+994|做梦|zuòmèng|꿈꾸다|晚上做梦|wǎnshang zuòmèng|밤에 꿈을 꾸다|做了一个梦|zuò le yí gè mèng|꿈을 하나 꾸었다|经常做梦|jīngcháng zuòmèng|자주 꿈을 꾸다
+995|作品|zuòpǐn|작품|文学作品|wénxué zuòpǐn|문학 작품|艺术作品|yìshù zuòpǐn|예술 작품|优秀作品|yōuxiù zuòpǐn|우수 작품
+996|作为|zuòwéi|~로서; ~로 삼다|作为老师|zuòwéi lǎoshī|교사로서|作为礼物|zuòwéi lǐwù|선물로|把它作为目标|bǎ tā zuòwéi mùbiāo|그것을 목표로 삼다
+997|座位|zuòwèi|좌석, 자리|找座位|zhǎo zuòwèi|자리를 찾다|座位号|zuòwèi hào|좌석 번호|空座位|kōng zuòwèi|빈자리
+998|作文|zuòwén|작문하다; 작문|写作文|xiě zuòwén|작문을 쓰다|一篇作文|yì piān zuòwén|작문 한 편|作文题目|zuòwén tímù|작문 제목·문제
+999|作用|zuòyòng|작용, 역할|起作用|qǐ zuòyòng|효과가 있다|重要作用|zhòngyào zuòyòng|중요한 역할|作用很大|zuòyòng hěn dà|작용이 크다
+1000|作者|zuòzhě|작가, 저자|文章作者|wénzhāng zuòzhě|글의 저자|小说作者|xiǎoshuō zuòzhě|소설의 작가|作者介绍|zuòzhě jièshào|작가 소개
