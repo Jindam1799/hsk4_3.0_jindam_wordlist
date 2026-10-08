@@ -41,6 +41,13 @@
   const highlight = (text, word) => esc(text).split(esc(word)).join(`<span class="hl">${esc(word)}</span>`);
   const roundsOf = (no) => state.rounds[no] || [false, false, false];
   const wordOf = (no) => WORDS[no - 1];
+  const shuffle = (arr) => { // 순서 섞기 (Fisher–Yates)
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  };
+  // 🔄 이모지는 색을 바꿀 수 없어서 같은 모양의 아이콘을 직접 그림 (글자색을 따라감)
+  const AGAIN_ICON = '<svg class="ic-again" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9"/><path d="M5.2 2.8v3.6h3.6"/><path d="M4 13a8 8 0 0 0 14.3 4.9"/><path d="M18.8 21.2v-3.6h-3.6"/></svg>';
   const todayKey = () => new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD (기기 시간 기준)
 
   // ---------- 발음: 여자 목소리 Tingting ----------
@@ -71,7 +78,17 @@
     pickVoice();
     speechSynthesis.addEventListener?.("voiceschanged", pickVoice);
   }
-  function speak(text, btn) {
+  // reveal: 재생하는 동안 답을 보여 줄 곳(카드 앞면 또는 짝꿍어휘 한 줄). 재생이 끝나면 다시 숨김
+  let playing = null;
+  function stopPlaying() {
+    if (!playing) return;
+    clearTimeout(playing.timer);
+    playing.btn?.classList.remove("playing");
+    playing.reveal?.classList.remove("say-show");
+    playing = null;
+  }
+  function speak(text, btn, reveal) {
+    stopPlaying();
     if (!("speechSynthesis" in window)) return;
     pickVoice(); // 음성 목록이 늦게 들어오는 브라우저 대비: 말할 때마다 다시 확인
     speechSynthesis.cancel();
@@ -79,10 +96,14 @@
     u.lang = zhVoice ? zhVoice.lang : "zh-CN";
     if (zhVoice) u.voice = zhVoice;
     u.rate = 0.85;
-    if (btn) {
-      btn.classList.add("playing");
-      u.onend = u.onerror = () => btn.classList.remove("playing");
-    }
+    const me = { btn, reveal };
+    playing = me;
+    btn?.classList.add("playing");
+    reveal?.classList.add("say-show");
+    const done = () => { if (playing === me) stopPlaying(); };
+    u.onend = u.onerror = done;
+    // 일부 휴대폰은 재생 끝 신호가 안 오므로, 글자 수로 재생 시간을 어림해 넉넉히 기다린 뒤 숨김
+    me.timer = setTimeout(done, 1500 + [...text].length * 450);
     speechSynthesis.speak(u);
   }
   const SPEAKER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
@@ -194,9 +215,9 @@
       <div class="done">
         <div class="done-badge">🎉</div>
         <h2>${esc(s.title)} 끝!</h2>
-        <p class="done-sum"><span>⭕ 알아요 <b>${s.known.length}</b></span><span>🔄 다시 <b>${s.again.length}</b></span></p>
+        <p class="done-sum"><span>⭕ 알아요 <b>${s.known.length}</b></span><span>❌ 몰라요 <b>${s.again.length}</b></span></p>
         <div class="done-actions">
-          ${retry.length ? `<button class="cta-sm" data-act="retry">🔄 다시 단어만 한 번 더 (${retry.length})</button>` : ""}
+          ${retry.length ? `<button class="cta-sm" data-act="retry">${AGAIN_ICON} 다시 단어만 한 번 더 (${retry.length})</button>` : ""}
           ${nextSec ? `<button class="cta-sm${retry.length ? " ghost" : ""}" data-act="next">다음 구간 ${sectionLabel(sections[s.section + 1])} →</button>` : ""}
           <button class="ghost" data-act="restart">이 묶음 처음부터 다시</button>
         </div>
@@ -222,13 +243,17 @@
     document.querySelectorAll("#dirSeg button").forEach((b) => b.classList.toggle("on", b.dataset.dir === state.dir));
     if (isDone()) {
       stageEl.innerHTML = doneHTML();
-      $("#judge").hidden = true;
     } else {
       const w = cur();
-      stageEl.innerHTML = `<div class="fc"><div class="fc-inner${flipped ? " flipped" : ""}">${frontHTML(w)}${backHTML(w)}</div></div>`;
+      stageEl.innerHTML = `<div class="fc">
+        <div class="fc-inner${flipped ? " flipped" : ""}">${frontHTML(w)}${backHTML(w)}</div>
+        <div class="stamp know" aria-hidden="true">⭕ 알아요</div>
+        <div class="stamp again" aria-hidden="true">❌ 몰라요</div>
+      </div>`;
       $("#judge").hidden = false;
       fitCard();
     }
+    $("#undoBtn").disabled = !(s.hist && s.hist.length);
     renderFoot();
     maybeCoach();
   }
@@ -237,7 +262,7 @@
     const s = state.session;
     const n = s.queue.length, at = Math.min(s.pos + 1, n);
     $("#cardFoot").innerHTML = `
-      <div class="label"><span><b>${at}</b> / ${n}</span><span>⭕ <b>${s.known.length}</b> · 🔄 <b>${s.again.length}</b></span></div>
+      <div class="label"><span><b>${at}</b> / ${n}</span><span>⭕ <b>${s.known.length}</b> · ❌ <b>${s.again.length}</b></span></div>
       <div class="track"><i style="width:${(Math.min(s.pos, n) / n) * 100}%"></i></div>`;
   }
 
@@ -256,8 +281,8 @@
       <div class="coach">
         <p><b>👆 꾹</b> 누르고 있으면 → 뜻·병음<br><small>손을 떼면 다시 사라져요</small></p>
         <p><b>👆 톡</b> 치면 → 뒤집어서 짝꿍어휘</p>
-        <p><b>👈 밀면</b> → 다음 카드</p>
-        <p><b>⭕ 🔄</b> 떠올렸는지 표시하기</p>
+        <p><b>👉 오른쪽으로 밀면</b> → ⭕ 알아요</p>
+        <p><b>👈 왼쪽으로 밀면</b> → ❌ 몰라요<br><small>4장 뒤에 다시 나와요</small></p>
         <button class="cta-sm" data-act="coach">알겠어요!</button>
       </div>`);
   }
@@ -266,6 +291,7 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let busy = false;
   function slide(dir, apply) { // dir 1: 왼쪽으로 나감(다음) / -1: 오른쪽으로 나감(이전)
+    stopPlaying();
     const card = stageEl.querySelector(".fc");
     if (reduceMotion || !card) { apply(); renderCard(); return; }
     busy = true;
@@ -292,17 +318,12 @@
     el.style.transform = "";
   }
 
-  function move(dir) { // 밀어서 넘기기 (알아요/다시 표시 없이)
-    if (busy) return;
-    const s = state.session;
-    const to = s.pos + dir;
-    if (to < 0 || to > s.queue.length || (dir > 0 && isDone())) { const c = stageEl.querySelector(".fc"); if (c) bounce(c); return; }
-    slide(dir, () => { s.pos = to; flipped = false; saveSession(); });
-  }
-
+  // 오른쪽으로 밀기 = ⭕ 알아요 / 왼쪽으로 밀기 = ❌ 몰라요
   function judge(known) {
     if (busy || isDone()) return;
     const s = state.session, no = s.queue[s.pos];
+    s.hist = s.hist || [];
+    const h = { known, no, pos: s.pos, rounds: state.rounds[no] ? state.rounds[no].slice() : null, status: state.status[no] ?? null, day: todayKey() };
     if (known) {
       fillRound(no);
       setStatus(no, "k");
@@ -312,14 +333,37 @@
     } else {
       setStatus(no, "a");
       s.again.push(no);
-      s.queue.splice(Math.min(s.pos + 1 + AGAIN_GAP, s.queue.length), 0, no); // 4장 뒤에 다시
-      toast("🔄 4장 뒤에 다시 나와요");
+      h.insertAt = Math.min(s.pos + 1 + AGAIN_GAP, s.queue.length);
+      s.queue.splice(h.insertAt, 0, no); // 4장 뒤에 다시
+      toast("❌ 몰라요 · 4장 뒤에 다시");
     }
     addLog(known);
-    slide(1, () => { s.pos += 1; flipped = false; saveSession(); });
+    s.hist.push(h);
+    if (s.hist.length > 30) s.hist.shift();
+    slide(known ? -1 : 1, () => { s.pos += 1; flipped = false; saveSession(); }); // 민 방향으로 날아감
+  }
+
+  // ↩ 되돌리기: 방금 밀었던 카드를 다시 가져오고 체크·기록도 되돌림
+  function undo() {
+    const s = state.session;
+    if (busy || !s.hist || !s.hist.length) return;
+    const h = s.hist.pop();
+    if (h.rounds) state.rounds[h.no] = h.rounds; else delete state.rounds[h.no];
+    if (h.status) state.status[h.no] = h.status; else delete state.status[h.no];
+    store.set("rounds", state.rounds);
+    store.set("status", state.status);
+    const list = h.known ? s.known : s.again;
+    const i = list.lastIndexOf(h.no);
+    if (i >= 0) list.splice(i, 1);
+    if (!h.known && h.insertAt != null) s.queue.splice(h.insertAt, 1);
+    const d = state.log[h.day];
+    if (d) { d.seen = Math.max(0, d.seen - 1); if (h.known) d.known = Math.max(0, d.known - 1); store.set("log", state.log); }
+    toast("↩ 되돌렸어요");
+    slide(h.known ? 1 : -1, () => { s.pos = h.pos; flipped = false; saveSession(); });
   }
 
   function flip() {
+    stopPlaying();
     flipped = !flipped;
     stageEl.querySelector(".fc-inner")?.classList.toggle("flipped", flipped);
     stageEl.querySelectorAll(".hold.show").forEach((h) => h.classList.remove("show"));
@@ -329,9 +373,19 @@
   const HOLD_MS = 160;
   let pt = null;
   stageEl.addEventListener("contextmenu", (e) => e.preventDefault());
+  const NEAR = 12;
+  function nearButton(x, y) { // 지금 보이는 면의 버튼(🔊·체크박스) 둘레 12px까지는 버튼 자리로 봄
+    const face = stageEl.querySelector(flipped ? ".back" : ".front");
+    return [...(face?.querySelectorAll("button") || [])].some((b) => {
+      const r = b.getBoundingClientRect();
+      return x > r.left - NEAR && x < r.right + NEAR && y > r.top - NEAR && y < r.bottom + NEAR;
+    });
+  }
+  let lastButtonAt = 0;
   stageEl.addEventListener("pointerdown", (e) => {
     const fc = e.target.closest(".fc");
-    if (!fc || busy || e.target.closest("button") || (e.pointerType === "mouse" && e.button !== 0)) return;
+    if (e.target.closest("button") || (fc && nearButton(e.clientX, e.clientY))) { lastButtonAt = Date.now(); return; }
+    if (!fc || busy || (e.pointerType === "mouse" && e.button !== 0)) return;
     const target = flipped ? e.target.closest(".back .hold") : fc.querySelector(".front .hold");
     pt = { id: e.pointerId, x: e.clientX, y: e.clientY, t: Date.now(), fc, target, held: false, drag: false, dx: 0 };
     try { fc.setPointerCapture(e.pointerId); } catch { /* 무시 */ }
@@ -349,11 +403,11 @@
     }
     if (pt.drag) {
       pt.dx = dx;
-      const s = state.session;
-      const can = dx < 0 ? !isDone() : s.pos > 0;
-      const d = dx * (can ? 1 : 0.25);
       pt.fc.style.transition = "none";
-      pt.fc.style.transform = `translateX(${d}px) rotate(${d / 30}deg)`;
+      pt.fc.style.transform = `translateX(${dx}px) rotate(${dx / 30}deg)`;
+      const o = Math.min(1, Math.abs(dx) / 90);
+      pt.fc.querySelector(".stamp.know").style.opacity = dx > 0 ? o : 0;
+      pt.fc.querySelector(".stamp.again").style.opacity = dx < 0 ? o : 0;
     }
   });
   function endPointer(e, cancelled) {
@@ -365,11 +419,14 @@
     if (cancelled) { bounce(p.fc); return; }
     if (p.drag) {
       const fast = Math.abs(p.dx) > 30 && Date.now() - p.t < 250;
-      if (Math.abs(p.dx) > 70 || fast) move(p.dx < 0 ? 1 : -1);
-      else bounce(p.fc);
+      if (Math.abs(p.dx) > 70 || fast) judge(p.dx > 0);
+      else {
+        bounce(p.fc);
+        p.fc.querySelectorAll(".stamp").forEach((st) => { st.style.opacity = 0; });
+      }
       return;
     }
-    if (!p.held && Date.now() - p.t < 400) flip(); // 짧게 톡 → 뒤집기
+    if (!p.held && Date.now() - p.t < 400 && Date.now() - lastButtonAt > 500) flip(); // 짧게 톡 → 뒤집기 (버튼 누른 직후는 제외)
   }
   stageEl.addEventListener("pointerup", (e) => endPointer(e, false));
   stageEl.addEventListener("pointercancel", (e) => endPointer(e, true));
@@ -377,7 +434,12 @@
   // 버튼: 발음 / 체크박스 / 끝 화면 / 안내
   stageEl.addEventListener("click", (e) => {
     const say = e.target.closest("[data-say]");
-    if (say) { speak(say.dataset.say, say); return; }
+    if (say) {
+      lastButtonAt = Date.now();
+      const reveal = say.closest(".prow") || stageEl.querySelector(".front .hold");
+      speak(say.dataset.say, say, reveal);
+      return;
+    }
     const box = e.target.closest("[data-box]");
     if (box) {
       const no = cur().no, i = +box.dataset.box;
@@ -393,13 +455,12 @@
     if (!act) return;
     const s = state.session;
     if (act === "coach") { store.set("coachSeen", true); stageEl.querySelector(".coach")?.remove(); }
-    if (act === "retry") startSession(listSession("retry", "다시 볼 단어", [...new Set(s.again)].filter((no) => state.status[no] === "a")));
+    if (act === "retry") startSession(listSession("retry", "다시 볼 단어", shuffle([...new Set(s.again)].filter((no) => state.status[no] === "a"))));
     if (act === "next") { state.section = s.section + 1; store.set("section", state.section); startSession(sectionSession(state.section)); }
-    if (act === "restart") startSession({ ...s, queue: [...new Set(s.queue)], pos: 0, known: [], again: [] });
+    if (act === "restart") startSession({ ...s, queue: [...new Set(s.queue)], pos: 0, known: [], again: [], hist: [] });
   });
 
-  $("#knowBtn").addEventListener("click", () => judge(true));
-  $("#againBtn").addEventListener("click", () => judge(false));
+  $("#undoBtn").addEventListener("click", undo);
   $("#dirSeg").addEventListener("click", (e) => {
     const b = e.target.closest("button[data-dir]");
     if (!b) return;
@@ -555,20 +616,15 @@
     startSession(sectionSession(state.section, no));
   });
 
-  // ---------- 📊 내 공부 현황 ----------
+  // ---------- 📍 내 공부 현황 ----------
   function renderStats() {
     const total = WORDS.length;
     const learned = WORDS.filter((w) => roundsOf(w.no)[0]).length;
     const mastered = WORDS.filter((w) => roundsOf(w.no).every(Boolean)).length;
     const weak = weakWords();
     const today = state.log[todayKey()] || { seen: 0, known: 0 };
-    const s = state.session;
-    const where = s && !isDone()
-      ? `<b>${esc(s.title)}</b> · ${s.pos + 1}번째 카드 / ${s.queue.length} <small>(${cur().no}번 ${esc(cur().word)})</small>`
-      : s ? `<b>${esc(s.title)}</b> 끝까지 했어요` : `<b>구간 ${sectionLabel(sections[state.section])}</b> 시작 전`;
     const pct = (n) => Math.round((n / total) * 100);
     $("#statsBody").innerHTML = `
-      <div class="st-where"><span>📍 지금 위치</span><p>${where}</p></div>
 
       <div class="st-big">
         <div class="st-ring" style="--p:${pct(learned)}"><b>${learned}</b><small>/ ${total}</small></div>
@@ -586,7 +642,7 @@
       </div>
 
       <button class="st-weak" data-act="weak" ${weak.length ? "" : "disabled"}>
-        <span>🔄 다시 볼 단어 <b>${weak.length}개</b></span>
+        <span>${AGAIN_ICON} 다시 볼 단어 <b>${weak.length}개</b></span>
         <small>${weak.length ? "모아서 연습하기 →" : "아직 없어요"}</small>
       </button>
 
@@ -595,8 +651,11 @@
         ${sections.map((sec, i) => {
           const done = sec.filter((w) => roundsOf(w.no)[0]).length;
           const full = sec.every((w) => roundsOf(w.no)[0]);
+          // 토마토 짝꿍이 모양: 외운 만큼 아래에서부터 빨갛게 익어 감
           return `<button class="tile${i === state.section ? " on" : ""}${full ? " full" : ""}" data-tile="${i}" style="--f:${(done / sec.length) * 100}%" aria-label="구간 ${sectionLabel(sec)} 외운 단어 ${done}개">
-            <b>${String(i + 1).padStart(2, "0")}</b><small>${done}/${sec.length}</small></button>`;
+            <span class="t-leaf"></span>
+            <span class="t-body"><span class="t-eyes"></span><b>${i + 1}</b><small>${done}/${sec.length}</small></span>
+          </button>`;
         }).join("")}
       </div>`;
   }
@@ -614,15 +673,16 @@
       const weak = weakWords();
       if (!weak.length) return;
       closeSheets();
-      startSession(listSession("weak", `다시 볼 단어 ${weak.length}개`, weak.slice(0, 50)));
+      startSession(listSession("weak", `다시 볼 단어 ${weak.length}개`, shuffle(weak).slice(0, 50))); // 랜덤 순서
     }
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeSheets();
     if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open") || $("#cards").hidden) return;
-    if (e.key === "ArrowRight") move(1);
-    if (e.key === "ArrowLeft") move(-1);
+    if (e.key === "ArrowRight") judge(true);
+    if (e.key === "ArrowLeft") judge(false);
+    if (e.key === "Backspace") undo();
     if (e.key === " ") { e.preventDefault(); flip(); }
   });
 
