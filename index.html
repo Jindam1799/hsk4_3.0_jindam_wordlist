@@ -4,32 +4,74 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#c8372d">
-  <meta name="description" content="HSK 3.0 4급 필수 어휘와 진담중국어 짝꿍어휘를 모바일에서 편하게 보는 단어장">
+  <meta name="author" content="진담중국어">
+  <meta name="copyright" content="© 2026 진담중국어. All rights reserved.">
+  <meta name="description" content="HSK 3.0 4급 필수 어휘 1000개와 진담중국어 짝꿍어휘를 휴대폰에서 넘기며 익히는 단어장">
   <title>HSK 4급 짝꿍어휘</title>
+  <!-- 카카오톡·SNS로 링크를 보냈을 때 보이는 미리보기 -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="진담중국어">
+  <meta property="og:title" content="HSK 4급 단어와 짝꿍어휘 | 진담중국어">
+  <meta property="og:description" content="HSK 3.0 필수 어휘 1000개, 단어마다 짝꿍어휘 3개. 덩어리로 익히면, 중국어가 툭!">
+  <meta property="og:url" content="https://jindam1799.github.io/hsk4_3.0_jindam_wordlist/">
+  <meta property="og:image" content="https://jindam1799.github.io/hsk4_3.0_jindam_wordlist/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <script src="inapp.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="mode-all">
-  <div class="app">
-    <header class="top">
-      <div class="brand-row">
-        <div class="brand">
-          <span class="badge">HSK 3.0</span>
-          <h1>HSK 4급 <span>짝꿍어휘</span></h1>
+
+  <!-- ===== 홈 (표지) ===== -->
+  <section class="home" id="home" aria-label="홈">
+    <div class="deco" aria-hidden="true">
+      <i class="heart" style="left:8%;top:10%"></i><i class="spark" style="right:9%;top:8%"></i>
+      <i class="spark sm" style="left:6%;top:42%"></i><i class="heart" style="right:6%;top:44%"></i>
+      <i class="heart sm" style="left:7%;top:70%"></i><i class="spark" style="right:7%;top:69%"></i>
+    </div>
+
+    <div class="home-inner">
+      <span class="pill">HSK 3.0 버전</span>
+      <h1 class="title-box">HSK 4급</h1>
+      <div class="ribbon"><span>진담 짝꿍어휘 단어장</span></div>
+      <p class="home-sub">필수 어휘 1000 · 단어마다 짝꿍어휘 3개</p>
+
+      <div class="hero" id="hero"></div>
+
+      <p class="tagline">덩어리로 익히면, 중국어가 <b>툭!</b></p>
+
+      <div class="home-actions">
+        <button class="cta" id="continueBtn"><b id="continueTitle">공부 시작하기</b><small id="continueSub"></small></button>
+        <div class="home-row">
+          <button class="ghost" id="homeSectionBtn">구간 고르기</button>
+          <button class="ghost" id="guideBtn">공부 방법</button>
         </div>
-        <button class="icon-btn" id="searchBtn" aria-label="단어 찾기">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-        </button>
-        <button class="icon-btn" id="infoBtn" aria-label="공부 방법 보기">?</button>
       </div>
+    </div>
 
-      <button class="band" id="sectionBtn" aria-label="구간 고르기">
-        <b id="bandTitle"></b>
-        <span class="band-more">구간 고르기 ▾</span>
+    <footer class="wave">
+      <b>진담중국어</b>
+      <small>진심을 담은 중국어 · 아웃풋에 진심</small>
+      <small class="copy">© 2026 진담중국어. All rights reserved.</small>
+    </footer>
+  </section>
+
+  <!-- ===== 공부 화면: 한 화면에 단어 2개, 밀어서 넘기기 ===== -->
+  <div class="app" id="study" hidden>
+    <header class="top">
+      <button class="icon-btn" id="homeBtn" aria-label="홈으로">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>
       </button>
-
+      <button class="band" id="sectionBtn" aria-label="구간 고르기">
+        <b id="bandTitle"></b><span class="band-more">구간 ▾</span>
+      </button>
+      <button class="icon-btn" id="searchBtn" aria-label="단어 찾기">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      </button>
       <div class="seg" id="modeSeg" aria-label="가리기">
         <button data-mode="all" class="on">다 보기</button>
         <button data-mode="hide-ko">뜻 가리기</button>
@@ -46,7 +88,7 @@
     </footer>
   </div>
 
-  <!-- 구간 고르기 -->
+  <!-- ===== 구간 고르기 ===== -->
   <section class="sheet" id="sectionSheet" hidden aria-label="구간 고르기">
     <div class="sheet-panel">
       <div class="sheet-head"><b>구간 고르기</b><button class="sheet-close" data-close aria-label="닫기">✕</button></div>
@@ -54,7 +96,7 @@
     </div>
   </section>
 
-  <!-- 단어 찾기 -->
+  <!-- ===== 단어 찾기 ===== -->
   <section class="sheet" id="searchSheet" hidden aria-label="단어 찾기">
     <div class="sheet-panel tall">
       <div class="sheet-head">
@@ -68,49 +110,34 @@
     </div>
   </section>
 
-  <section class="intro" id="intro" aria-label="이렇게 공부해요">
-    <div class="intro-banner">
-      <p class="intro-level">HSK 4급</p>
-      <h2>단어와 짝꿍어휘</h2>
-      <p class="intro-sub">필수 어휘 1000 · 단어마다 짝꿍어휘 3개</p>
-    </div>
-    <div class="intro-body">
-      <h3>이렇게 공부해요</h3>
+  <!-- ===== 공부 방법 (이렇게 공부해요) ===== -->
+  <section class="sheet" id="guideSheet" hidden aria-label="이렇게 공부해요">
+    <div class="sheet-panel guide">
+      <div class="sheet-head"><b>이렇게 공부해요</b><button class="sheet-close" data-close aria-label="닫기">✕</button></div>
       <ol class="steps">
         <li>
           <span class="step-no">1</span>
-          <div>
-            <b>체크박스로 공부한 횟수 표시</b>
-            <p>단어 왼쪽에 작은 체크박스가 3개 있어요.<br>단어를 공부할 때마다 하나씩 체크해 주세요.<br>체크 3개를 모두 채우면 3번 공부 완료!</p>
-          </div>
+          <div><b>체크박스로 공부한 횟수 표시</b>
+            <p>단어 왼쪽에 작은 체크박스가 3개 있어요. 공부할 때마다 하나씩 체크하고, 3개를 모두 채우면 3번 공부 완료!</p></div>
         </li>
         <li>
           <span class="step-no">2</span>
-          <div>
-            <b>단어 → 짝꿍어휘 순서로</b>
-            <p>큰 글씨 단어와 뜻을 먼저 익히고, 아래 ①②③ 짝꿍어휘로 실제 쓰임을 확인해요.</p>
-          </div>
+          <div><b>단어 → 짝꿍어휘 순서로</b>
+            <p>큰 글씨 단어와 뜻을 먼저 익히고, 아래 ①②③ 짝꿍어휘로 실제 쓰임을 확인해요.</p></div>
         </li>
         <li>
           <span class="step-no">3</span>
-          <div>
-            <b>번호로 진도 확인</b>
-            <p>0001부터 1000까지 번호가 붙어 있고, 50개씩 빨간 띠의 구간으로 나뉘어 있어요. 오늘 어디까지 했는지 바로 찾을 수 있어요.</p>
-          </div>
+          <div><b>번호로 진도 확인</b>
+            <p>0001부터 1000까지 번호가 붙어 있고, 50개씩 빨간 띠의 구간으로 나뉘어 있어요.</p></div>
         </li>
       </ol>
-      <p class="boxes-hint">시작 전에 <span class="demo-box"></span><span class="demo-box"></span><span class="demo-box"></span> ← 이런 박스가 단어마다 있어요</p>
-
-      <button class="start-btn" id="startBtn">단어 공부 시작하기</button>
-
       <ul class="app-tips">
-        <li><b>👉 넘기기</b> 카드를 왼쪽으로 밀면 다음 단어, 오른쪽으로 밀면 이전 단어예요.</li>
-        <li><b>🔊 발음</b> 한자를 누르면 중국어 발음을 들을 수 있어요.</li>
-        <li><b>가리기</b> ‘중국어 가리기’를 켜고 한국어만 보며 먼저 말해 보세요. 가린 곳을 누르면 정답이 보여요.</li>
-        <li><b>저장</b> 체크한 박스와 마지막으로 본 단어는 지금 쓰는 휴대폰(브라우저)에 저장돼요.</li>
+        <li><b>넘기기</b>한 화면에 2단어씩. 왼쪽으로 밀면 다음, 오른쪽으로 밀면 이전이에요.</li>
+        <li><b>발음</b>한자를 누르면 중국어 발음이 나와요. 따라 말해 보세요.</li>
+        <li><b>가리기</b>‘중국어 가리기’로 한국어만 보고 먼저 말한 뒤, 가린 곳을 눌러 확인해요.</li>
       </ul>
-      <p class="source">게임과 단어장의 HSK 단어 및 급수는 중외언어교류협력센터의 《HSK考试大纲》 어휘 목록을 기준으로 확인했으며, 짝꿍어휘는 실제 말하기 연습을 위해 진담중국어가 추가하였다.</p>
-      <p class="brand-foot">덩어리로 익히면, 중국어가 <b>툭!</b><br>진담중국어 · 진심을 담은 중국어</p>
+      <p class="source">HSK 단어 및 급수는 중외언어교류협력센터의 《HSK考试大纲》 어휘 목록을 기준으로 확인했으며, 짝꿍어휘는 실제 말하기 연습을 위해 진담중국어가 추가하였다.</p>
+      <p class="copyright">© 2026 진담중국어(진심을 담은 중국어). All rights reserved.<br>단어장의 짝꿍어휘·구성·디자인·캐릭터는 진담중국어의 저작물로, 무단 복제·배포를 금합니다.</p>
     </div>
   </section>
 

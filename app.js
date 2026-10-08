@@ -1,7 +1,9 @@
+/*! HSK 4급 진담 짝꿍어휘 단어장 · © 2026 진담중국어(진심을 담은 중국어). All rights reserved. */
 (() => {
   "use strict";
 
   const SECTION_SIZE = 50;
+  const PER_PAGE = 2; // 한 화면에 단어 2개
   const pad = (n) => String(n).padStart(4, "0");
   const CIRCLED = ["①", "②", "③"];
 
@@ -20,13 +22,14 @@
   for (let i = 0; i < WORDS.length; i += SECTION_SIZE) sections.push(WORDS.slice(i, i + SECTION_SIZE));
 
   const clampSection = (i) => Math.max(0, Math.min(i, sections.length - 1));
+  const pageStart = (i) => Math.floor(i / PER_PAGE) * PER_PAGE;
   const state = {
     section: clampSection(store.get("section", 0)),
-    idx: store.get("idx", 0), // 구간 안에서 몇 번째 단어인지 (마지막으로 본 단어에서 이어서 시작)
+    idx: store.get("idx", 0), // 구간 안에서 화면 첫 단어의 위치 (마지막으로 본 곳에서 이어서 시작)
     mode: store.get("mode", "all"),
     rounds: store.get("rounds", {}), // { 단어번호: [bool, bool, bool] }
   };
-  state.idx = Math.max(0, Math.min(state.idx, sections[state.section].length - 1));
+  state.idx = pageStart(Math.max(0, Math.min(state.idx, sections[state.section].length - 1)));
 
   const $ = (sel) => document.querySelector(sel);
   const stage = $("#stage");
@@ -36,7 +39,7 @@
   const fold = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, "").toLowerCase();
   const highlight = (text, word) => esc(text).split(esc(word)).join(`<span class="hl">${esc(word)}</span>`);
   const roundsOf = (no) => state.rounds[no] || [false, false, false];
-  const currentWord = () => sections[state.section][state.idx];
+  const pageWords = () => sections[state.section].slice(state.idx, state.idx + PER_PAGE);
   const sectionLabel = (sec) => `${pad(sec[0].no)} – ${pad(sec[sec.length - 1].no)}`;
 
   function saveSpot() {
@@ -44,22 +47,29 @@
     store.set("idx", state.idx);
   }
 
-  // ---------- 발음 (중국어 여성 음성 우선) ----------
+  // ---------- 발음: 여성 중국어 음성 ----------
+  // 아이폰·아이패드·맥 → Tingting / 크롬(PC) → 구글 기본 음성 "Google 普通话（中国大陆）"(여성)
+  // 안드로이드 → 기기 기본 중국어 음성(구글 TTS 기본값이 여성)
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const FEMALE = /tingting|ting-ting|meijia|sin-ji|xiaoxiao|xiaoyi|xiaohan|xiaomo|huihui|yaoyao|female|女/i;
+  const MALE = /li-mu|limu|kangkang|yunxi|yunyang|yunjian|yunze|\bmale\b|男/i;
   let zhVoice = null;
   function pickVoice() {
     if (!("speechSynthesis" in window)) return;
-    const voices = speechSynthesis.getVoices().filter((v) => /^zh[-_](CN|Hans)/i.test(v.lang) || v.lang === "zh");
+    const zh = speechSynthesis.getVoices().filter((v) => /^(zh|cmn)[-_](CN|Hans)/i.test(v.lang));
     zhVoice =
-      voices.find((v) => /xiaoxiao|xiaoyi|tingting|ting-ting|meijia|female|女/i.test(v.name)) ||
-      voices.find((v) => /google/i.test(v.name)) ||
-      voices[0] || null;
+      zh.find((v) => /tingting|ting-ting/i.test(v.name)) ||
+      zh.find((v) => /^google/i.test(v.name)) ||
+      (isAndroid ? null : zh.find((v) => FEMALE.test(v.name) && !MALE.test(v.name)) || zh.find((v) => !MALE.test(v.name))) ||
+      null; // null이면 lang="zh-CN"만 지정해 기기 기본 중국어 음성 사용
   }
   if ("speechSynthesis" in window) {
     pickVoice();
-    speechSynthesis.onvoiceschanged = pickVoice;
+    speechSynthesis.addEventListener?.("voiceschanged", pickVoice);
   }
   function speak(text, btn) {
     if (!("speechSynthesis" in window)) return;
+    if (!zhVoice) pickVoice(); // 음성 목록이 늦게 오는 브라우저 대비
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "zh-CN";
@@ -74,7 +84,57 @@
 
   const SPEAKER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
 
-  // ---------- 렌더링 ----------
+  // ---------- 캐릭터 (표지의 짝꿍이) ----------
+  const CHAR_SVG = `
+    <svg viewBox="0 0 240 230" aria-hidden="true">
+      <path d="M42 128 Q14 134 6 166" fill="none" stroke="var(--char)" stroke-width="13" stroke-linecap="round"/>
+      <path d="M198 128 Q226 134 234 166" fill="none" stroke="var(--char)" stroke-width="13" stroke-linecap="round"/>
+      <ellipse cx="88" cy="216" rx="26" ry="11" fill="#9e2f25"/>
+      <ellipse cx="152" cy="216" rx="26" ry="11" fill="#9e2f25"/>
+      <path d="M120 40 V20" stroke="#6aa85a" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="104" cy="18" rx="17" ry="9" fill="#8cc47a" transform="rotate(-25 104 18)"/>
+      <ellipse cx="138" cy="13" rx="19" ry="10" fill="#6aa85a" transform="rotate(-20 138 13)"/>
+      <rect x="30" y="36" width="180" height="178" rx="48" fill="var(--char)"/>
+      <circle cx="94" cy="80" r="11" fill="#fff"/><circle cx="146" cy="80" r="11" fill="#fff"/>
+      <circle cx="96" cy="83" r="5.5" fill="#2a2422"/><circle cx="148" cy="83" r="5.5" fill="#2a2422"/>
+      <ellipse cx="70" cy="104" rx="16" ry="8" fill="#e9a198"/><ellipse cx="170" cy="104" rx="16" ry="8" fill="#e9a198"/>
+      <path d="M107 100 Q120 111 133 100" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/>
+    </svg>`;
+  const MINI_FACE = `
+    <svg viewBox="0 0 40 16" aria-hidden="true">
+      <circle cx="12" cy="4" r="2.6" fill="#2a2422"/><circle cx="28" cy="4" r="2.6" fill="#2a2422"/>
+      <ellipse cx="5" cy="10" rx="4" ry="2.2" fill="#f2a59b"/><ellipse cx="35" cy="10" rx="4" ry="2.2" fill="#f2a59b"/>
+      <path d="M16 9 Q20 13 24 9" fill="none" stroke="#2a2422" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>`;
+
+  // 짝꿍어휘에서 표제어를 빼고 남은 "짝꿍" 부분 (예: 按时完成 → 完成)
+  function partner(pair, word) {
+    const rest = pair.replace(word, "").replace(/[，,。！？…\s]/g, "");
+    return rest && rest.length <= 4 ? rest : null;
+  }
+
+  function renderHero() {
+    const w = WORDS[sections[state.section][state.idx].no - 1];
+    const zs = { 1: 0.27, 2: 0.2, 3: 0.155, 4: 0.12 }[w.word.length] || 0.12;
+    $("#hero").innerHTML = `
+      <div class="char" id="heroChar" role="button" aria-label="${esc(w.word)} 발음 듣기" style="--zs:${zs}">
+        ${CHAR_SVG}
+        <div class="char-text"><b>${esc(w.word)}</b><small>${esc(w.pinyin)} · ${esc(w.meaning.split(/[;,]/)[0])}</small></div>
+      </div>
+      <span class="bubble">우리는 짝꿍!</span>
+      <div class="minis">
+        ${w.pairs.map((p, i) => `
+          <div class="mini-wrap">
+            <div class="mini len-${Math.max(2, (partner(p[0], w.word) || "").length)}">${MINI_FACE}<span>${esc(partner(p[0], w.word) || CIRCLED[i])}</span></div>
+            <div class="mini-label">${CIRCLED[i]} ${esc(p[0])}<small>${esc(p[2])}</small></div>
+          </div>`).join("")}
+      </div>`;
+    const started = Object.keys(state.rounds).length > 0 || state.section > 0 || state.idx > 0;
+    $("#continueTitle").textContent = started ? "이어서 공부하기" : "공부 시작하기";
+    $("#continueSub").textContent = `${pad(w.no)} ${w.word}부터 · 구간 ${sectionLabel(sections[state.section])}`;
+  }
+
+  // ---------- 단어 카드 ----------
   function wordHTML(w) {
     const r = roundsOf(w.no);
     return `
@@ -87,11 +147,9 @@
         </div>
         <div class="body">
           <div class="word-head">
-            <div class="hw">
-              <button class="hz zh mask" data-say="${esc(w.word)}" lang="zh-CN">${esc(w.word)}</button>
-              <span class="py zh mask">${esc(w.pinyin)}</span>
-              <button class="speak" data-say="${esc(w.word)}" aria-label="발음 듣기">${SPEAKER}</button>
-            </div>
+            <button class="hz zh mask" data-say="${esc(w.word)}" lang="zh-CN">${esc(w.word)}</button>
+            <span class="py zh mask">${esc(w.pinyin)}</span>
+            <button class="speak" data-say="${esc(w.word)}" aria-label="발음 듣기">${SPEAKER}</button>
             <div class="mean ko mask">${esc(w.meaning)}</div>
           </div>
           <ol class="pairs">
@@ -107,11 +165,23 @@
       </article>`;
   }
 
-  function renderCard() {
-    const hint = state.mode === "all"
-      ? "← 밀어서 넘기기 →"
-      : "가려진 곳을 누르면 정답 · ← 밀어서 넘기기 →";
-    stage.innerHTML = `<div class="card">${wordHTML(currentWord())}</div><p class="hint">${hint}</p>`;
+  // 화면 크기에 맞춰 글자 크기 배율(--k)을 정하고, 넘치는 카드가 있으면 조금씩 줄임
+  function fitPage(page) {
+    const h = stage.clientHeight;
+    let k = Math.max(0.8, Math.min(1.35, h / 470));
+    const overflowing = () => [...page.querySelectorAll(".word")].some((w) => w.scrollHeight > w.clientHeight + 1);
+    page.style.setProperty("--k", k.toFixed(2));
+    for (let i = 0; i < 12 && overflowing() && k > 0.62; i++) {
+      k -= 0.05;
+      page.style.setProperty("--k", k.toFixed(2));
+    }
+  }
+
+  function renderPage(flashNo) {
+    stage.innerHTML = `<div class="page">${pageWords().map(wordHTML).join("")}</div>`;
+    const page = stage.firstElementChild;
+    fitPage(page);
+    if (flashNo) page.querySelector(`.word[data-no="${flashNo}"]`)?.classList.add("flash");
   }
 
   function renderChrome() {
@@ -120,29 +190,54 @@
     ["all", "hide-ko", "hide-zh"].forEach((m) => document.body.classList.toggle("mode-" + m, m === state.mode));
     document.querySelectorAll("#modeSeg button").forEach((b) => b.classList.toggle("on", b.dataset.mode === state.mode));
     $("#prevBtn").disabled = state.section === 0 && state.idx === 0;
-    $("#nextBtn").disabled = state.section === sections.length - 1 && state.idx === sec.length - 1;
+    $("#nextBtn").disabled = state.section === sections.length - 1 && state.idx + PER_PAGE >= sec.length;
     renderProgress();
   }
 
   function renderProgress() {
     const sec = sections[state.section];
+    const words = pageWords();
     const counts = [0, 1, 2].map((i) => sec.filter((w) => roundsOf(w.no)[i]).length);
+    const end = state.idx + words.length;
     $("#progress").innerHTML = `
-      <div class="label"><span><b>${state.idx + 1}</b> / ${sec.length}</span><span>${counts.map((c, i) => `${i + 1}회 <b>${c}</b>`).join(" · ")}</span></div>
-      <div class="track"><i style="width:${((state.idx + 1) / sec.length) * 100}%"></i></div>`;
+      <div class="label"><span><b>${state.idx + 1}${words.length > 1 ? `–${end}` : ""}</b> / ${sec.length}</span><span>${counts.map((c, i) => `${i + 1}회 <b>${c}</b>`).join(" · ")}</span></div>
+      <div class="track"><i style="width:${(end / sec.length) * 100}%"></i></div>`;
   }
 
-  function render() {
+  function render(flashNo) {
     renderChrome();
-    renderCard();
+    renderPage(flashNo);
   }
 
-  // ---------- 이동 (애니메이션) ----------
+  // ---------- 홈 ↔ 공부 화면 ----------
+  function showStudy(push = true) {
+    $("#home").hidden = true;
+    $("#study").hidden = false;
+    render();
+    if (push && history.state?.screen !== "study") history.pushState({ screen: "study" }, "");
+  }
+  function showHome() {
+    $("#study").hidden = true;
+    $("#home").hidden = false;
+    renderHero();
+  }
+  // 휴대폰 '뒤로 가기'를 누르면 홈으로
+  window.addEventListener("popstate", () => { closeSheets(); showHome(); });
+  $("#homeBtn").addEventListener("click", () => {
+    if (history.state?.screen === "study") history.back();
+    else showHome();
+  });
+  $("#continueBtn").addEventListener("click", () => showStudy());
+  $("#home").addEventListener("click", (e) => {
+    if (e.target.closest("#heroChar")) speak(WORDS[sections[state.section][state.idx].no - 1].word);
+  });
+
+  // ---------- 넘기기 (애니메이션) ----------
   function neighbor(dir) {
-    let section = state.section, idx = state.idx + dir;
+    let section = state.section, idx = state.idx + dir * PER_PAGE;
     if (idx < 0) {
       if (section === 0) return null;
-      section -= 1; idx = sections[section].length - 1;
+      section -= 1; idx = pageStart(sections[section].length - 1);
     } else if (idx >= sections[section].length) {
       if (section === sections.length - 1) return null;
       section += 1; idx = 0;
@@ -153,31 +248,31 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let busy = false;
 
-  function bounce(card) {
-    card.style.transition = "transform .2s ease-out";
-    card.style.transform = "";
+  function bounce(el) {
+    el.style.transition = "transform .2s ease-out";
+    el.style.transform = "";
   }
 
   function go(dir) {
     if (busy) return;
     const next = neighbor(dir);
-    const card = stage.querySelector(".card");
-    if (!next) { if (card) bounce(card); return; }
+    const page = stage.querySelector(".page");
+    if (!next) { if (page) bounce(page); return; }
 
     const apply = () => {
       Object.assign(state, next);
       saveSpot();
       render();
     };
-    if (reduceMotion || !card) { apply(); return; }
+    if (reduceMotion || !page) { apply(); return; }
 
     busy = true;
-    card.style.transition = "transform .16s ease-in, opacity .16s ease-in";
-    card.style.transform = `translateX(${-dir * 110}%)`;
-    card.style.opacity = "0";
+    page.style.transition = "transform .16s ease-in, opacity .16s ease-in";
+    page.style.transform = `translateX(${-dir * 110}%)`;
+    page.style.opacity = "0";
     setTimeout(() => {
       apply();
-      const incoming = stage.querySelector(".card");
+      const incoming = stage.querySelector(".page");
       incoming.style.transition = "none";
       incoming.style.transform = `translateX(${dir * 35}%)`;
       incoming.style.opacity = "0";
@@ -190,19 +285,20 @@
     }, 160);
   }
 
-  function jumpTo(section, idx) {
+  function jumpTo(section, idx, flashNo) {
     state.section = clampSection(section);
-    state.idx = Math.max(0, Math.min(idx, sections[state.section].length - 1));
+    state.idx = pageStart(Math.max(0, Math.min(idx, sections[state.section].length - 1)));
     saveSpot();
-    render();
+    if ($("#study").hidden) showStudy();
+    render(flashNo);
   }
 
   // ---------- 손가락으로 밀어 넘기기 ----------
   let drag = null;
   stage.addEventListener("touchstart", (e) => {
-    const card = stage.querySelector(".card");
-    if (!card || busy || e.touches.length > 1) return;
-    drag = { x: e.touches[0].clientX, y: e.touches[0].clientY, dx: 0, horizontal: null, card, t: Date.now() };
+    const page = stage.querySelector(".page");
+    if (!page || busy || e.touches.length > 1) return;
+    drag = { x: e.touches[0].clientX, y: e.touches[0].clientY, dx: 0, horizontal: null, page, t: Date.now() };
   }, { passive: true });
 
   stage.addEventListener("touchmove", (e) => {
@@ -213,22 +309,21 @@
     if (!drag.horizontal) return;
     e.preventDefault();
     drag.dx = dx;
-    // 더 넘길 단어가 없으면 살짝만 끌리게
-    const resist = neighbor(dx < 0 ? 1 : -1) ? 1 : 0.25;
-    drag.card.style.transition = "none";
-    drag.card.style.transform = `translateX(${dx * resist}px) rotate(${(dx * resist) / 40}deg)`;
+    const resist = neighbor(dx < 0 ? 1 : -1) ? 1 : 0.25; // 더 넘길 곳이 없으면 살짝만 끌림
+    drag.page.style.transition = "none";
+    drag.page.style.transform = `translateX(${dx * resist}px) rotate(${(dx * resist) / 50}deg)`;
   }, { passive: false });
 
   stage.addEventListener("touchend", () => {
     if (!drag) return;
-    const { dx, horizontal, card, t } = drag;
+    const { dx, horizontal, page, t } = drag;
     drag = null;
     if (!horizontal) return;
     const fast = Math.abs(dx) > 30 && Date.now() - t < 250;
     if (Math.abs(dx) > 70 || fast) go(dx < 0 ? 1 : -1);
-    else bounce(card);
+    else bounce(page);
   });
-  stage.addEventListener("touchcancel", () => { if (drag) bounce(drag.card); drag = null; });
+  stage.addEventListener("touchcancel", () => { if (drag) bounce(drag.page); drag = null; });
 
   // ---------- 카드 안 터치: 체크 / 가린 곳 보기 / 발음 ----------
   const isHidden = (el) =>
@@ -269,7 +364,13 @@
     render();
   });
 
-  // ---------- 아래에서 올라오는 창 (구간 고르기 / 단어 찾기) ----------
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { const p = stage.querySelector(".page"); if (p && !$("#study").hidden) fitPage(p); }, 100);
+  });
+
+  // ---------- 아래에서 올라오는 창 (구간 고르기 / 단어 찾기 / 공부 방법) ----------
   function openSheet(sheet) {
     sheet.hidden = false;
     document.body.classList.add("sheet-open");
@@ -284,7 +385,7 @@
     });
   });
 
-  $("#sectionBtn").addEventListener("click", () => {
+  function openSections() {
     $("#sectionGrid").innerHTML = sections.map((sec, i) => {
       const done = sec.filter((w) => roundsOf(w.no)[0]).length;
       return `
@@ -295,13 +396,16 @@
         </button>`;
     }).join("");
     openSheet($("#sectionSheet"));
-  });
+  }
+  $("#sectionBtn").addEventListener("click", openSections);
+  $("#homeSectionBtn").addEventListener("click", openSections);
   $("#sectionGrid").addEventListener("click", (e) => {
     const b = e.target.closest(".sec");
     if (!b) return;
     closeSheets();
     jumpTo(+b.dataset.section, 0);
   });
+  $("#guideBtn").addEventListener("click", () => openSheet($("#guideSheet")));
 
   // 검색: 0 정확히 일치 / 1 표제어·뜻에 포함 / 2 짝꿍어휘에만 포함
   function search(query) {
@@ -348,31 +452,23 @@
   $("#results").addEventListener("click", (e) => {
     const b = e.target.closest("button[data-no]");
     if (!b) return;
-    const i = +b.dataset.no - 1;
+    const no = +b.dataset.no, i = no - 1;
     closeSheets();
-    jumpTo(Math.floor(i / SECTION_SIZE), i % SECTION_SIZE);
+    jumpTo(Math.floor(i / SECTION_SIZE), i % SECTION_SIZE, no);
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeSheets();
-    if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open")) return;
+    if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open") || $("#study").hidden) return;
     if (e.key === "ArrowRight") go(1);
     if (e.key === "ArrowLeft") go(-1);
   });
 
-  // ---------- 처음 화면(이렇게 공부해요): 첫 방문 때 보여 주고, ? 버튼으로 다시 열기 ----------
-  const intro = $("#intro");
-  function showIntro(open) {
-    intro.hidden = !open;
-    document.body.classList.toggle("intro-open", open);
-    if (open) intro.scrollTop = 0;
-  }
-  $("#infoBtn").addEventListener("click", () => showIntro(true));
-  $("#startBtn").addEventListener("click", () => {
+  // 첫 화면은 홈(표지). 처음 온 사람에게는 '공부 방법'을 한 번 보여 줌
+  history.replaceState({ screen: "home" }, "");
+  showHome();
+  if (!store.get("introSeen", false)) {
     store.set("introSeen", true);
-    showIntro(false);
-  });
-  showIntro(!store.get("introSeen", false));
-
-  render();
+    openSheet($("#guideSheet"));
+  }
 })();

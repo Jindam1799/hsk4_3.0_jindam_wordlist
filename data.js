@@ -1,4 +1,5 @@
 // HSK 4급 진담 짝꿍어휘 데이터 — tools/build_data.py 로 생성 (직접 고치지 말고 tools/words/*.txt 를 고치세요)
+// © 2026 진담중국어(진심을 담은 중국어). 짝꿍어휘는 진담중국어의 저작물입니다. 무단 복제·배포 금지.
 const WORDS = [
   {"no":1,"word":"啊","pinyin":"ā","meaning":"아, 어(감탄사)","pairs":[["啊，我明白了","ā, wǒ míngbai le","아, 알겠어요"],["啊，原来是这样","ā, yuánlái shì zhèyàng","아, 원래 이런 거였구나"],["啊，真漂亮","ā, zhēn piàoliang","아, 정말 예쁘다"]]},
   {"no":2,"word":"爱情","pinyin":"àiqíng","meaning":"애정, 사랑","pairs":[["爱情故事","àiqíng gùshi","사랑 이야기"],["追求爱情","zhuīqiú àiqíng","사랑을 추구하다"],["美好的爱情","měihǎo de àiqíng","아름다운 사랑"]]},

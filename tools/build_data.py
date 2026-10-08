@@ -30,6 +30,7 @@ if [w["no"] for w in words] != expected:
 out = root.parent / "data.js"
 with out.open("w", encoding="utf-8") as fp:
     fp.write("// HSK 4급 진담 짝꿍어휘 데이터 — tools/build_data.py 로 생성 (직접 고치지 말고 tools/words/*.txt 를 고치세요)\n")
+    fp.write("// © 2026 진담중국어(진심을 담은 중국어). 짝꿍어휘는 진담중국어의 저작물입니다. 무단 복제·배포 금지.\n")
     fp.write("const WORDS = [\n")
     for w in words:
         fp.write("  " + json.dumps(w, ensure_ascii=False, separators=(",", ":")) + ",\n")
