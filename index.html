@@ -12,42 +12,61 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="mode-all">
-  <header class="top">
-    <div class="brand-row">
-      <div class="brand">
-        <span class="badge">HSK 3.0</span>
-        <h1>HSK 4급 <span>짝꿍어휘</span></h1>
+  <div class="app">
+    <header class="top">
+      <div class="brand-row">
+        <div class="brand">
+          <span class="badge">HSK 3.0</span>
+          <h1>HSK 4급 <span>짝꿍어휘</span></h1>
+        </div>
+        <button class="icon-btn" id="searchBtn" aria-label="단어 찾기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        </button>
+        <button class="icon-btn" id="infoBtn" aria-label="공부 방법 보기">?</button>
       </div>
-      <button class="icon-btn" id="infoBtn" aria-label="공부 방법 보기">?</button>
-    </div>
 
-    <label class="search">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-      <input id="search" type="search" placeholder="한자 · 병음 · 뜻으로 검색" autocomplete="off">
-    </label>
+      <button class="band" id="sectionBtn" aria-label="구간 고르기">
+        <b id="bandTitle"></b>
+        <span class="band-more">구간 고르기 ▾</span>
+      </button>
 
-    <nav class="sections" id="sections" aria-label="구간 선택"></nav>
-
-    <div class="toolbar">
-      <div class="seg" id="viewSeg" role="tablist" aria-label="보기 방식">
-        <button data-view="list" class="on">목록</button>
-        <button data-view="card">카드</button>
-      </div>
       <div class="seg" id="modeSeg" aria-label="가리기">
         <button data-mode="all" class="on">다 보기</button>
         <button data-mode="hide-ko">뜻 가리기</button>
         <button data-mode="hide-zh">중국어 가리기</button>
       </div>
+    </header>
+
+    <main class="stage" id="stage"></main>
+
+    <footer class="bottom-bar">
+      <button class="nav-btn" id="prevBtn" aria-label="이전 단어">‹</button>
+      <div class="progress" id="progress"></div>
+      <button class="nav-btn" id="nextBtn" aria-label="다음 단어">›</button>
+    </footer>
+  </div>
+
+  <!-- 구간 고르기 -->
+  <section class="sheet" id="sectionSheet" hidden aria-label="구간 고르기">
+    <div class="sheet-panel">
+      <div class="sheet-head"><b>구간 고르기</b><button class="sheet-close" data-close aria-label="닫기">✕</button></div>
+      <div class="section-grid" id="sectionGrid"></div>
     </div>
-  </header>
+  </section>
 
-  <main id="main"></main>
-
-  <footer class="bottom-bar">
-    <button class="nav-btn" id="prevBtn" aria-label="이전">‹</button>
-    <div class="progress" id="progress"></div>
-    <button class="nav-btn" id="nextBtn" aria-label="다음">›</button>
-  </footer>
+  <!-- 단어 찾기 -->
+  <section class="sheet" id="searchSheet" hidden aria-label="단어 찾기">
+    <div class="sheet-panel tall">
+      <div class="sheet-head">
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="search" type="search" placeholder="한자 · 병음 · 뜻 · 번호" autocomplete="off">
+        </label>
+        <button class="sheet-close" data-close aria-label="닫기">✕</button>
+      </div>
+      <ul class="results" id="results"></ul>
+    </div>
+  </section>
 
   <section class="intro" id="intro" aria-label="이렇게 공부해요">
     <div class="intro-banner">
@@ -76,7 +95,7 @@
           <span class="step-no">3</span>
           <div>
             <b>번호로 진도 확인</b>
-            <p>0001부터 1000까지 번호가 붙어 있고, 50개마다 빨간 띠가 나와요. 오늘 어디까지 했는지 바로 찾을 수 있어요.</p>
+            <p>0001부터 1000까지 번호가 붙어 있고, 50개씩 빨간 띠의 구간으로 나뉘어 있어요. 오늘 어디까지 했는지 바로 찾을 수 있어요.</p>
           </div>
         </li>
       </ol>
@@ -85,9 +104,10 @@
       <button class="start-btn" id="startBtn">단어 공부 시작하기</button>
 
       <ul class="app-tips">
+        <li><b>👉 넘기기</b> 카드를 왼쪽으로 밀면 다음 단어, 오른쪽으로 밀면 이전 단어예요.</li>
         <li><b>🔊 발음</b> 한자를 누르면 중국어 발음을 들을 수 있어요.</li>
         <li><b>가리기</b> ‘중국어 가리기’를 켜고 한국어만 보며 먼저 말해 보세요. 가린 곳을 누르면 정답이 보여요.</li>
-        <li><b>저장</b> 체크한 박스는 지금 쓰는 휴대폰(브라우저)에 저장돼요.</li>
+        <li><b>저장</b> 체크한 박스와 마지막으로 본 단어는 지금 쓰는 휴대폰(브라우저)에 저장돼요.</li>
       </ul>
       <p class="source">게임과 단어장의 HSK 단어 및 급수는 중외언어교류협력센터의 《HSK考试大纲》 어휘 목록을 기준으로 확인했으며, 짝꿍어휘는 실제 말하기 연습을 위해 진담중국어가 추가하였다.</p>
       <p class="brand-foot">덩어리로 익히면, 중국어가 <b>툭!</b><br>진담중국어 · 진심을 담은 중국어</p>

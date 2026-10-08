@@ -19,38 +19,29 @@
   const sections = [];
   for (let i = 0; i < WORDS.length; i += SECTION_SIZE) sections.push(WORDS.slice(i, i + SECTION_SIZE));
 
+  const clampSection = (i) => Math.max(0, Math.min(i, sections.length - 1));
   const state = {
-    section: Math.min(store.get("section", 0), sections.length - 1),
-    view: store.get("view", "list"),
+    section: clampSection(store.get("section", 0)),
+    idx: store.get("idx", 0), // 구간 안에서 몇 번째 단어인지 (마지막으로 본 단어에서 이어서 시작)
     mode: store.get("mode", "all"),
-    query: "",
-    cardIdx: 0,
     rounds: store.get("rounds", {}), // { 단어번호: [bool, bool, bool] }
   };
+  state.idx = Math.max(0, Math.min(state.idx, sections[state.section].length - 1));
 
   const $ = (sel) => document.querySelector(sel);
-  const main = $("#main");
+  const stage = $("#stage");
 
   // ---------- 유틸 ----------
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fold = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, "").toLowerCase();
   const highlight = (text, word) => esc(text).split(esc(word)).join(`<span class="hl">${esc(word)}</span>`);
   const roundsOf = (no) => state.rounds[no] || [false, false, false];
+  const currentWord = () => sections[state.section][state.idx];
+  const sectionLabel = (sec) => `${pad(sec[0].no)} – ${pad(sec[sec.length - 1].no)}`;
 
-  function currentList() {
-    if (!state.query) return sections[state.section] || [];
-    const q = fold(state.query);
-    // 0: 단어·병음·번호가 정확히 일치 / 1: 표제어나 뜻에 포함 / 2: 짝꿍어휘에만 포함
-    const score = (w) => {
-      if (fold(w.word) === q || fold(w.pinyin) === q || pad(w.no) === state.query.trim()) return 0;
-      if ([w.word, w.pinyin, w.meaning].some((t) => fold(t).includes(q))) return 1;
-      if (w.pairs.flat().some((t) => fold(t).includes(q))) return 2;
-      return -1;
-    };
-    return WORDS.map((w) => [score(w), w])
-      .filter(([sc]) => sc >= 0)
-      .sort((a, b) => a[0] - b[0] || a[1].no - b[1].no)
-      .map(([, w]) => w);
+  function saveSpot() {
+    store.set("section", state.section);
+    store.set("idx", state.idx);
   }
 
   // ---------- 발음 (중국어 여성 음성 우선) ----------
@@ -116,149 +107,135 @@
       </article>`;
   }
 
-  // 단어장처럼 50개 구간마다 빨간 띠, 10개마다 작은 구분선
-  function sectionListHTML(list) {
-    const first = list[0].no, last = list[list.length - 1].no;
-    const done = list.filter((w) => roundsOf(w.no).every(Boolean)).length;
-    let html = `<div class="band"><b>구간 ${pad(first)} – ${pad(last)}</b><span>3번 공부 완료 ${done} / ${list.length}</span></div>`;
-    list.forEach((w, i) => {
-      if (i % 10 === 0) {
-        const end = list[Math.min(i + 9, list.length - 1)].no;
-        html += `<p class="sub-band">${pad(w.no)} – ${pad(end)}</p>`;
-      }
-      html += wordHTML(w);
-    });
-    return html;
+  function renderCard() {
+    const hint = state.mode === "all"
+      ? "← 밀어서 넘기기 →"
+      : "가려진 곳을 누르면 정답 · ← 밀어서 넘기기 →";
+    stage.innerHTML = `<div class="card">${wordHTML(currentWord())}</div><p class="hint">${hint}</p>`;
   }
 
-  function renderSections() {
-    $("#sections").innerHTML = sections.map((sec, i) => {
-      const first = sec[0].no, last = sec[sec.length - 1].no;
-      const done = sec.every((w) => roundsOf(w.no)[0]);
-      const on = !state.query && i === state.section;
-      return `<button class="chip${on ? " on" : ""}${done ? " done" : ""}" data-section="${i}">${pad(first)}–${pad(last)}</button>`;
-    }).join("");
-    const onChip = $("#sections .chip.on");
-    if (onChip) onChip.scrollIntoView({ block: "nearest", inline: "center" });
-  }
-
-  function renderMain() {
-    const list = currentList();
-    if (!list.length) {
-      main.innerHTML = `<p class="empty">‘${esc(state.query)}’에 맞는 단어가 없어요.</p>`;
-      return;
-    }
-    if (state.view === "card") {
-      state.cardIdx = Math.max(0, Math.min(state.cardIdx, list.length - 1));
-      main.innerHTML = `<div class="card-stage">${wordHTML(list[state.cardIdx])}
-        <p class="card-hint">${state.mode === "all" ? "위의 ‘가리기’를 켜고 먼저 말해 본 뒤 확인해요" : "가려진 부분을 누르면 정답이 보여요"} · 옆으로 밀어 넘기기</p></div>`;
-    } else {
-      main.innerHTML = state.query
-        ? `<p class="result-head">검색 결과 ${list.length}개</p>` + list.map(wordHTML).join("")
-        : sectionListHTML(list);
-    }
+  function renderChrome() {
+    const sec = sections[state.section];
+    $("#bandTitle").textContent = `구간 ${sectionLabel(sec)}`;
+    ["all", "hide-ko", "hide-zh"].forEach((m) => document.body.classList.toggle("mode-" + m, m === state.mode));
+    document.querySelectorAll("#modeSeg button").forEach((b) => b.classList.toggle("on", b.dataset.mode === state.mode));
+    $("#prevBtn").disabled = state.section === 0 && state.idx === 0;
+    $("#nextBtn").disabled = state.section === sections.length - 1 && state.idx === sec.length - 1;
+    renderProgress();
   }
 
   function renderProgress() {
-    const list = currentList();
-    const prev = $("#prevBtn"), next = $("#nextBtn");
-    if (state.view === "card") {
-      prev.disabled = state.cardIdx <= 0 && (state.query || state.section <= 0);
-      next.disabled = state.cardIdx >= list.length - 1 && (state.query || state.section >= sections.length - 1);
-    } else {
-      prev.disabled = !!state.query || state.section <= 0;
-      next.disabled = !!state.query || state.section >= sections.length - 1;
-    }
-    const counts = [0, 1, 2].map((i) => list.filter((w) => roundsOf(w.no)[i]).length);
-    const total = list.length || 1;
-    const left = state.view === "card" && list.length
-      ? `<b>${state.cardIdx + 1}</b> / ${list.length}`
-      : state.query ? "검색 결과" : `구간 <b>${pad(sections[state.section][0].no)}</b>`;
+    const sec = sections[state.section];
+    const counts = [0, 1, 2].map((i) => sec.filter((w) => roundsOf(w.no)[i]).length);
     $("#progress").innerHTML = `
-      <div class="label"><span>${left}</span><span>${counts.map((c, i) => `${i + 1}회 <b>${c}</b>`).join(" · ")}</span></div>
-      <div class="bars">${counts.map((c) => `<div class="bar"><i style="width:${(c / total) * 100}%"></i></div>`).join("")}</div>`;
+      <div class="label"><span><b>${state.idx + 1}</b> / ${sec.length}</span><span>${counts.map((c, i) => `${i + 1}회 <b>${c}</b>`).join(" · ")}</span></div>
+      <div class="track"><i style="width:${((state.idx + 1) / sec.length) * 100}%"></i></div>`;
   }
 
-  function renderToolbar() {
-    ["all", "hide-ko", "hide-zh"].forEach((m) => document.body.classList.toggle("mode-" + m, m === state.mode));
-    document.querySelectorAll("#viewSeg button").forEach((b) => b.classList.toggle("on", b.dataset.view === state.view));
-    document.querySelectorAll("#modeSeg button").forEach((b) => b.classList.toggle("on", b.dataset.mode === state.mode));
+  function render() {
+    renderChrome();
+    renderCard();
   }
 
-  function render({ scrollTop = false } = {}) {
-    renderToolbar();
-    renderSections();
-    renderMain();
-    renderProgress();
-    if (scrollTop) window.scrollTo({ top: 0 });
-  }
-
-  // ---------- 이동 ----------
-  function goSection(i) {
-    state.section = Math.max(0, Math.min(i, sections.length - 1));
-    state.query = "";
-    $("#search").value = "";
-    store.set("section", state.section);
-    render({ scrollTop: true });
-  }
-
-  function step(dir) {
-    if (state.view !== "card") return goSection(state.section + dir);
-    const list = currentList();
-    const n = state.cardIdx + dir;
-    if (n >= 0 && n < list.length) {
-      state.cardIdx = n;
-      render();
-    } else if (!state.query && sections[state.section + dir]) {
-      state.section += dir;
-      store.set("section", state.section);
-      state.cardIdx = dir > 0 ? 0 : sections[state.section].length - 1;
-      render();
+  // ---------- 이동 (애니메이션) ----------
+  function neighbor(dir) {
+    let section = state.section, idx = state.idx + dir;
+    if (idx < 0) {
+      if (section === 0) return null;
+      section -= 1; idx = sections[section].length - 1;
+    } else if (idx >= sections[section].length) {
+      if (section === sections.length - 1) return null;
+      section += 1; idx = 0;
     }
+    return { section, idx };
   }
 
-  // ---------- 이벤트 ----------
-  $("#sections").addEventListener("click", (e) => {
-    const chip = e.target.closest(".chip");
-    if (!chip) return;
-    state.cardIdx = 0;
-    goSection(+chip.dataset.section);
-  });
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let busy = false;
 
-  $("#viewSeg").addEventListener("click", (e) => {
-    const b = e.target.closest("button");
-    if (!b) return;
-    state.view = b.dataset.view;
-    state.cardIdx = 0;
-    store.set("view", state.view);
-    render({ scrollTop: true });
-  });
+  function bounce(card) {
+    card.style.transition = "transform .2s ease-out";
+    card.style.transform = "";
+  }
 
-  $("#modeSeg").addEventListener("click", (e) => {
-    const b = e.target.closest("button");
-    if (!b) return;
-    state.mode = b.dataset.mode;
-    store.set("mode", state.mode);
-    renderToolbar();
-    if (state.view === "card") renderMain();
-    else document.querySelectorAll(".mask.shown").forEach((el) => el.classList.remove("shown"));
-  });
+  function go(dir) {
+    if (busy) return;
+    const next = neighbor(dir);
+    const card = stage.querySelector(".card");
+    if (!next) { if (card) bounce(card); return; }
 
-  let searchTimer;
-  $("#search").addEventListener("input", (e) => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => {
-      state.query = e.target.value.trim();
-      state.cardIdx = 0;
-      render({ scrollTop: true });
-    }, 150);
-  });
+    const apply = () => {
+      Object.assign(state, next);
+      saveSpot();
+      render();
+    };
+    if (reduceMotion || !card) { apply(); return; }
 
+    busy = true;
+    card.style.transition = "transform .16s ease-in, opacity .16s ease-in";
+    card.style.transform = `translateX(${-dir * 110}%)`;
+    card.style.opacity = "0";
+    setTimeout(() => {
+      apply();
+      const incoming = stage.querySelector(".card");
+      incoming.style.transition = "none";
+      incoming.style.transform = `translateX(${dir * 35}%)`;
+      incoming.style.opacity = "0";
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        incoming.style.transition = "transform .2s ease-out, opacity .2s ease-out";
+        incoming.style.transform = "";
+        incoming.style.opacity = "";
+        setTimeout(() => { busy = false; }, 200);
+      }));
+    }, 160);
+  }
+
+  function jumpTo(section, idx) {
+    state.section = clampSection(section);
+    state.idx = Math.max(0, Math.min(idx, sections[state.section].length - 1));
+    saveSpot();
+    render();
+  }
+
+  // ---------- 손가락으로 밀어 넘기기 ----------
+  let drag = null;
+  stage.addEventListener("touchstart", (e) => {
+    const card = stage.querySelector(".card");
+    if (!card || busy || e.touches.length > 1) return;
+    drag = { x: e.touches[0].clientX, y: e.touches[0].clientY, dx: 0, horizontal: null, card, t: Date.now() };
+  }, { passive: true });
+
+  stage.addEventListener("touchmove", (e) => {
+    if (!drag) return;
+    const dx = e.touches[0].clientX - drag.x;
+    const dy = e.touches[0].clientY - drag.y;
+    if (drag.horizontal === null && Math.abs(dx) + Math.abs(dy) > 8) drag.horizontal = Math.abs(dx) > Math.abs(dy);
+    if (!drag.horizontal) return;
+    e.preventDefault();
+    drag.dx = dx;
+    // 더 넘길 단어가 없으면 살짝만 끌리게
+    const resist = neighbor(dx < 0 ? 1 : -1) ? 1 : 0.25;
+    drag.card.style.transition = "none";
+    drag.card.style.transform = `translateX(${dx * resist}px) rotate(${(dx * resist) / 40}deg)`;
+  }, { passive: false });
+
+  stage.addEventListener("touchend", () => {
+    if (!drag) return;
+    const { dx, horizontal, card, t } = drag;
+    drag = null;
+    if (!horizontal) return;
+    const fast = Math.abs(dx) > 30 && Date.now() - t < 250;
+    if (Math.abs(dx) > 70 || fast) go(dx < 0 ? 1 : -1);
+    else bounce(card);
+  });
+  stage.addEventListener("touchcancel", () => { if (drag) bounce(drag.card); drag = null; });
+
+  // ---------- 카드 안 터치: 체크 / 가린 곳 보기 / 발음 ----------
   const isHidden = (el) =>
     el.classList.contains("mask") && !el.classList.contains("shown") &&
     ((state.mode === "hide-ko" && el.classList.contains("ko")) || (state.mode === "hide-zh" && el.classList.contains("zh")));
 
-  main.addEventListener("click", (e) => {
+  stage.addEventListener("click", (e) => {
     const round = e.target.closest(".round");
     if (round) {
       const no = +round.closest(".word").dataset.no;
@@ -269,13 +246,7 @@
       store.set("rounds", state.rounds);
       round.classList.toggle("on", r[i]);
       round.setAttribute("aria-pressed", r[i]);
-      renderSections();
       renderProgress();
-      const band = main.querySelector(".band span");
-      if (band) {
-        const list = currentList();
-        band.textContent = `3번 공부 완료 ${list.filter((w) => roundsOf(w.no).every(Boolean)).length} / ${list.length}`;
-      }
       return;
     }
     const mask = e.target.closest(".mask");
@@ -287,27 +258,109 @@
     if (sayer) speak(sayer.dataset.say, sayer.closest(".word").querySelector(".speak"));
   });
 
-  $("#prevBtn").addEventListener("click", () => step(-1));
-  $("#nextBtn").addEventListener("click", () => step(1));
+  $("#prevBtn").addEventListener("click", () => go(-1));
+  $("#nextBtn").addEventListener("click", () => go(1));
 
-  // 카드 모드: 좌우로 밀어 넘기기
-  let touchX = null, touchY = null;
-  main.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; touchY = e.touches[0].clientY; }, { passive: true });
-  main.addEventListener("touchend", (e) => {
-    if (state.view !== "card" || touchX == null) return;
-    const dx = e.changedTouches[0].clientX - touchX;
-    const dy = e.changedTouches[0].clientY - touchY;
-    touchX = null;
-    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
+  $("#modeSeg").addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    state.mode = b.dataset.mode;
+    store.set("mode", state.mode);
+    render();
+  });
+
+  // ---------- 아래에서 올라오는 창 (구간 고르기 / 단어 찾기) ----------
+  function openSheet(sheet) {
+    sheet.hidden = false;
+    document.body.classList.add("sheet-open");
+  }
+  function closeSheets() {
+    document.querySelectorAll(".sheet").forEach((s) => { s.hidden = true; });
+    document.body.classList.remove("sheet-open");
+  }
+  document.querySelectorAll(".sheet").forEach((sheet) => {
+    sheet.addEventListener("click", (e) => {
+      if (e.target === sheet || e.target.closest("[data-close]")) closeSheets();
+    });
+  });
+
+  $("#sectionBtn").addEventListener("click", () => {
+    $("#sectionGrid").innerHTML = sections.map((sec, i) => {
+      const done = sec.filter((w) => roundsOf(w.no)[0]).length;
+      return `
+        <button class="sec${i === state.section ? " on" : ""}" data-section="${i}">
+          <b>${sectionLabel(sec)}</b>
+          <span class="sec-bar"><i style="width:${(done / sec.length) * 100}%"></i></span>
+          <small>1회 체크 ${done} / ${sec.length}</small>
+        </button>`;
+    }).join("");
+    openSheet($("#sectionSheet"));
+  });
+  $("#sectionGrid").addEventListener("click", (e) => {
+    const b = e.target.closest(".sec");
+    if (!b) return;
+    closeSheets();
+    jumpTo(+b.dataset.section, 0);
+  });
+
+  // 검색: 0 정확히 일치 / 1 표제어·뜻에 포함 / 2 짝꿍어휘에만 포함
+  function search(query) {
+    const q = fold(query);
+    if (!q) return [];
+    const score = (w) => {
+      if (fold(w.word) === q || fold(w.pinyin) === q || pad(w.no) === query.trim() || String(w.no) === query.trim()) return 0;
+      if ([w.word, w.pinyin, w.meaning].some((t) => fold(t).includes(q))) return 1;
+      if (w.pairs.flat().some((t) => fold(t).includes(q))) return 2;
+      return -1;
+    };
+    return WORDS.map((w) => [score(w), w])
+      .filter(([sc]) => sc >= 0)
+      .sort((a, b) => a[0] - b[0] || a[1].no - b[1].no)
+      .slice(0, 80)
+      .map(([, w]) => w);
+  }
+
+  let searchTimer;
+  $("#search").addEventListener("input", (e) => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      const query = e.target.value.trim();
+      const list = search(query);
+      $("#results").innerHTML = !query
+        ? `<li class="empty">한자, 병음(성조 없이도 OK), 뜻, 번호로 찾아요.</li>`
+        : list.length
+          ? list.map((w) => `
+              <li><button data-no="${w.no}">
+                <span class="r-no">${pad(w.no)}</span>
+                <span class="r-zh">${esc(w.word)}</span>
+                <span class="r-py">${esc(w.pinyin)}</span>
+                <span class="r-ko">${esc(w.meaning)}</span>
+              </button></li>`).join("")
+          : `<li class="empty">‘${esc(query)}’에 맞는 단어가 없어요.</li>`;
+    }, 120);
+  });
+  $("#searchBtn").addEventListener("click", () => {
+    $("#search").value = "";
+    $("#search").dispatchEvent(new Event("input"));
+    openSheet($("#searchSheet"));
+    setTimeout(() => $("#search").focus(), 50);
+  });
+  $("#results").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-no]");
+    if (!b) return;
+    const i = +b.dataset.no - 1;
+    closeSheets();
+    jumpTo(Math.floor(i / SECTION_SIZE), i % SECTION_SIZE);
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.target.tagName === "INPUT") return;
-    if (e.key === "ArrowRight") step(1);
-    if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "Escape") closeSheets();
+    if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open")) return;
+    if (e.key === "ArrowRight") go(1);
+    if (e.key === "ArrowLeft") go(-1);
   });
 
-  // 처음 화면(이렇게 공부해요): 첫 방문 때 보여 주고, ? 버튼으로 다시 열기
+  // ---------- 처음 화면(이렇게 공부해요): 첫 방문 때 보여 주고, ? 버튼으로 다시 열기 ----------
   const intro = $("#intro");
   function showIntro(open) {
     intro.hidden = !open;
