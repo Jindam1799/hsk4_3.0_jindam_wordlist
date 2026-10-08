@@ -3,7 +3,7 @@
   "use strict";
 
   const SECTION_SIZE = 50;
-  const PER_PAGE = 2; // 한 화면에 단어 2개
+  const AGAIN_GAP = 4; // '다시' 누른 단어는 4장 뒤에 다시 나옴
   const pad = (n) => String(n).padStart(4, "0");
   const CIRCLED = ["①", "②", "③"];
 
@@ -20,32 +20,28 @@
 
   const sections = [];
   for (let i = 0; i < WORDS.length; i += SECTION_SIZE) sections.push(WORDS.slice(i, i + SECTION_SIZE));
-
   const clampSection = (i) => Math.max(0, Math.min(i, sections.length - 1));
-  const pageStart = (i) => Math.floor(i / PER_PAGE) * PER_PAGE;
+  const sectionLabel = (sec) => `${sec[0].no} – ${sec[sec.length - 1].no}`; // 예: 1 – 50
+
   const state = {
     section: clampSection(store.get("section", 0)),
-    idx: store.get("idx", 0), // 구간 안에서 화면 첫 단어의 위치 (마지막으로 본 곳에서 이어서 시작)
-    mode: store.get("mode", "all"),
-    rounds: store.get("rounds", {}), // { 단어번호: [bool, bool, bool] }
+    dir: store.get("dir", "zh"),               // zh: 한자 보고 뜻 떠올리기 / ko: 뜻 보고 중국어 말하기
+    rounds: store.get("rounds", {}),           // { 단어번호: [bool, bool, bool] } 체크박스 3개
+    status: store.get("status", {}),           // { 단어번호: "k"(알아요) | "a"(다시) } 마지막 결과
+    log: store.get("log", {}),                 // { "YYYY-MM-DD": { seen, known } } 날짜별 공부량
+    session: store.get("cardSession", null),   // 지금 넘기고 있는 카드 묶음
   };
-  state.idx = pageStart(Math.max(0, Math.min(state.idx, sections[state.section].length - 1)));
 
   const $ = (sel) => document.querySelector(sel);
-  const stage = $("#stage");
+  const stageEl = $("#cardStage");
 
   // ---------- 유틸 ----------
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fold = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, "").toLowerCase();
   const highlight = (text, word) => esc(text).split(esc(word)).join(`<span class="hl">${esc(word)}</span>`);
   const roundsOf = (no) => state.rounds[no] || [false, false, false];
-  const pageWords = () => sections[state.section].slice(state.idx, state.idx + PER_PAGE);
-  const sectionLabel = (sec) => `${pad(sec[0].no)} – ${pad(sec[sec.length - 1].no)}`;
-
-  function saveSpot() {
-    store.set("section", state.section);
-    store.set("idx", state.idx);
-  }
+  const wordOf = (no) => WORDS[no - 1];
+  const todayKey = () => new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD (기기 시간 기준)
 
   // ---------- 발음: 여자 목소리 Tingting ----------
   // 1순위 Tingting(婷婷) — 아이폰·아이패드·맥(사파리·크롬 모두)
@@ -89,251 +85,382 @@
     }
     speechSynthesis.speak(u);
   }
-
   const SPEAKER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
 
-  // ---------- 캐릭터 (표지의 짝꿍이) ----------
-  // 홈: 시작 버튼 문구와 이어서 볼 구간
-  function renderHero() {
-    const started = Object.keys(state.rounds).length > 0 || state.section > 0 || state.idx > 0;
-    $("#continueTitle").textContent = started ? "이어서 공부하기" : "공부 시작하기";
-    $("#continueSub").textContent = `구간 ${sectionLabel(sections[state.section])}`;
+  // ---------- 기록 ----------
+  function saveSession() { store.set("cardSession", state.session); }
+  function addLog(known) {
+    const k = todayKey();
+    const d = state.log[k] || { seen: 0, known: 0 };
+    d.seen += 1;
+    if (known) d.known += 1;
+    state.log[k] = d;
+    store.set("log", state.log);
+  }
+  function fillRound(no) { // ⭕ 알아요: 비어 있는 첫 체크박스를 채움
+    const r = roundsOf(no).slice();
+    const i = r.indexOf(false);
+    if (i >= 0) r[i] = true;
+    state.rounds[no] = r;
+    store.set("rounds", state.rounds);
+  }
+  function setStatus(no, s) {
+    state.status[no] = s;
+    store.set("status", state.status);
+  }
+  const weakWords = () => WORDS.filter((w) => state.status[w.no] === "a").map((w) => w.no);
+  function streakDays() {
+    let n = 0;
+    const d = new Date();
+    if (!state.log[todayKey()]) d.setDate(d.getDate() - 1); // 오늘 아직 안 했으면 어제부터 셈
+    for (;;) {
+      const k = d.toLocaleDateString("sv-SE");
+      if (!state.log[k]?.seen) break;
+      n += 1;
+      d.setDate(d.getDate() - 1);
+    }
+    return n;
   }
 
-  // ---------- 단어 카드 ----------
-  function wordHTML(w) {
-    const r = roundsOf(w.no);
+  // ---------- 카드 묶음(세션) ----------
+  // queue: 넘길 단어 번호 목록 / pos: 지금 카드 위치 / known·again: 이번 묶음에서 누른 결과
+  function sectionSession(i, startNo) {
+    const sec = sections[i];
+    const queue = sec.map((w) => w.no);
+    return { key: "s" + i, section: i, title: `구간 ${sectionLabel(sec)}`, queue, pos: startNo ? Math.max(0, queue.indexOf(startNo)) : 0, known: [], again: [] };
+  }
+  function listSession(key, title, nos) {
+    return { key, section: state.section, title, queue: nos, pos: 0, known: [], again: [] };
+  }
+  const cur = () => wordOf(state.session.queue[state.session.pos]);
+  const isDone = () => state.session.pos >= state.session.queue.length;
+
+  // ---------- 카드 그리기 ----------
+  let flipped = false;
+
+  const boxes = (no) => `
+    <span class="boxes" aria-label="공부한 횟수">
+      ${roundsOf(no).map((on, i) => `<button class="box${on ? " on" : ""}" data-box="${i}" aria-pressed="${on}" aria-label="${i + 1}번째 공부"></button>`).join("")}
+    </span>`;
+  const speakBtn = (text, cls = "") => `<button class="say ${cls}" data-say="${esc(text)}" aria-label="발음 듣기">${SPEAKER}</button>`;
+  const lenCls = (s) => `len-${Math.min([...s].length, 5)}`;
+
+  function frontHTML(w) {
+    const zhFirst = state.dir === "zh";
+    const q = zhFirst
+      ? `<div class="q q-zh ${lenCls(w.word)}" lang="zh-CN">${esc(w.word)}</div>`
+      : `<div class="q q-ko">${esc(w.meaning)}</div>`;
+    const a = zhFirst
+      ? `<div class="a"><div class="a-py">${esc(w.pinyin)}</div><div class="a-ko">${esc(w.meaning)}</div></div>`
+      : `<div class="a"><div class="a-zh" lang="zh-CN">${esc(w.word)}</div><div class="a-py">${esc(w.pinyin)}</div></div>`;
     return `
-      <article class="word" data-no="${w.no}">
-        <div class="side">
+      <section class="face front">
+        <div class="face-top"><span class="no">${pad(w.no)}</span>${boxes(w.no)}${speakBtn(w.word)}</div>
+        <div class="face-main hold" data-hold="front">${q}${a}</div>
+        <p class="face-hint">꾹 누르면 ${zhFirst ? "뜻·병음" : "중국어"} · 톡 치면 짝꿍어휘</p>
+      </section>`;
+  }
+
+  function backHTML(w) {
+    const zhFirst = state.dir === "zh";
+    const rows = w.pairs.map((p, i) => {
+      const q = zhFirst ? `<div class="pq pq-zh" lang="zh-CN">${highlight(p[0], w.word)}</div>` : `<div class="pq pq-ko">${esc(p[2])}</div>`;
+      const a = zhFirst
+        ? `<div class="a"><span class="a-py">${esc(p[1])}</span><span class="a-ko">${esc(p[2])}</span></div>`
+        : `<div class="a"><span class="a-zh" lang="zh-CN">${highlight(p[0], w.word)}</span><span class="a-py">${esc(p[1])}</span></div>`;
+      return `
+        <li class="prow hold" data-hold="p${i}">
+          <span class="n">${CIRCLED[i]}</span>
+          <div class="pbody">${q}${a}</div>
+          ${speakBtn(p[0], "sm")}
+        </li>`;
+    }).join("");
+    return `
+      <section class="face back">
+        <div class="face-top">
           <span class="no">${pad(w.no)}</span>
-          <div class="rounds" aria-label="공부한 횟수 체크">
-            ${[0, 1, 2].map((i) => `<button class="round${r[i] ? " on" : ""}" data-round="${i}" aria-pressed="${r[i]}" aria-label="${i + 1}번째 공부"></button>`).join("")}
-          </div>
+          <span class="back-title">${zhFirst ? `<b lang="zh-CN">${esc(w.word)}</b> 짝꿍어휘` : `<b>${esc(w.meaning.split(/[;,]/)[0])}</b> 짝꿍어휘`}</span>
         </div>
-        <div class="body">
-          <div class="word-head">
-            <button class="hz zh mask" data-say="${esc(w.word)}" lang="zh-CN">${esc(w.word)}</button>
-            <span class="py zh mask">${esc(w.pinyin)}</span>
-            <button class="speak" data-say="${esc(w.word)}" aria-label="발음 듣기">${SPEAKER}</button>
-            <div class="mean ko mask">${esc(w.meaning)}</div>
-          </div>
-          <ol class="pairs">
-            ${w.pairs.map((p, i) => `
-              <li class="pair">
-                <span class="n">${CIRCLED[i]}</span>
-                <button class="pz zh mask" data-say="${esc(p[0])}" lang="zh-CN">${highlight(p[0], w.word)}</button>
-                <span class="pp zh mask">${esc(p[1])}</span>
-                <span class="pk ko mask">${esc(p[2])}</span>
-              </li>`).join("")}
-          </ol>
-        </div>
-      </article>`;
+        <ol class="prows">${rows}</ol>
+        <p class="face-hint">한 줄씩 꾹 눌러 확인 · 톡 치면 앞면</p>
+      </section>`;
   }
 
-  // 화면 크기에 맞춰 글자 크기 배율(--k)을 정하고, 넘치는 카드가 있으면 조금씩 줄임
-  function fitPage(page) {
-    const h = stage.clientHeight;
-    let k = Math.max(0.8, Math.min(1.35, h / 470));
-    const overflowing = () => [...page.querySelectorAll(".word")].some((w) => w.scrollHeight > w.clientHeight + 1);
-    page.style.setProperty("--k", k.toFixed(2));
-    for (let i = 0; i < 12 && overflowing() && k > 0.62; i++) {
-      k -= 0.05;
-      page.style.setProperty("--k", k.toFixed(2));
+  function doneHTML() {
+    const s = state.session;
+    const retry = [...new Set(s.again)].filter((no) => state.status[no] === "a");
+    const nextSec = s.key.startsWith("s") && s.section < sections.length - 1;
+    return `
+      <div class="done">
+        <div class="done-badge">🎉</div>
+        <h2>${esc(s.title)} 끝!</h2>
+        <p class="done-sum"><span>⭕ 알아요 <b>${s.known.length}</b></span><span>🔄 다시 <b>${s.again.length}</b></span></p>
+        <div class="done-actions">
+          ${retry.length ? `<button class="cta-sm" data-act="retry">🔄 다시 단어만 한 번 더 (${retry.length})</button>` : ""}
+          ${nextSec ? `<button class="cta-sm${retry.length ? " ghost" : ""}" data-act="next">다음 구간 ${sectionLabel(sections[s.section + 1])} →</button>` : ""}
+          <button class="ghost" data-act="restart">이 묶음 처음부터 다시</button>
+        </div>
+      </div>`;
+  }
+
+  // 카드 높이에 맞춰 글자 크기 배율(--k)을 정하고, 넘치면 조금씩 줄임
+  function fitCard() {
+    const fc = stageEl.querySelector(".fc");
+    if (!fc) return;
+    let k = Math.max(0.78, Math.min(1.3, stageEl.clientHeight / 430));
+    const over = () => [...fc.querySelectorAll(".face")].some((f) => f.scrollHeight > f.clientHeight + 1);
+    fc.style.setProperty("--k", k.toFixed(2));
+    for (let i = 0; i < 14 && over() && k > 0.6; i++) {
+      k -= 0.04;
+      fc.style.setProperty("--k", k.toFixed(2));
     }
   }
 
-  function renderPage(flashNo) {
-    stage.innerHTML = `<div class="page">${pageWords().map(wordHTML).join("")}</div>`;
-    const page = stage.firstElementChild;
-    fitPage(page);
-    if (flashNo) page.querySelector(`.word[data-no="${flashNo}"]`)?.classList.add("flash");
-  }
-
-  function renderChrome() {
-    const sec = sections[state.section];
-    $("#bandTitle").textContent = `구간 ${sectionLabel(sec)}`;
-    ["all", "hide-ko", "hide-zh"].forEach((m) => document.body.classList.toggle("mode-" + m, m === state.mode));
-    document.querySelectorAll("#modeSeg button").forEach((b) => b.classList.toggle("on", b.dataset.mode === state.mode));
-    $("#prevBtn").disabled = state.section === 0 && state.idx === 0;
-    $("#nextBtn").disabled = state.section === sections.length - 1 && state.idx + PER_PAGE >= sec.length;
-    renderProgress();
-  }
-
-  function renderProgress() {
-    const sec = sections[state.section];
-    const words = pageWords();
-    const counts = [0, 1, 2].map((i) => sec.filter((w) => roundsOf(w.no)[i]).length);
-    const end = state.idx + words.length;
-    $("#progress").innerHTML = `
-      <div class="label"><span><b>${state.idx + 1}${words.length > 1 ? `–${end}` : ""}</b> / ${sec.length}</span><span>${counts.map((c, i) => `${i + 1}회 <b>${c}</b>`).join(" · ")}</span></div>
-      <div class="track"><i style="width:${(end / sec.length) * 100}%"></i></div>`;
-  }
-
-  function render(flashNo) {
-    renderChrome();
-    renderPage(flashNo);
-  }
-
-  // ---------- 홈 ↔ 공부 화면 ----------
-  function showStudy(push = true) {
-    $("#home").hidden = true;
-    $("#study").hidden = false;
-    render();
-    if (push && history.state?.screen !== "study") history.pushState({ screen: "study" }, "");
-  }
-  function showHome() {
-    $("#study").hidden = true;
-    $("#home").hidden = false;
-    renderHero();
-  }
-  // 휴대폰 '뒤로 가기'를 누르면 홈으로
-  window.addEventListener("popstate", () => { closeSheets(); showHome(); });
-  $("#homeBtn").addEventListener("click", () => {
-    if (history.state?.screen === "study") history.back();
-    else showHome();
-  });
-  $("#continueBtn").addEventListener("click", () => showStudy());
-
-  // ---------- 넘기기 (애니메이션) ----------
-  function neighbor(dir) {
-    let section = state.section, idx = state.idx + dir * PER_PAGE;
-    if (idx < 0) {
-      if (section === 0) return null;
-      section -= 1; idx = pageStart(sections[section].length - 1);
-    } else if (idx >= sections[section].length) {
-      if (section === sections.length - 1) return null;
-      section += 1; idx = 0;
+  function renderCard() {
+    const s = state.session;
+    $("#cardBandTitle").textContent = s.title;
+    document.querySelectorAll("#dirSeg button").forEach((b) => b.classList.toggle("on", b.dataset.dir === state.dir));
+    if (isDone()) {
+      stageEl.innerHTML = doneHTML();
+      $("#judge").hidden = true;
+    } else {
+      const w = cur();
+      stageEl.innerHTML = `<div class="fc"><div class="fc-inner${flipped ? " flipped" : ""}">${frontHTML(w)}${backHTML(w)}</div></div>`;
+      $("#judge").hidden = false;
+      fitCard();
     }
-    return { section, idx };
+    renderFoot();
+    maybeCoach();
   }
 
+  function renderFoot() {
+    const s = state.session;
+    const n = s.queue.length, at = Math.min(s.pos + 1, n);
+    $("#cardFoot").innerHTML = `
+      <div class="label"><span><b>${at}</b> / ${n}</span><span>⭕ <b>${s.known.length}</b> · 🔄 <b>${s.again.length}</b></span></div>
+      <div class="track"><i style="width:${(Math.min(s.pos, n) / n) * 100}%"></i></div>`;
+  }
+
+  function toast(text) {
+    const t = document.createElement("div");
+    t.className = "toast";
+    t.textContent = text;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 900);
+  }
+
+  // 처음 카드 화면에 들어왔을 때 사용법 안내 (한 번만)
+  function maybeCoach() {
+    if (store.get("coachSeen", false) || isDone() || stageEl.querySelector(".coach")) return;
+    stageEl.insertAdjacentHTML("beforeend", `
+      <div class="coach">
+        <p><b>👆 꾹</b> 누르고 있으면 → 뜻·병음<br><small>손을 떼면 다시 사라져요</small></p>
+        <p><b>👆 톡</b> 치면 → 뒤집어서 짝꿍어휘</p>
+        <p><b>👈 밀면</b> → 다음 카드</p>
+        <p><b>⭕ 🔄</b> 떠올렸는지 표시하기</p>
+        <button class="cta-sm" data-act="coach">알겠어요!</button>
+      </div>`);
+  }
+
+  // ---------- 넘기기 애니메이션 ----------
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let busy = false;
-
+  function slide(dir, apply) { // dir 1: 왼쪽으로 나감(다음) / -1: 오른쪽으로 나감(이전)
+    const card = stageEl.querySelector(".fc");
+    if (reduceMotion || !card) { apply(); renderCard(); return; }
+    busy = true;
+    card.style.transition = "transform .16s ease-in, opacity .16s ease-in";
+    card.style.transform = `translateX(${-dir * 110}%) rotate(${-dir * 6}deg)`;
+    card.style.opacity = "0";
+    setTimeout(() => {
+      apply();
+      renderCard();
+      const inc = stageEl.querySelector(".fc") || stageEl.firstElementChild;
+      inc.style.transition = "none";
+      inc.style.transform = `translateX(${dir * 30}%)`;
+      inc.style.opacity = "0";
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        inc.style.transition = "transform .2s ease-out, opacity .2s ease-out";
+        inc.style.transform = "";
+        inc.style.opacity = "";
+        setTimeout(() => { busy = false; }, 200);
+      }));
+    }, 160);
+  }
   function bounce(el) {
     el.style.transition = "transform .2s ease-out";
     el.style.transform = "";
   }
 
-  function go(dir) {
+  function move(dir) { // 밀어서 넘기기 (알아요/다시 표시 없이)
     if (busy) return;
-    const next = neighbor(dir);
-    const page = stage.querySelector(".page");
-    if (!next) { if (page) bounce(page); return; }
-
-    const apply = () => {
-      Object.assign(state, next);
-      saveSpot();
-      render();
-    };
-    if (reduceMotion || !page) { apply(); return; }
-
-    busy = true;
-    page.style.transition = "transform .16s ease-in, opacity .16s ease-in";
-    page.style.transform = `translateX(${-dir * 110}%)`;
-    page.style.opacity = "0";
-    setTimeout(() => {
-      apply();
-      const incoming = stage.querySelector(".page");
-      incoming.style.transition = "none";
-      incoming.style.transform = `translateX(${dir * 35}%)`;
-      incoming.style.opacity = "0";
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        incoming.style.transition = "transform .2s ease-out, opacity .2s ease-out";
-        incoming.style.transform = "";
-        incoming.style.opacity = "";
-        setTimeout(() => { busy = false; }, 200);
-      }));
-    }, 160);
+    const s = state.session;
+    const to = s.pos + dir;
+    if (to < 0 || to > s.queue.length || (dir > 0 && isDone())) { const c = stageEl.querySelector(".fc"); if (c) bounce(c); return; }
+    slide(dir, () => { s.pos = to; flipped = false; saveSession(); });
   }
 
-  function jumpTo(section, idx, flashNo) {
-    state.section = clampSection(section);
-    state.idx = pageStart(Math.max(0, Math.min(idx, sections[state.section].length - 1)));
-    saveSpot();
-    if ($("#study").hidden) showStudy();
-    render(flashNo);
+  function judge(known) {
+    if (busy || isDone()) return;
+    const s = state.session, no = s.queue[s.pos];
+    if (known) {
+      fillRound(no);
+      setStatus(no, "k");
+      s.known.push(no);
+      const filled = roundsOf(no).filter(Boolean).length;
+      toast(filled === 3 ? "⭕ 3번 공부 완료!" : `⭕ ${filled}번째 체크`);
+    } else {
+      setStatus(no, "a");
+      s.again.push(no);
+      s.queue.splice(Math.min(s.pos + 1 + AGAIN_GAP, s.queue.length), 0, no); // 4장 뒤에 다시
+      toast("🔄 4장 뒤에 다시 나와요");
+    }
+    addLog(known);
+    slide(1, () => { s.pos += 1; flipped = false; saveSession(); });
   }
 
-  // ---------- 손가락으로 밀어 넘기기 ----------
-  let drag = null;
-  stage.addEventListener("touchstart", (e) => {
-    const page = stage.querySelector(".page");
-    if (!page || busy || e.touches.length > 1) return;
-    drag = { x: e.touches[0].clientX, y: e.touches[0].clientY, dx: 0, horizontal: null, page, t: Date.now() };
-  }, { passive: true });
+  function flip() {
+    flipped = !flipped;
+    stageEl.querySelector(".fc-inner")?.classList.toggle("flipped", flipped);
+    stageEl.querySelectorAll(".hold.show").forEach((h) => h.classList.remove("show"));
+  }
 
-  stage.addEventListener("touchmove", (e) => {
-    if (!drag) return;
-    const dx = e.touches[0].clientX - drag.x;
-    const dy = e.touches[0].clientY - drag.y;
-    if (drag.horizontal === null && Math.abs(dx) + Math.abs(dy) > 8) drag.horizontal = Math.abs(dx) > Math.abs(dy);
-    if (!drag.horizontal) return;
-    e.preventDefault();
-    drag.dx = dx;
-    const resist = neighbor(dx < 0 ? 1 : -1) ? 1 : 0.25; // 더 넘길 곳이 없으면 살짝만 끌림
-    drag.page.style.transition = "none";
-    drag.page.style.transform = `translateX(${dx * resist}px) rotate(${(dx * resist) / 50}deg)`;
-  }, { passive: false });
-
-  stage.addEventListener("touchend", () => {
-    if (!drag) return;
-    const { dx, horizontal, page, t } = drag;
-    drag = null;
-    if (!horizontal) return;
-    const fast = Math.abs(dx) > 30 && Date.now() - t < 250;
-    if (Math.abs(dx) > 70 || fast) go(dx < 0 ? 1 : -1);
-    else bounce(page);
+  // ---------- 터치: 꾹(보기) / 톡(뒤집기) / 밀기(넘기기) ----------
+  const HOLD_MS = 160;
+  let pt = null;
+  stageEl.addEventListener("contextmenu", (e) => e.preventDefault());
+  stageEl.addEventListener("pointerdown", (e) => {
+    const fc = e.target.closest(".fc");
+    if (!fc || busy || e.target.closest("button") || (e.pointerType === "mouse" && e.button !== 0)) return;
+    const target = flipped ? e.target.closest(".back .hold") : fc.querySelector(".front .hold");
+    pt = { id: e.pointerId, x: e.clientX, y: e.clientY, t: Date.now(), fc, target, held: false, drag: false, dx: 0 };
+    try { fc.setPointerCapture(e.pointerId); } catch { /* 무시 */ }
+    pt.timer = setTimeout(() => {
+      if (pt && !pt.drag && pt.target) { pt.held = true; pt.target.classList.add("show"); }
+    }, HOLD_MS);
   });
-  stage.addEventListener("touchcancel", () => { if (drag) bounce(drag.page); drag = null; });
+  stageEl.addEventListener("pointermove", (e) => {
+    if (!pt || e.pointerId !== pt.id) return;
+    const dx = e.clientX - pt.x, dy = e.clientY - pt.y;
+    if (!pt.drag && Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy)) {
+      pt.drag = true;
+      clearTimeout(pt.timer);
+      pt.target?.classList.remove("show");
+    }
+    if (pt.drag) {
+      pt.dx = dx;
+      const s = state.session;
+      const can = dx < 0 ? !isDone() : s.pos > 0;
+      const d = dx * (can ? 1 : 0.25);
+      pt.fc.style.transition = "none";
+      pt.fc.style.transform = `translateX(${d}px) rotate(${d / 30}deg)`;
+    }
+  });
+  function endPointer(e, cancelled) {
+    if (!pt || (e && e.pointerId !== pt.id)) return;
+    const p = pt;
+    pt = null;
+    clearTimeout(p.timer);
+    p.target?.classList.remove("show");
+    if (cancelled) { bounce(p.fc); return; }
+    if (p.drag) {
+      const fast = Math.abs(p.dx) > 30 && Date.now() - p.t < 250;
+      if (Math.abs(p.dx) > 70 || fast) move(p.dx < 0 ? 1 : -1);
+      else bounce(p.fc);
+      return;
+    }
+    if (!p.held && Date.now() - p.t < 400) flip(); // 짧게 톡 → 뒤집기
+  }
+  stageEl.addEventListener("pointerup", (e) => endPointer(e, false));
+  stageEl.addEventListener("pointercancel", (e) => endPointer(e, true));
 
-  // ---------- 카드 안 터치: 체크 / 가린 곳 보기 / 발음 ----------
-  const isHidden = (el) =>
-    el.classList.contains("mask") && !el.classList.contains("shown") &&
-    ((state.mode === "hide-ko" && el.classList.contains("ko")) || (state.mode === "hide-zh" && el.classList.contains("zh")));
-
-  stage.addEventListener("click", (e) => {
-    const round = e.target.closest(".round");
-    if (round) {
-      const no = +round.closest(".word").dataset.no;
+  // 버튼: 발음 / 체크박스 / 끝 화면 / 안내
+  stageEl.addEventListener("click", (e) => {
+    const say = e.target.closest("[data-say]");
+    if (say) { speak(say.dataset.say, say); return; }
+    const box = e.target.closest("[data-box]");
+    if (box) {
+      const no = cur().no, i = +box.dataset.box;
       const r = roundsOf(no).slice();
-      const i = +round.dataset.round;
       r[i] = !r[i];
       state.rounds[no] = r;
       store.set("rounds", state.rounds);
-      round.classList.toggle("on", r[i]);
-      round.setAttribute("aria-pressed", r[i]);
-      renderProgress();
+      box.classList.toggle("on", r[i]);
+      box.setAttribute("aria-pressed", r[i]);
       return;
     }
-    const mask = e.target.closest(".mask");
-    if (mask && isHidden(mask)) {
-      mask.classList.add("shown");
-      return;
-    }
-    const sayer = e.target.closest("[data-say]");
-    if (sayer) speak(sayer.dataset.say, sayer.closest(".word").querySelector(".speak"));
+    const act = e.target.closest("[data-act]")?.dataset.act;
+    if (!act) return;
+    const s = state.session;
+    if (act === "coach") { store.set("coachSeen", true); stageEl.querySelector(".coach")?.remove(); }
+    if (act === "retry") startSession(listSession("retry", "다시 볼 단어", [...new Set(s.again)].filter((no) => state.status[no] === "a")));
+    if (act === "next") { state.section = s.section + 1; store.set("section", state.section); startSession(sectionSession(state.section)); }
+    if (act === "restart") startSession({ ...s, queue: [...new Set(s.queue)], pos: 0, known: [], again: [] });
   });
 
-  $("#prevBtn").addEventListener("click", () => go(-1));
-  $("#nextBtn").addEventListener("click", () => go(1));
-
-  $("#modeSeg").addEventListener("click", (e) => {
-    const b = e.target.closest("button");
+  $("#knowBtn").addEventListener("click", () => judge(true));
+  $("#againBtn").addEventListener("click", () => judge(false));
+  $("#dirSeg").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-dir]");
     if (!b) return;
-    state.mode = b.dataset.mode;
-    store.set("mode", state.mode);
-    render();
+    state.dir = b.dataset.dir;
+    store.set("dir", state.dir);
+    flipped = false;
+    renderCard();
   });
 
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => { const p = stage.querySelector(".page"); if (p && !$("#study").hidden) fitPage(p); }, 100);
+  function startSession(sess) {
+    // 구간 카드를 넘기다가 '다시 볼 단어' 연습으로 가면, 구간 진행 위치를 따로 보관해 두었다가 이어서 함
+    const prev = state.session;
+    if (prev && prev.key.startsWith("s") && !isDone()) store.set("sectionSession", prev);
+    state.session = sess;
+    flipped = false;
+    saveSession();
+    if ($("#cards").hidden) showScreen("cards");
+    else renderCard();
+  }
+
+  // ---------- 화면 전환 (홈 ↔ 카드) ----------
+  function renderHome() {
+    let s = state.session;
+    if (s && (isDone() || !s.key.startsWith("s"))) { // 다시 볼 단어 연습 뒤에는 보관해 둔 구간 진행을 기준으로
+      const saved = store.get("sectionSession", null);
+      if (saved && saved.section === state.section && saved.pos < saved.queue.length) s = saved;
+    }
+    const started = s && (s.pos > 0 || s.known.length || s.again.length) && s.pos < s.queue.length;
+    $("#cardsBtn b").textContent = started ? "🃏 이어서 외우기" : "🃏 카드로 외우기";
+    $("#continueSub").textContent = s && !s.key.startsWith("s") && s.pos < s.queue.length ? s.title : `구간 ${sectionLabel(sections[state.section])}`;
+  }
+  function showScreen(name) {
+    $("#home").hidden = name !== "home";
+    $("#cards").hidden = name !== "cards";
+    if (name === "home") renderHome();
+    if (name === "cards") {
+      renderCard();
+      if (history.state?.screen !== "cards") history.pushState({ screen: "cards" }, "");
+    }
+  }
+  window.addEventListener("popstate", () => { closeSheets(); showScreen(history.state?.screen === "cards" ? "cards" : "home"); });
+  document.querySelectorAll("[data-home]").forEach((b) => b.addEventListener("click", () => {
+    if (history.state?.screen === "cards") history.back();
+    else showScreen("home");
+  }));
+  $("#cardsBtn").addEventListener("click", () => {
+    // 이어서 하던 묶음이 지금 구간과 같으면 그대로, 아니면 이 구간을 새로 시작
+    const s = state.session;
+    const keep = s && !isDone() && (!s.key.startsWith("s") || s.section === state.section);
+    if (!keep) {
+      const saved = store.get("sectionSession", null);
+      state.session = saved && saved.section === state.section && saved.pos < saved.queue.length ? saved : sectionSession(state.section);
+      saveSession();
+    }
+    flipped = false;
+    showScreen("cards");
   });
 
-  // ---------- 아래에서 올라오는 창 (구간 고르기 / 단어 찾기 / 공부 방법) ----------
+  window.addEventListener("resize", () => { if (!$("#cards").hidden) fitCard(); });
+
+  // ---------- 아래에서 올라오는 창 ----------
   function openSheet(sheet) {
     sheet.hidden = false;
     document.body.classList.add("sheet-open");
@@ -348,29 +475,36 @@
     });
   });
 
-  function openSections() {
+  // 구간 고르기
+  let sectionFrom = "home";
+  function openSections(from) {
+    sectionFrom = from;
     $("#sectionGrid").innerHTML = sections.map((sec, i) => {
       const done = sec.filter((w) => roundsOf(w.no)[0]).length;
       return `
         <button class="sec${i === state.section ? " on" : ""}" data-section="${i}">
           <b>${sectionLabel(sec)}</b>
           <span class="sec-bar"><i style="width:${(done / sec.length) * 100}%"></i></span>
-          <small>1회 체크 ${done} / ${sec.length}</small>
+          <small>외운 단어 ${done} / ${sec.length}</small>
         </button>`;
     }).join("");
     openSheet($("#sectionSheet"));
   }
-  $("#sectionBtn").addEventListener("click", openSections);
-  $("#homeSectionBtn").addEventListener("click", openSections);
+  $("#homeSectionBtn").addEventListener("click", () => openSections("home"));
+  $("#cardBandBtn").addEventListener("click", () => openSections("cards"));
   $("#sectionGrid").addEventListener("click", (e) => {
     const b = e.target.closest(".sec");
     if (!b) return;
     closeSheets();
-    jumpTo(+b.dataset.section, 0);
+    state.section = +b.dataset.section;
+    store.set("section", state.section);
+    if (sectionFrom === "cards") startSession(sectionSession(state.section));
+    else renderHome();
   });
+
   $("#guideBtn").addEventListener("click", () => { pickVoice(); openSheet($("#guideSheet")); });
 
-  // 검색: 0 정확히 일치 / 1 표제어·뜻에 포함 / 2 짝꿍어휘에만 포함
+  // 단어 찾기: 0 정확히 일치 / 1 표제어·뜻에 포함 / 2 짝꿍어휘에만 포함
   function search(query) {
     const q = fold(query);
     if (!q) return [];
@@ -386,7 +520,6 @@
       .slice(0, 80)
       .map(([, w]) => w);
   }
-
   let searchTimer;
   $("#search").addEventListener("input", (e) => {
     clearTimeout(searchTimer);
@@ -415,21 +548,88 @@
   $("#results").addEventListener("click", (e) => {
     const b = e.target.closest("button[data-no]");
     if (!b) return;
-    const no = +b.dataset.no, i = no - 1;
+    const no = +b.dataset.no;
     closeSheets();
-    jumpTo(Math.floor(i / SECTION_SIZE), i % SECTION_SIZE, no);
+    state.section = Math.floor((no - 1) / SECTION_SIZE);
+    store.set("section", state.section);
+    startSession(sectionSession(state.section, no));
+  });
+
+  // ---------- 📊 내 공부 현황 ----------
+  function renderStats() {
+    const total = WORDS.length;
+    const learned = WORDS.filter((w) => roundsOf(w.no)[0]).length;
+    const mastered = WORDS.filter((w) => roundsOf(w.no).every(Boolean)).length;
+    const weak = weakWords();
+    const today = state.log[todayKey()] || { seen: 0, known: 0 };
+    const s = state.session;
+    const where = s && !isDone()
+      ? `<b>${esc(s.title)}</b> · ${s.pos + 1}번째 카드 / ${s.queue.length} <small>(${cur().no}번 ${esc(cur().word)})</small>`
+      : s ? `<b>${esc(s.title)}</b> 끝까지 했어요` : `<b>구간 ${sectionLabel(sections[state.section])}</b> 시작 전`;
+    const pct = (n) => Math.round((n / total) * 100);
+    $("#statsBody").innerHTML = `
+      <div class="st-where"><span>📍 지금 위치</span><p>${where}</p></div>
+
+      <div class="st-big">
+        <div class="st-ring" style="--p:${pct(learned)}"><b>${learned}</b><small>/ ${total}</small></div>
+        <div class="st-big-text">
+          <p><b>외운 단어</b> <span>⭕ 알아요를 한 번 이상 누른 단어</span></p>
+          <p class="st-line"><span>3번 공부 완료</span><b>${mastered}개</b></p>
+          <div class="st-bar"><i style="width:${pct(mastered)}%"></i></div>
+        </div>
+      </div>
+
+      <div class="st-cards">
+        <div><small>오늘 넘긴 카드</small><b>${today.seen}</b></div>
+        <div><small>오늘 알아요</small><b>${today.known}</b></div>
+        <div><small>연속 공부</small><b>${streakDays()}일${streakDays() >= 3 ? " 🔥" : ""}</b></div>
+      </div>
+
+      <button class="st-weak" data-act="weak" ${weak.length ? "" : "disabled"}>
+        <span>🔄 다시 볼 단어 <b>${weak.length}개</b></span>
+        <small>${weak.length ? "모아서 연습하기 →" : "아직 없어요"}</small>
+      </button>
+
+      <p class="st-map-title">구간 지도 <small>누르면 그 구간 카드를 시작해요</small></p>
+      <div class="st-map">
+        ${sections.map((sec, i) => {
+          const done = sec.filter((w) => roundsOf(w.no)[0]).length;
+          const full = sec.every((w) => roundsOf(w.no)[0]);
+          return `<button class="tile${i === state.section ? " on" : ""}${full ? " full" : ""}" data-tile="${i}" style="--f:${(done / sec.length) * 100}%" aria-label="구간 ${sectionLabel(sec)} 외운 단어 ${done}개">
+            <b>${String(i + 1).padStart(2, "0")}</b><small>${done}/${sec.length}</small></button>`;
+        }).join("")}
+      </div>`;
+  }
+  document.querySelectorAll("[data-stats]").forEach((b) => b.addEventListener("click", () => { renderStats(); openSheet($("#statsSheet")); }));
+  $("#statsBody").addEventListener("click", (e) => {
+    const tile = e.target.closest("[data-tile]");
+    if (tile) {
+      closeSheets();
+      state.section = +tile.dataset.tile;
+      store.set("section", state.section);
+      startSession(sectionSession(state.section));
+      return;
+    }
+    if (e.target.closest('[data-act="weak"]')) {
+      const weak = weakWords();
+      if (!weak.length) return;
+      closeSheets();
+      startSession(listSession("weak", `다시 볼 단어 ${weak.length}개`, weak.slice(0, 50)));
+    }
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeSheets();
-    if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open") || $("#study").hidden) return;
-    if (e.key === "ArrowRight") go(1);
-    if (e.key === "ArrowLeft") go(-1);
+    if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open") || $("#cards").hidden) return;
+    if (e.key === "ArrowRight") move(1);
+    if (e.key === "ArrowLeft") move(-1);
+    if (e.key === " ") { e.preventDefault(); flip(); }
   });
 
-  // 첫 화면은 홈(표지). 처음 온 사람에게는 '공부 방법'을 한 번 보여 줌
+  // ---------- 시작: 홈(표지). 처음 온 사람에게는 '공부 방법'을 한 번 보여 줌 ----------
+  if (state.session && !Array.isArray(state.session.queue)) state.session = null;
   history.replaceState({ screen: "home" }, "");
-  showHome();
+  showScreen("home");
   if (!store.get("introSeen", false)) {
     store.set("introSeen", true);
     openSheet($("#guideSheet"));
