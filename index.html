@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#c8372d">
+  <meta name="description" content="HSK 3.0 4급 필수 어휘와 진담중국어 짝꿍어휘를 모바일에서 편하게 보는 단어장">
+  <title>HSK 4급 짝꿍어휘</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="mode-all">
+  <header class="top">
+    <div class="brand-row">
+      <div class="brand">
+        <span class="badge">HSK 3.0</span>
+        <h1>HSK 4급 <span>짝꿍어휘</span></h1>
+      </div>
+      <button class="icon-btn" id="infoBtn" aria-label="사용법">?</button>
+    </div>
+
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="search" type="search" placeholder="한자 · 병음 · 뜻으로 검색" autocomplete="off">
+    </label>
+
+    <nav class="sections" id="sections" aria-label="구간 선택"></nav>
+
+    <div class="toolbar">
+      <div class="seg" id="viewSeg" role="tablist" aria-label="보기 방식">
+        <button data-view="list" class="on">목록</button>
+        <button data-view="card">카드</button>
+      </div>
+      <div class="seg" id="modeSeg" aria-label="가리기">
+        <button data-mode="all" class="on">다 보기</button>
+        <button data-mode="hide-ko">뜻 가리기</button>
+        <button data-mode="hide-zh">중국어 가리기</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main"></main>
+
+  <footer class="bottom-bar">
+    <button class="nav-btn" id="prevBtn" aria-label="이전">‹</button>
+    <div class="progress" id="progress"></div>
+    <button class="nav-btn" id="nextBtn" aria-label="다음">›</button>
+  </footer>
+
+  <dialog id="info">
+    <h2>이렇게 공부해요</h2>
+    <ol>
+      <li><b>짝꿍어휘</b> — 단어 하나가 아니라 함께 쓰는 덩어리 3개로 익혀요.</li>
+      <li><b>입에 붙이기</b> — 한자를 누르면 원어민 발음이 나와요. 따라 말해 보세요.</li>
+      <li><b>가리기</b> — ‘중국어 가리기’로 한국어만 보고 중국어를 먼저 말해 보세요. 가려진 부분을 누르면 정답이 보여요.</li>
+      <li><b>1·2·3 회독</b> — 한 번 볼 때마다 박스를 체크해요. 체크는 이 기기에 저장돼요.</li>
+    </ol>
+    <p class="source">게임과 단어장의 HSK 단어 및 급수는 중외언어교류협력센터의 《HSK考试大纲》 어휘 목록을 기준으로 확인했으며, 짝꿍어휘는 실제 말하기 연습을 위해 진담중국어가 추가하였다.</p>
+    <p class="brand-foot">덩어리로 익히면, 중국어가 <b>툭!</b><br>진담중국어 · 진심을 담은 중국어</p>
+    <form method="dialog"><button class="close">닫기</button></form>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
