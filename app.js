@@ -47,21 +47,29 @@
     store.set("idx", state.idx);
   }
 
-  // ---------- 발음: 여성 중국어 음성 ----------
-  // 아이폰·아이패드·맥 → Tingting / 크롬(PC) → 구글 기본 음성 "Google 普通话（中国大陆）"(여성)
-  // 안드로이드 → 기기 기본 중국어 음성(구글 TTS 기본값이 여성)
+  // ---------- 발음: 여자 목소리 Tingting ----------
+  // 1순위 Tingting(婷婷) — 아이폰·아이패드·맥(사파리·크롬 모두)
+  // 2순위 구글 기본 중국어 음성 "Google 普通话（中国大陆）"(여성) — PC 크롬
+  // 3순위 다른 여성 음성(Huihui·Xiaoxiao 등) / 안드로이드는 기기 기본 중국어 음성(구글 TTS 기본값이 여성)
+  // 남성 음성(Li-mu, Kangkang, Yunxi 등)은 고르지 않음
   const isAndroid = /Android/i.test(navigator.userAgent);
-  const FEMALE = /tingting|ting-ting|meijia|sin-ji|xiaoxiao|xiaoyi|xiaohan|xiaomo|huihui|yaoyao|female|女/i;
-  const MALE = /li-mu|limu|kangkang|yunxi|yunyang|yunjian|yunze|\bmale\b|男/i;
+  const TINGTING = /tingting|ting-ting|婷婷/i;
+  const FEMALE = /meijia|sin-ji|xiaoxiao|xiaoyi|xiaohan|xiaomo|huihui|yaoyao|female|女/i;
+  const MALE = /li-?mu|kangkang|yunxi|yunyang|yunjian|yunze|\bmale\b|男/i;
   let zhVoice = null;
   function pickVoice() {
-    if (!("speechSynthesis" in window)) return;
-    const zh = speechSynthesis.getVoices().filter((v) => /^(zh|cmn)[-_](CN|Hans)/i.test(v.lang));
+    if (!("speechSynthesis" in window)) return null;
+    const zh = speechSynthesis.getVoices().filter((v) => /^(zh|cmn)[-_](CN|Hans)/i.test(v.lang) || TINGTING.test(v.name));
+    const tingting = zh.filter((v) => TINGTING.test(v.name));
     zhVoice =
-      zh.find((v) => /tingting|ting-ting/i.test(v.name)) ||
+      tingting.find((v) => /enhanced|premium|향상|高/i.test(v.name)) || tingting[0] ||
       zh.find((v) => /^google/i.test(v.name)) ||
-      (isAndroid ? null : zh.find((v) => FEMALE.test(v.name) && !MALE.test(v.name)) || zh.find((v) => !MALE.test(v.name))) ||
+      zh.find((v) => FEMALE.test(v.name) && !MALE.test(v.name)) ||
+      (isAndroid ? null : zh.find((v) => !MALE.test(v.name))) ||
       null; // null이면 lang="zh-CN"만 지정해 기기 기본 중국어 음성 사용
+    const label = document.getElementById("voiceName");
+    if (label) label.textContent = zhVoice ? zhVoice.name : "기기 기본 중국어 음성";
+    return zhVoice;
   }
   if ("speechSynthesis" in window) {
     pickVoice();
@@ -69,10 +77,10 @@
   }
   function speak(text, btn) {
     if (!("speechSynthesis" in window)) return;
-    if (!zhVoice) pickVoice(); // 음성 목록이 늦게 오는 브라우저 대비
+    pickVoice(); // 음성 목록이 늦게 들어오는 브라우저 대비: 말할 때마다 다시 확인
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = "zh-CN";
+    u.lang = zhVoice ? zhVoice.lang : "zh-CN";
     if (zhVoice) u.voice = zhVoice;
     u.rate = 0.85;
     if (btn) {
@@ -85,27 +93,9 @@
   const SPEAKER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
 
   // ---------- 캐릭터 (표지의 짝꿍이) ----------
-  const CHAR_SVG = `
-    <svg viewBox="0 0 240 230" aria-hidden="true">
-      <path d="M42 128 Q14 134 6 166" fill="none" stroke="var(--char)" stroke-width="13" stroke-linecap="round"/>
-      <path d="M198 128 Q226 134 234 166" fill="none" stroke="var(--char)" stroke-width="13" stroke-linecap="round"/>
-      <ellipse cx="88" cy="216" rx="26" ry="11" fill="#9e2f25"/>
-      <ellipse cx="152" cy="216" rx="26" ry="11" fill="#9e2f25"/>
-      <path d="M120 40 V20" stroke="#6aa85a" stroke-width="5" stroke-linecap="round"/>
-      <ellipse cx="104" cy="18" rx="17" ry="9" fill="#8cc47a" transform="rotate(-25 104 18)"/>
-      <ellipse cx="138" cy="13" rx="19" ry="10" fill="#6aa85a" transform="rotate(-20 138 13)"/>
-      <rect x="30" y="36" width="180" height="178" rx="48" fill="var(--char)"/>
-      <circle cx="94" cy="80" r="11" fill="#fff"/><circle cx="146" cy="80" r="11" fill="#fff"/>
-      <circle cx="96" cy="83" r="5.5" fill="#2a2422"/><circle cx="148" cy="83" r="5.5" fill="#2a2422"/>
-      <ellipse cx="70" cy="104" rx="16" ry="8" fill="#e9a198"/><ellipse cx="170" cy="104" rx="16" ry="8" fill="#e9a198"/>
-      <path d="M107 100 Q120 111 133 100" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/>
-    </svg>`;
-  const MINI_FACE = `
-    <svg viewBox="0 0 40 16" aria-hidden="true">
-      <circle cx="12" cy="4" r="2.6" fill="#2a2422"/><circle cx="28" cy="4" r="2.6" fill="#2a2422"/>
-      <ellipse cx="5" cy="10" rx="4" ry="2.2" fill="#f2a59b"/><ellipse cx="35" cy="10" rx="4" ry="2.2" fill="#f2a59b"/>
-      <path d="M16 9 Q20 13 24 9" fill="none" stroke="#2a2422" stroke-width="1.8" stroke-linecap="round"/>
-    </svg>`;
+  // 캐릭터 그림은 진담중국어 단어장 표지 원본에서 오려 낸 것 (img/char.png, img/mini.png). 몸의 글자는 앱이 올림
+  const CHAR_IMG = '<img src="img/char.png" alt="" draggable="false">';
+  const MINI_IMG = '<img src="img/mini.png" alt="" draggable="false">';
 
   // 짝꿍어휘에서 표제어를 빼고 남은 "짝꿍" 부분 (예: 按时完成 → 完成)
   function partner(pair, word) {
@@ -118,14 +108,14 @@
     const zs = { 1: 0.27, 2: 0.2, 3: 0.155, 4: 0.12 }[w.word.length] || 0.12;
     $("#hero").innerHTML = `
       <div class="char" id="heroChar" role="button" aria-label="${esc(w.word)} 발음 듣기" style="--zs:${zs}">
-        ${CHAR_SVG}
+        ${CHAR_IMG}
         <div class="char-text"><b>${esc(w.word)}</b><small>${esc(w.pinyin)} · ${esc(w.meaning.split(/[;,]/)[0])}</small></div>
       </div>
       <span class="bubble">우리는 짝꿍!</span>
       <div class="minis">
         ${w.pairs.map((p, i) => `
           <div class="mini-wrap">
-            <div class="mini len-${Math.max(2, (partner(p[0], w.word) || "").length)}">${MINI_FACE}<span>${esc(partner(p[0], w.word) || CIRCLED[i])}</span></div>
+            <div class="mini len-${Math.max(2, (partner(p[0], w.word) || "").length)}">${MINI_IMG}<span>${esc(partner(p[0], w.word) || CIRCLED[i])}</span></div>
             <div class="mini-label">${CIRCLED[i]} ${esc(p[0])}<small>${esc(p[2])}</small></div>
           </div>`).join("")}
       </div>`;
@@ -405,7 +395,7 @@
     closeSheets();
     jumpTo(+b.dataset.section, 0);
   });
-  $("#guideBtn").addEventListener("click", () => openSheet($("#guideSheet")));
+  $("#guideBtn").addEventListener("click", () => { pickVoice(); openSheet($("#guideSheet")); });
 
   // 검색: 0 정확히 일치 / 1 표제어·뜻에 포함 / 2 짝꿍어휘에만 포함
   function search(query) {
