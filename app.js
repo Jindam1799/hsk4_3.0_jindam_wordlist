@@ -287,7 +287,6 @@
       $("#judge").hidden = false;
       fitCard();
     }
-    $("#undoBtn").disabled = !(s.hist && s.hist.length);
     renderFoot();
     maybeCoach();
   }
@@ -356,8 +355,6 @@
   function judge(known) {
     if (busy || isDone()) return;
     const s = state.session, no = s.queue[s.pos];
-    s.hist = s.hist || [];
-    const h = { known, no, pos: s.pos, rounds: state.rounds[no] ? state.rounds[no].slice() : null, srs: state.srs[no] ? { ...state.srs[no] } : null, status: state.status[no] ?? null, day: todayKey() };
     if (known) {
       setStatus(no, "k");
       s.known.push(no);
@@ -365,35 +362,11 @@
     } else {
       setStatus(no, "a");
       s.again.push(no);
-      h.insertAt = Math.min(s.pos + 1 + AGAIN_GAP, s.queue.length);
-      s.queue.splice(h.insertAt, 0, no); // 4장 뒤에 다시
+      s.queue.splice(Math.min(s.pos + 1 + AGAIN_GAP, s.queue.length), 0, no); // 4장 뒤에 다시
       toast(dontKnow(no));
     }
     addLog(known);
-    s.hist.push(h);
-    if (s.hist.length > 30) s.hist.shift();
     slide(known ? -1 : 1, () => { s.pos += 1; flipped = false; saveSession(); }); // 민 방향으로 날아감
-  }
-
-  // ↩ 되돌리기: 방금 밀었던 카드를 다시 가져오고 체크·기록도 되돌림
-  function undo() {
-    const s = state.session;
-    if (busy || !s.hist || !s.hist.length) return;
-    const h = s.hist.pop();
-    if (h.rounds) state.rounds[h.no] = h.rounds; else delete state.rounds[h.no];
-    if (h.status) state.status[h.no] = h.status; else delete state.status[h.no];
-    if (h.srs) state.srs[h.no] = h.srs; else delete state.srs[h.no];
-    store.set("srs", state.srs);
-    store.set("rounds", state.rounds);
-    store.set("status", state.status);
-    const list = h.known ? s.known : s.again;
-    const i = list.lastIndexOf(h.no);
-    if (i >= 0) list.splice(i, 1);
-    if (!h.known && h.insertAt != null) s.queue.splice(h.insertAt, 1);
-    const d = state.log[h.day];
-    if (d) { d.seen = Math.max(0, d.seen - 1); if (h.known) d.known = Math.max(0, d.known - 1); store.set("log", state.log); }
-    toast("↩ 되돌렸어요");
-    slide(h.known ? 1 : -1, () => { s.pos = h.pos; flipped = false; saveSession(); });
   }
 
   function flip() {
@@ -492,10 +465,9 @@
     if (act === "coach") { store.set("coachSeen", true); stageEl.querySelector(".coach")?.remove(); }
     if (act === "retry") startSession(listSession("retry", "다시 볼 단어", shuffle([...new Set(s.again)].filter((no) => state.status[no] === "a"))));
     if (act === "next") { state.section = s.section + 1; store.set("section", state.section); startSession(sectionSession(state.section)); }
-    if (act === "restart") startSession({ ...s, queue: [...new Set(s.queue)], pos: 0, known: [], again: [], hist: [] });
+    if (act === "restart") startSession({ ...s, queue: [...new Set(s.queue)], pos: 0, known: [], again: [] });
   });
 
-  $("#undoBtn").addEventListener("click", undo);
   $("#dirSeg").addEventListener("click", (e) => {
     const b = e.target.closest("button[data-dir]");
     if (!b) return;
@@ -713,6 +685,20 @@
       </div>`;
   }
   document.querySelectorAll("[data-stats]").forEach((b) => b.addEventListener("click", () => { renderStats(); openSheet($("#statsSheet")); }));
+
+  // 기록 초기화: 한 번 더 확인한 뒤 체크·복습 날짜·다시 볼 단어·공부 기록·진행 위치를 모두 지움
+  const RESET_KEYS = ["rounds", "status", "srs", "log", "cardSession", "sectionSession", "section", "idx"];
+  $("#resetBtn").addEventListener("click", () => {
+    $("#statsBody").innerHTML = `
+      <div class="reset-confirm">
+        <p class="rc-title">정말 처음부터 다시 시작할까요?</p>
+        <p>체크, 오늘 복습, 다시 볼 단어, 공부 기록, 진행 위치가 <b>모두 지워지고 되돌릴 수 없어요.</b></p>
+        <div class="rc-actions">
+          <button class="ghost" data-act="reset-cancel">취소</button>
+          <button class="cta-sm" data-act="reset-ok">초기화</button>
+        </div>
+      </div>`;
+  });
   $("#statsBody").addEventListener("click", (e) => {
     const tile = e.target.closest("[data-tile]");
     if (tile) {
@@ -720,6 +706,12 @@
       state.section = +tile.dataset.tile;
       store.set("section", state.section);
       startSession(sectionSession(state.section));
+      return;
+    }
+    if (e.target.closest('[data-act="reset-cancel"]')) { renderStats(); return; }
+    if (e.target.closest('[data-act="reset-ok"]')) {
+      RESET_KEYS.forEach((k) => { try { localStorage.removeItem("hsk4:" + k); } catch { /* 무시 */ } });
+      location.replace(location.pathname + location.search); // 깨끗한 상태로 다시 시작
       return;
     }
     if (e.target.closest('[data-act="review"]')) { startReview(); return; }
@@ -736,13 +728,22 @@
     if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open") || $("#cards").hidden) return;
     if (e.key === "ArrowRight") judge(true);
     if (e.key === "ArrowLeft") judge(false);
-    if (e.key === "Backspace") undo();
     if (e.key === " ") { e.preventDefault(); flip(); }
   });
 
   // ---------- 시작: 홈(표지). 처음 온 사람에게는 '공부 방법'을 한 번 보여 줌 ----------
   if (state.session && !Array.isArray(state.session.queue)) state.session = null;
   for (const no of Object.keys(state.rounds)) { const n = state.rounds[no].filter(Boolean).length; state.rounds[no] = [n >= 1, n >= 2, n >= 3]; }
+  if (!store.get("srsV2", false)) { // 예전 방식(알아요마다 한 칸)으로 생긴 체크는 날짜 근거가 없으니 1칸으로 맞추고 오늘 복습에 넣음
+    for (const no of Object.keys(state.rounds)) {
+      if (state.srs[no] || !state.rounds[no][0]) continue;
+      state.rounds[no] = [true, false, false];
+      state.srs[no] = { last: addDays(-1), due: todayKey() };
+    }
+    store.set("rounds", state.rounds);
+    store.set("srs", state.srs);
+    store.set("srsV2", true);
+  }
   history.replaceState({ screen: "home" }, "");
   showScreen("home");
   if (!store.get("introSeen", false)) {

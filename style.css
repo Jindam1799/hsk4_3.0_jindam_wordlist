@@ -128,12 +128,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .no { color: var(--red); font-weight: 900; font-size: 16px; font-variant-numeric: tabular-nums; }
 .boxes { display: flex; gap: 6px; }
 .box {
-  position: relative; width: 22px; height: 22px; padding: 0; border-radius: 5px;
-  border: 1.5px solid var(--red); background: #fff; color: #fff; font-size: 14px; font-weight: 900; line-height: 1;
+  position: relative; width: 28px; height: 28px; border-radius: 7px; flex: none;
+  border: 2px solid var(--red); background: #fff; display: grid; place-items: center;
 }
-.box::before { content: ""; position: absolute; inset: -8px -3px; }
 .box.on { background: var(--red); }
-.box.on::after { content: "✓"; }
+.box.on::after { /* 네모 가운데에 오는 체크 모양 */
+  content: ""; width: 7px; height: 13px; margin-top: -3px;
+  border: solid #fff; border-width: 0 3px 3px 0; transform: rotate(45deg);
+}
 .say {
   margin-left: auto; width: 42px; height: 42px; border-radius: 50%; flex: none; padding: 0;
   border: 2px solid var(--pink-2); background: #fff; display: grid; place-items: center;
@@ -188,15 +190,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .hl { color: var(--red); font-weight: 700; }
 
 /* 밀기 안내: ← 몰라요 · ↩ 되돌리기 · 알아요 → */
-.judge { flex: none; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; padding: 12px 16px 2px; }
+.judge { flex: none; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 18px 2px; min-height: 50px; }
 .judge .sg { font-size: 14px; font-weight: 900; white-space: nowrap; }
 .judge .left { color: var(--ink-2); }
 .judge .right { color: var(--red); text-align: right; }
-.judge .undo {
-  height: 38px; padding: 0 14px; border-radius: 999px; border: 2px solid var(--pink-2);
-  background: #fff; color: var(--ink-2); font-size: 13px; font-weight: 700;
-}
-.judge .undo:disabled { opacity: .4; }
 
 /* 밀 때 나타나는 도장 */
 .stamp {
@@ -417,7 +414,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 @media (max-height: 700px) {
   .judge { padding-top: 8px; }
-  .judge .undo { height: 34px; }
   .card-foot { padding-top: 6px; }
   .face-hint { padding: 5px; font-size: 11px; }
   .st-big { grid-template-columns: 66px 1fr; padding: 8px 10px; }
@@ -482,3 +478,16 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .st-weak:disabled span .ic-cal { color: var(--ink-3); }
 .box { pointer-events: none; }
 @media (max-height: 620px) { .review-pill { height: 38px; font-size: 13px; } }
+
+/* 기록 초기화 */
+.st-reset {
+  margin-left: auto; height: 32px; padding: 0 12px; border-radius: 999px;
+  border: 1.5px solid var(--line); background: #fff; color: var(--ink-3); font-size: 12px; font-weight: 700;
+}
+.sheet-head > b.st-title { margin-right: 0; }
+.reset-confirm { background: #fff; border: 2px solid var(--red); border-radius: 16px; padding: 18px 16px; text-align: center; }
+.reset-confirm p { margin: 0 0 8px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.reset-confirm .rc-title { font-size: 17px; font-weight: 900; color: var(--ink); }
+.reset-confirm b { color: var(--red); }
+.rc-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+.rc-actions .ghost { height: 48px; }
