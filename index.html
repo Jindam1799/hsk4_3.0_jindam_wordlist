@@ -62,8 +62,8 @@
       <button class="band" id="cardBandBtn" aria-label="구간 고르기">
         <b id="cardBandTitle"></b><span class="band-more">구간 ▾</span>
       </button>
-      <button class="icon-btn" id="searchBtn" aria-label="단어 찾기">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <button class="icon-btn" id="listBtn" aria-label="단어 목록">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M8.5 9h7M8.5 13h7M8.5 17h4"/></svg>
       </button>
       <button class="icon-btn stats-btn" data-stats aria-label="내 공부 현황"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.2S6.2 13.3 6.2 8.9a5.8 5.8 0 0 1 11.6 0c0 4.4-5.8 10.3-5.8 10.3z"/><circle cx="12" cy="8.9" r="2.4"/><ellipse cx="12" cy="20.4" rx="6.2" ry="1.7"/></svg></button>
       <div class="seg" id="dirSeg" aria-label="연습 방향">
@@ -98,18 +98,30 @@
     </div>
   </section>
 
-  <!-- ===== 단어 찾기 ===== -->
-  <section class="sheet" id="searchSheet" hidden aria-label="단어 찾기">
+  <!-- ===== 📋 단어 목록 (검색 · 이 구간 · 오늘 본 단어 · 몰라요 단어) ===== -->
+  <section class="sheet" id="listSheet" hidden aria-label="단어 목록">
     <div class="sheet-panel tall">
       <div class="sheet-head">
-        <label class="search">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-          <input id="search" type="search" placeholder="한자 · 병음 · 뜻 · 번호" autocomplete="off">
-        </label>
+        <b class="st-title"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M8.5 9h7M8.5 13h7M8.5 17h4"/></svg> 단어 목록</b>
+        <button class="st-reset" id="maskBtn" aria-pressed="false">뜻 가리기</button>
         <button class="sheet-close" data-close aria-label="닫기">✕</button>
+      </div>
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="search" type="search" placeholder="한자 · 병음 · 뜻 · 번호로 찾기" autocomplete="off">
+      </label>
+      <div class="seg list-tabs" id="listTabs">
+        <button data-tab="sec" class="on">이 구간</button>
+        <button data-tab="today">오늘 본 단어</button>
+        <button data-tab="weak">❌ 몰라요</button>
       </div>
       <ul class="results" id="results"></ul>
     </div>
+  </section>
+
+  <!-- ===== 미리보기 카드 (보기만 하고 기록은 바뀌지 않음) ===== -->
+  <section class="sheet preview-sheet" id="previewSheet" hidden aria-label="단어 미리보기">
+    <div class="preview" id="preview"></div>
   </section>
 
   <!-- ===== 공부 방법 (이렇게 공부해요) ===== -->

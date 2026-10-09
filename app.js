@@ -118,6 +118,12 @@
 
   // ---------- 기록 ----------
   function saveSession() { store.set("cardSession", state.session); }
+  function markSeen(no) { // 오늘 본 단어 (날짜가 바뀌면 새로 시작)
+    let d = store.get("seenDay", null);
+    if (!d || d.day !== todayKey()) d = { day: todayKey(), nos: [] };
+    if (!d.nos.includes(no)) d.nos.push(no);
+    store.set("seenDay", d);
+  }
   function addLog(known) {
     const k = todayKey();
     const d = state.log[k] || { seen: 0, known: 0 };
@@ -366,6 +372,7 @@
       toast(dontKnow(no));
     }
     addLog(known);
+    markSeen(no);
     slide(known ? -1 : 1, () => { s.pos += 1; flipped = false; saveSession(); }); // 민 방향으로 날아감
   }
 
@@ -547,7 +554,7 @@
     document.querySelectorAll(".sheet").forEach((s) => { s.hidden = true; });
     document.body.classList.remove("sheet-open");
   }
-  document.querySelectorAll(".sheet").forEach((sheet) => {
+  document.querySelectorAll(".sheet:not(.preview-sheet)").forEach((sheet) => {
     sheet.addEventListener("click", (e) => {
       if (e.target === sheet || e.target.closest("[data-close]")) closeSheets();
     });
@@ -598,39 +605,114 @@
       .slice(0, 80)
       .map(([, w]) => w);
   }
+  // ---------- 📋 단어 목록 ----------
+  let listTab = "sec";
+  let masked = false;
+  const seenToday = () => { const d = store.get("seenDay", null); return d && d.day === todayKey() ? d.nos : []; };
+  function rowHTML(w, today) {
+    const lv = levelOf(w.no);
+    return `
+      <li><button data-no="${w.no}">
+        <span class="r-no">${w.no}</span>
+        <span class="r-zh">${esc(w.word)}</span>
+        <span class="r-py">${esc(w.pinyin)}</span>
+        <span class="r-ko">${esc(w.meaning)}</span>
+        <span class="r-side">${today.has(w.no) ? '<i class="r-today">오늘</i>' : ""}<span class="r-boxes" aria-label="체크 ${lv}칸">${[0, 1, 2].map((k) => `<i class="${k < lv ? "on" : ""}"></i>`).join("")}</span></span>
+      </button></li>`;
+  }
+  function renderList() {
+    const query = $("#search").value.trim();
+    const today = new Set(seenToday());
+    let list, empty;
+    if (query) {
+      list = search(query);
+      empty = `‘${esc(query)}’에 맞는 단어가 없어요.`;
+    } else if (listTab === "today") {
+      list = [...today].map(wordOf); // 본 순서대로
+      empty = "오늘은 아직 넘긴 카드가 없어요.";
+    } else if (listTab === "weak") {
+      list = weakWords().map(wordOf);
+      empty = "❌ 몰라요 단어가 없어요. 잘하고 있어요!";
+    } else {
+      list = sections[state.section];
+    }
+    document.querySelectorAll("#listTabs button").forEach((b) => b.classList.toggle("on", !query && b.dataset.tab === listTab));
+    $("#listTabs").classList.toggle("dim", !!query);
+    const head = query ? `<li class="list-head">검색 결과 ${list.length}개</li>`
+      : listTab === "sec" ? `<li class="list-head">구간 ${sectionLabel(sections[state.section])}</li>`
+      : `<li class="list-head">${list.length}개</li>`;
+    $("#results").innerHTML = list.length ? head + list.map((w) => rowHTML(w, today)).join("") : `<li class="empty">${empty}</li>`;
+    $("#results").classList.toggle("masked", masked);
+    $("#results").scrollTop = 0;
+  }
   let searchTimer;
-  $("#search").addEventListener("input", (e) => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => {
-      const query = e.target.value.trim();
-      const list = search(query);
-      $("#results").innerHTML = !query
-        ? `<li class="empty">한자, 병음(성조 없이도 OK), 뜻, 번호로 찾아요.</li>`
-        : list.length
-          ? list.map((w) => `
-              <li><button data-no="${w.no}">
-                <span class="r-no">${pad(w.no)}</span>
-                <span class="r-zh">${esc(w.word)}</span>
-                <span class="r-py">${esc(w.pinyin)}</span>
-                <span class="r-ko">${esc(w.meaning)}</span>
-              </button></li>`).join("")
-          : `<li class="empty">‘${esc(query)}’에 맞는 단어가 없어요.</li>`;
-    }, 120);
-  });
-  $("#searchBtn").addEventListener("click", () => {
+  $("#search").addEventListener("input", () => { clearTimeout(searchTimer); searchTimer = setTimeout(renderList, 120); });
+  $("#listTabs").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-tab]");
+    if (!b) return;
+    listTab = b.dataset.tab;
     $("#search").value = "";
-    $("#search").dispatchEvent(new Event("input"));
-    openSheet($("#searchSheet"));
-    setTimeout(() => $("#search").focus(), 50);
+    renderList();
+  });
+  $("#maskBtn").addEventListener("click", () => {
+    masked = !masked;
+    $("#maskBtn").textContent = masked ? "뜻 보이기" : "뜻 가리기";
+    $("#maskBtn").setAttribute("aria-pressed", masked);
+    $("#results").classList.toggle("masked", masked);
+  });
+  $("#listBtn").addEventListener("click", () => {
+    $("#search").value = "";
+    renderList();
+    openSheet($("#listSheet"));
   });
   $("#results").addEventListener("click", (e) => {
     const b = e.target.closest("button[data-no]");
-    if (!b) return;
-    const no = +b.dataset.no;
-    closeSheets();
-    state.section = Math.floor((no - 1) / SECTION_SIZE);
-    store.set("section", state.section);
-    startSession(sectionSession(state.section, no));
+    if (b) openPreview(+b.dataset.no);
+  });
+
+  // 미리보기 카드: 앞면 정보 + 짝꿍어휘 + 🔊, 체크·기록은 바뀌지 않음
+  function openPreview(no) {
+    const w = wordOf(no), lv = levelOf(no);
+    $("#preview").innerHTML = `
+      <div class="pv-top">
+        <span class="no">${pad(no)}</span>
+        <span class="boxes">${[0, 1, 2].map((k) => `<span class="box${k < lv ? " on" : ""}"></span>`).join("")}</span>
+        <button class="sheet-close" data-pv-close aria-label="닫기">✕</button>
+      </div>
+      <div class="pv-word">
+        <div class="pv-zh" lang="zh-CN">${esc(w.word)}</div>
+        <div class="pv-py">${esc(w.pinyin)} ${speakBtn(w.word, "sm")}</div>
+        <div class="pv-ko">${esc(w.meaning)}</div>
+      </div>
+      <p class="pv-label">짝꿍어휘</p>
+      <ol class="pv-pairs">
+        ${w.pairs.map((p, i) => `
+          <li>
+            <span class="n">${CIRCLED[i]}</span>
+            <div><div class="pv-pz" lang="zh-CN">${highlight(p[0], w.word)}</div><div class="pv-pp">${esc(p[1])}</div><div class="pv-pk">${esc(p[2])}</div></div>
+            ${speakBtn(p[0], "sm")}
+          </li>`).join("")}
+      </ol>
+      <div class="pv-actions">
+        <button class="ghost" data-pv-close>닫기</button>
+        <button class="cta-sm" data-pv-go="${no}">이 단어부터 카드로</button>
+      </div>`;
+    $("#previewSheet").hidden = false;
+  }
+  const closePreview = () => { stopPlaying(); $("#previewSheet").hidden = true; };
+  $("#previewSheet").addEventListener("click", (e) => {
+    const say = e.target.closest("[data-say]");
+    if (say) { speak(say.dataset.say, say); return; }
+    if (e.target === $("#previewSheet") || e.target.closest("[data-pv-close]")) { closePreview(); return; }
+    const go = e.target.closest("[data-pv-go]");
+    if (go) {
+      const no = +go.dataset.pvGo;
+      closePreview();
+      closeSheets();
+      state.section = Math.floor((no - 1) / SECTION_SIZE);
+      store.set("section", state.section);
+      startSession(sectionSession(state.section, no));
+    }
   });
 
   // ---------- 📍 내 공부 현황 ----------
@@ -687,7 +769,7 @@
   document.querySelectorAll("[data-stats]").forEach((b) => b.addEventListener("click", () => { renderStats(); openSheet($("#statsSheet")); }));
 
   // 기록 초기화: 한 번 더 확인한 뒤 체크·복습 날짜·다시 볼 단어·공부 기록·진행 위치를 모두 지움
-  const RESET_KEYS = ["rounds", "status", "srs", "log", "cardSession", "sectionSession", "section", "idx"];
+  const RESET_KEYS = ["rounds", "status", "srs", "log", "cardSession", "sectionSession", "section", "idx", "seenDay"];
   $("#resetBtn").addEventListener("click", () => {
     $("#statsBody").innerHTML = `
       <div class="reset-confirm">
@@ -724,7 +806,7 @@
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeSheets();
+    if (e.key === "Escape") { if (!$("#previewSheet").hidden) closePreview(); else closeSheets(); }
     if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open") || $("#cards").hidden) return;
     if (e.key === "ArrowRight") judge(true);
     if (e.key === "ArrowLeft") judge(false);

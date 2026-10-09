@@ -346,12 +346,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .results { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; }
 .results button {
   width: 100%; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left;
-  display: grid; grid-template-columns: 44px auto 1fr; column-gap: 8px; align-items: baseline; padding: 10px 2px;
+  display: grid; grid-template-columns: 34px auto 1fr auto; column-gap: 8px; align-items: baseline; padding: 10px 2px;
 }
 .r-no { color: var(--red); font-weight: 700; font-size: 12px; font-variant-numeric: tabular-nums; }
 .r-zh { font-family: var(--zh); font-size: 20px; font-weight: 700; }
 .r-py { font-family: var(--py); color: var(--red); font-size: 14px; }
-.r-ko { grid-column: 2 / -1; color: var(--ink-2); font-size: 13px; }
+.r-ko { grid-column: 2 / 4; grid-row: 2; color: var(--ink-2); font-size: 13px; border-radius: 6px; }
 .results .empty { text-align: center; color: var(--ink-2); padding: 32px 0; font-size: 14px; }
 
 /* 공부 방법 */
@@ -491,3 +491,63 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .reset-confirm b { color: var(--red); }
 .rc-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
 .rc-actions .ghost { height: 48px; }
+
+/* 📋 단어 목록 */
+#listSheet .search { flex: none; margin-bottom: 8px; }
+.list-tabs { flex: none; margin-bottom: 6px; }
+.list-tabs.dim { opacity: .5; }
+.list-head { font-size: 12px; color: var(--ink-3); padding: 6px 2px 2px; }
+.r-side { grid-column: 4; grid-row: 1 / 3; align-self: center; display: flex; align-items: center; gap: 6px; }
+.r-today { font-style: normal; font-size: 10px; font-weight: 700; color: #fff; background: var(--red); border-radius: 6px; padding: 1px 5px; }
+.r-boxes { display: flex; gap: 3px; }
+.r-boxes i { width: 11px; height: 11px; border-radius: 3px; border: 1.5px solid var(--red); background: #fff; }
+.r-boxes i.on { background: var(--red); }
+.results.masked .r-ko { color: transparent; background: var(--pink-2); }
+
+/* 미리보기 카드 */
+.preview-sheet { z-index: 30; align-items: center; padding: 16px; }
+.preview {
+  width: min(var(--appw), 100%); max-height: 92dvh; overflow-y: auto; background: #fff;
+  border: 2px solid var(--line); border-radius: 22px; box-shadow: 0 6px 0 var(--pink-2), 0 16px 40px rgba(0, 0, 0, .2);
+}
+.pv-top { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--pink); border-bottom: 1px solid var(--line); }
+.pv-top .sheet-close { margin-left: auto; }
+.pv-word { text-align: center; padding: 14px 16px 10px; }
+.pv-zh { font-family: var(--zh); font-weight: 700; font-size: 60px; line-height: 1.1; }
+.pv-py { font-family: var(--py); color: var(--red); font-size: 22px; display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; }
+.pv-ko { font-weight: 700; font-size: 18px; margin-top: 4px; word-break: keep-all; }
+.pv-label { margin: 0; padding: 6px 16px; font-size: 12px; font-weight: 900; color: var(--red); border-top: 1px dashed var(--line); }
+.pv-pairs { list-style: none; margin: 0; padding: 0 12px 6px; }
+.pv-pairs li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 8px 4px; }
+.pv-pairs li + li { border-top: 1px dashed var(--line); }
+.pv-pairs .n { color: var(--red); font-size: 18px; }
+.pv-pz { font-family: var(--zh); font-size: 21px; }
+.pv-pp { font-family: var(--py); color: var(--red); font-size: 13px; }
+.pv-pk { color: var(--ink-2); font-size: 14px; word-break: keep-all; }
+.pv-actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 8px; padding: 10px 12px 14px; }
+.pv-actions .ghost { height: 48px; }
+@media (max-height: 700px) {
+  .preview-sheet { padding: 10px; }
+  .pv-top { padding: 6px 10px; }
+  .pv-zh { font-size: 44px; }
+  .pv-py { font-size: 18px; margin-top: 0; }
+  .pv-ko { font-size: 16px; margin-top: 0; }
+  .pv-word { padding: 6px 14px 6px; }
+  .pv-label { padding: 4px 14px; }
+  .pv-pairs li { padding: 4px 2px; gap: 8px; }
+  .pv-pz { font-size: 19px; }
+  .pv-pp, .pv-pk { display: inline; }
+  .pv-pp { margin-right: 6px; }
+  .pv-pk { font-size: 13px; }
+  .pv-pairs .say.sm { width: 32px; height: 32px; }
+  .pv-actions { padding: 6px 10px 10px; }
+  .pv-actions .ghost, .pv-actions .cta-sm { height: 42px; }
+}
+@media (max-height: 580px) {
+  .pv-zh { font-size: 38px; }
+  .pv-pz { font-size: 17px; }
+  .pv-pp { font-size: 12px; }
+  .pv-pairs li { padding: 3px 2px; }
+  .pv-label { display: none; }
+  .pv-pairs { border-top: 1px dashed var(--line); padding-top: 2px; }
+}
