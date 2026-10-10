@@ -23,8 +23,54 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="splash.css">
+  <!-- 오늘 이미 시작화면을 봤으면 바로 홈으로 (깜빡임 없이) -->
+  <script>try{if(JSON.parse(localStorage.getItem("hsk4:splashDay"))===new Date().toLocaleDateString("sv-SE"))document.documentElement.classList.add("no-splash")}catch(e){}</script>
 </head>
 <body class="mode-all">
+
+  <!-- ===== 시작화면: 오늘의 짝꿍 (하루 첫 방문에만) ===== -->
+  <section class="splash" id="splash" aria-label="시작화면">
+    <div class="sp-inner">
+      <div class="sp-top">
+        <span class="sp-pill">HSK 3.0 · 4급 진담 짝꿍어휘</span>
+        <h1 class="sp-today">오늘의 <b>짝꿍</b></h1>
+        <span class="sp-date"></span>
+      </div>
+      <div class="sp-stage">
+        <div class="sp-hero">
+          <svg viewBox="0 0 54 70" aria-hidden="true">
+            <g class="sp-leaf">
+              <path d="M27 14 L27 9" stroke="#5fa35a" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M27 10 C21.5 10 20 6.5 20 4 C24 4 27 6 27 10Z" fill="#7cc174"/>
+              <path d="M27 9.5 C32.5 9.5 34 5 34 2.5 C30 2.5 27 4.5 27 9.5Z" fill="#5fa35a"/>
+            </g>
+            <path d="M3 48 C-1 50 -2 53 -3 55" stroke="#c8372d" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+            <path d="M51 48 C55 50 56 53 57 55" stroke="#c8372d" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+            <rect x="1" y="13" width="52" height="52" rx="16" fill="#c8372d"/>
+            <ellipse cx="17" cy="66" rx="5.5" ry="2.6" fill="#9e2b22"/><ellipse cx="37" cy="66" rx="5.5" ry="2.6" fill="#9e2b22"/>
+            <circle cx="18" cy="25" r="2.2" fill="#fff"/><circle cx="36" cy="25" r="2.2" fill="#fff"/>
+            <circle cx="18.5" cy="25.5" r="1.1" fill="#3a2a28"/><circle cx="36.5" cy="25.5" r="1.1" fill="#3a2a28"/>
+            <ellipse cx="11.5" cy="30" rx="3.2" ry="1.7" fill="#f2a79d" opacity=".9"/><ellipse cx="42.5" cy="30" rx="3.2" ry="1.7" fill="#f2a79d" opacity=".9"/>
+            <path d="M24 29 Q27 32 30 29" stroke="#fff" stroke-width="1" fill="none" stroke-linecap="round"/>
+          </svg>
+          <div class="sp-word" lang="zh-CN"></div>
+          <div class="sp-py"></div>
+          <span class="sp-bubble">오늘은 나랑 짝꿍!</span>
+        </div>
+        <div class="sp-mean"></div>
+        <div class="sp-buddies"></div>
+      </div>
+      <div class="sp-bottom">
+        <p class="sp-copy">덩어리로 익히면, 중국어가 <b>툭!</b></p>
+        <button class="sp-start" type="button"><b>시작하기</b><small>🔊 누르면 오늘의 단어를 읽어 줘요</small></button>
+      </div>
+      <div class="sp-wave">
+        <svg viewBox="0 0 1414 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C120 -4 240 -4 354 26 S590 62 707 30 S940 -4 1060 26 S1300 62 1414 22 V60 H0 Z"/></svg>
+        <b>진담중국어</b><small>진심을 담은 중국어 · 아웃풋에 진심</small>
+      </div>
+    </div>
+  </section>
 
   <!-- ===== 홈 (표지) ===== -->
   <section class="home" id="home" aria-label="홈">
@@ -160,5 +206,6 @@
 
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script src="splash.js"></script>
 </body>
 </html>
