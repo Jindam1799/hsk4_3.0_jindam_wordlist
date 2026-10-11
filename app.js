@@ -53,7 +53,7 @@
     for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
     return a;
   };
-  // 🔄 이모지는 색을 바꿀 수 없어서 같은 모양의 아이콘을 직접 그림 (글자색을 따라감)
+  // 🔄 이모지는 색을 바꿀 수 없어서 같은 모양의 아이콘을 직접 그림 (글자색 = 테마 색을 따라감)
   const AGAIN_ICON = '<svg class="ic-again" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9"/><path d="M5.2 2.8v3.6h3.6"/><path d="M4 13a8 8 0 0 0 14.3 4.9"/><path d="M18.8 21.2v-3.6h-3.6"/></svg>';
   const CAL_ICON = '<svg class="ic-cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg>';
   const todayKey = () => new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD (기기 시간 기준)
@@ -147,11 +147,11 @@
   }
   function know(no) { // 결과 문구를 돌려줌
     const lv = levelOf(no), info = state.srs[no];
-    if (lv >= 3) return "🍅 이미 다 익은 단어예요!";
+    if (lv >= 3) return "🥝 이미 다 익은 단어예요!";
     const waited = info?.last ? dayNum(todayKey()) - dayNum(info.last) : Infinity;
     if (lv === 0 || waited >= GAP_AFTER[lv]) {
       const next = lv + 1;
-      if (next === 3) { setLevel(no, 3, 0); return "🍅 3칸 완료! 다 익었어요"; }
+      if (next === 3) { setLevel(no, 3, 0); return "🥝 3칸 완료! 다 익었어요"; }
       setLevel(no, next, GAP_AFTER[next]);
       return `⭕ ${next}칸 체크! ${GAP_AFTER[next] === 1 ? "내일" : `${GAP_AFTER[next]}일 뒤에`} 다시 확인해요`;
     }
@@ -730,7 +730,7 @@
         <div class="st-ring" style="--p:${pct(learned)}"><b>${learned}</b><small>/ ${total}</small></div>
         <div class="st-big-text">
           <p><b>외운 단어</b> <span>체크 1칸 이상 · 3칸 = 서로 다른 날 3번 기억</span></p>
-          <p class="st-line"><span>🍅 3칸 완료</span><b>${mastered}개</b></p>
+          <p class="st-line"><span>🥝 3칸 완료</span><b>${mastered}개</b></p>
           <div class="st-bar"><i style="width:${pct(mastered)}%"></i></div>
         </div>
       </div>
@@ -758,7 +758,7 @@
           const done = sec.filter((w) => roundsOf(w.no)[0]).length;
           const ripe = sec.reduce((n, w) => n + levelOf(w.no), 0) / (sec.length * 3); // 체크 칸 수만큼 익음
           const full = sec.every((w) => levelOf(w.no) === 3);
-          // 토마토 짝꿍이 모양: 체크가 채워질수록 아래에서부터 빨갛게 익어 감
+          // 키위 짝꿍이 모양: 체크가 채워질수록 아래에서부터 초록으로 익어 감
           return `<button class="tile${i === state.section ? " on" : ""}${full ? " full" : ""}" data-tile="${i}" style="--f:${Math.round(ripe * 100)}%" aria-label="구간 ${sectionLabel(sec)} ${Math.round(ripe * 100)}% 익음">
             <span class="t-leaf"></span>
             <span class="t-body"><span class="t-eyes"></span><b>${i + 1}</b><small>${Math.round(ripe * 100)}%</small></span>
