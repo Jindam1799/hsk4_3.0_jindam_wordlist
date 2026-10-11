@@ -1,0 +1,15 @@
+{
+  "name": "HSK 4급 짝꿍어휘 | 진담중국어",
+  "short_name": "진담 HSK4",
+  "description": "HSK 3.0 4급 필수 어휘 1000개와 진담중국어 짝꿍어휘",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#f3faf6",
+  "theme_color": "#047857",
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

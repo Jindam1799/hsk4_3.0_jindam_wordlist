@@ -196,11 +196,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .prow .a-zh { font-family: var(--zh); font-size: calc(20px * var(--k)); font-weight: 500; }
 .hl { color: var(--main); font-weight: 700; }
 
-/* 밀기 안내: ← 몰라요 · ↩ 되돌리기 · 알아요 → */
+/* 밀기 안내: ← 알아요 · 몰라요 → */
 .judge { flex: none; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 18px 2px; min-height: 50px; }
 .judge .sg { font-size: 14px; font-weight: 900; white-space: nowrap; }
-.judge .left { color: var(--ink-2); }
-.judge .right { color: var(--main); text-align: right; }
+.judge .left { color: var(--main); }
+.judge .right { color: var(--ink-2); text-align: right; }
 
 /* 밀 때 나타나는 도장 */
 .stamp {
@@ -208,8 +208,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
   padding: 6px 14px; border-radius: 12px; border: 3px solid; background: rgba(255, 255, 255, .92);
   font-size: 20px; font-weight: 900; white-space: nowrap;
 }
-.stamp.know { left: 18px; color: var(--main); border-color: var(--main); transform: rotate(-12deg); }
-.stamp.again { right: 18px; color: var(--ink-2); border-color: var(--ink-3); transform: rotate(12deg); }
+.stamp.know { right: 18px; color: var(--main); border-color: var(--main); transform: rotate(12deg); }
+.stamp.again { left: 18px; color: var(--ink-2); border-color: var(--ink-3); transform: rotate(-12deg); }
 .fc { position: relative; }
 
 .card-foot { flex: none; padding: 10px 16px calc(10px + var(--safe-b)); }

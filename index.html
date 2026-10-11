@@ -8,6 +8,12 @@
   <meta name="copyright" content="© 2026 진담중국어. All rights reserved.">
   <meta name="description" content="HSK 3.0 4급 필수 어휘 1000개와 진담중국어 짝꿍어휘를 휴대폰에서 넘기며 익히는 단어장">
   <title>HSK 4급 짝꿍어휘</title>
+  <!-- 홈 화면 아이콘: 진담중국어 키위 짝꿍 (브라우저와 같은 기록을 쓰도록 display: browser) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="진담 HSK4">
   <!-- 카카오톡·SNS로 링크를 보냈을 때 보이는 미리보기 -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="진담중국어">
@@ -45,13 +51,12 @@
               <path d="M27 10 C21.5 10 20 6.5 20 4 C24 4 27 6 27 10Z" fill="#7cc174"/>
               <path d="M27 9.5 C32.5 9.5 34 5 34 2.5 C30 2.5 27 4.5 27 9.5Z" fill="#5fa35a"/>
             </g>
-            <!-- 키위 짝꿍: 갈색 껍질 · 연두 과육 · 씨 · 진담 4급 초록(#047857) 속 -->
+            <!-- 키위 짝꿍: 갈색 껍질 · 한 색 과육 · 씨 -->
             <path d="M3 48 C-1 50 -2 53 -3 55" stroke="#8a6239" stroke-width="3.4" stroke-linecap="round" fill="none"/>
             <path d="M51 48 C55 50 56 53 57 55" stroke="#8a6239" stroke-width="3.4" stroke-linecap="round" fill="none"/>
             <rect x="1" y="13" width="52" height="52" rx="16" fill="#8a6239"/>
             <rect x="3.6" y="15.6" width="46.8" height="46.8" rx="13.6" fill="#5fae3f"/>
             <g fill="#22301c"><ellipse cx="14" cy="18.8" rx="1.5" ry=".85" transform="rotate(0 14 18.8)"/><ellipse cx="22" cy="18.6" rx="1.5" ry=".85" transform="rotate(0 22 18.6)"/><ellipse cx="32" cy="18.6" rx="1.5" ry=".85" transform="rotate(0 32 18.6)"/><ellipse cx="40" cy="18.8" rx="1.5" ry=".85" transform="rotate(0 40 18.8)"/><ellipse cx="14" cy="59.2" rx="1.5" ry=".85" transform="rotate(0 14 59.2)"/><ellipse cx="22" cy="59.4" rx="1.5" ry=".85" transform="rotate(0 22 59.4)"/><ellipse cx="32" cy="59.4" rx="1.5" ry=".85" transform="rotate(0 32 59.4)"/><ellipse cx="40" cy="59.2" rx="1.5" ry=".85" transform="rotate(0 40 59.2)"/><ellipse cx="6.8" cy="29" rx="1.5" ry=".85" transform="rotate(90 6.8 29)"/><ellipse cx="6.8" cy="39" rx="1.5" ry=".85" transform="rotate(90 6.8 39)"/><ellipse cx="6.8" cy="49" rx="1.5" ry=".85" transform="rotate(90 6.8 49)"/><ellipse cx="47.2" cy="29" rx="1.5" ry=".85" transform="rotate(90 47.2 29)"/><ellipse cx="47.2" cy="39" rx="1.5" ry=".85" transform="rotate(90 47.2 39)"/><ellipse cx="47.2" cy="49" rx="1.5" ry=".85" transform="rotate(90 47.2 49)"/></g>
-            <rect x="10.5" y="22.5" width="33" height="35" rx="9.5" fill="#047857"/>
             <ellipse cx="17" cy="66" rx="5.5" ry="2.6" fill="#6b4a28"/><ellipse cx="37" cy="66" rx="5.5" ry="2.6" fill="#6b4a28"/>
             <circle cx="18" cy="27" r="2.2" fill="#fff"/><circle cx="36" cy="27" r="2.2" fill="#fff"/>
             <circle cx="18.5" cy="27.5" r="1.1" fill="#3a2a28"/><circle cx="36.5" cy="27.5" r="1.1" fill="#3a2a28"/>
@@ -124,10 +129,10 @@
 
     <main class="card-stage" id="cardStage"></main>
 
-    <!-- 밀기 안내: 왼쪽 = 몰라요 / 오른쪽 = 알아요 -->
+    <!-- 밀기 안내: 왼쪽 = 알아요 / 오른쪽 = 몰라요 -->
     <div class="judge" id="judge">
-      <span class="sg left">← ❌ 몰라요</span>
-      <span class="sg right">⭕ 알아요 →</span>
+      <span class="sg left">← ⭕ 알아요</span>
+      <span class="sg right">❌ 몰라요 →</span>
     </div>
     <footer class="card-foot" id="cardFoot"></footer>
   </div>
@@ -199,7 +204,7 @@
         <li><b>꾹</b>누르고 있으면 뜻·병음이 보이고, 손을 떼면 사라져요.</li>
         <li><b>톡</b>치면 카드가 뒤집혀 짝꿍어휘가 나와요. 짝꿍어휘도 한 줄씩 꾹 눌러 확인해요.</li>
         <li><b>📅 복습</b>체크한 단어는 하루 뒤, 3일 뒤에 ‘오늘 복습할 단어’로 다시 나와요. 홈에서 매일 먼저 해요.</li>
-        <li><b>밀기</b>떠올렸으면 오른쪽으로 밀어 ⭕ 알아요, 헷갈리면 왼쪽으로 밀어 ❌ 몰라요 — 몰라요 단어는 4장 뒤에 또 나와요.</li>
+        <li><b>밀기</b>떠올렸으면 왼쪽으로 밀어 ⭕ 알아요, 헷갈리면 오른쪽으로 밀어 ❌ 몰라요 — 몰라요 단어는 4장 뒤에 또 나와요.</li>
         <li><b>🔊</b>소리 버튼을 누르면 중국어 발음이 나와요. 따라 말해 보세요.<br><small class="voice">발음 목소리: <span id="voiceName">확인 중…</span></small></li>
         <li><b>방향</b>‘뜻 보고 중국어 말하기’로 바꾸면 한국어를 보고 중국어를 먼저 말해요.</li>
       </ul>

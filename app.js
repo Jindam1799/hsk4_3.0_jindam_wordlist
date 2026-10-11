@@ -316,13 +316,13 @@
 
   // 처음 카드 화면에 들어왔을 때 사용법 안내 (한 번만)
   function maybeCoach() {
-    if (store.get("coachSeen", false) || isDone() || stageEl.querySelector(".coach")) return;
+    if (store.get("coachSeen2", false) || isDone() || stageEl.querySelector(".coach")) return;
     stageEl.insertAdjacentHTML("beforeend", `
       <div class="coach">
         <p><b>👆 꾹</b> 누르고 있으면 → 뜻·병음<br><small>손을 떼면 다시 사라져요</small></p>
         <p><b>👆 톡</b> 치면 → 뒤집어서 짝꿍어휘</p>
-        <p><b>👉 오른쪽으로 밀면</b> → ⭕ 알아요</p>
-        <p><b>👈 왼쪽으로 밀면</b> → ❌ 몰라요<br><small>4장 뒤에 다시 나와요</small></p>
+        <p><b>👈 왼쪽으로 밀면</b> → ⭕ 알아요</p>
+        <p><b>👉 오른쪽으로 밀면</b> → ❌ 몰라요<br><small>4장 뒤에 다시 나와요</small></p>
         <button class="cta-sm" data-act="coach">알겠어요!</button>
       </div>`);
   }
@@ -358,7 +358,7 @@
     el.style.transform = "";
   }
 
-  // 오른쪽으로 밀기 = ⭕ 알아요 / 왼쪽으로 밀기 = ❌ 몰라요
+  // 왼쪽으로 밀기 = ⭕ 알아요 / 오른쪽으로 밀기 = ❌ 몰라요
   function judge(known) {
     if (busy || isDone()) return;
     const s = state.session, no = s.queue[s.pos];
@@ -374,7 +374,7 @@
     }
     addLog(known);
     markSeen(no);
-    slide(known ? -1 : 1, () => { s.pos += 1; flipped = false; saveSession(); }); // 민 방향으로 날아감
+    slide(known ? 1 : -1, () => { s.pos += 1; flipped = false; saveSession(); }); // 민 방향으로 날아감
   }
 
   function flip() {
@@ -429,8 +429,8 @@
       pt.fc.style.transition = "none";
       pt.fc.style.transform = `translateX(${dx}px) rotate(${dx / 30}deg)`;
       const o = Math.min(1, Math.abs(dx) / 90);
-      pt.fc.querySelector(".stamp.know").style.opacity = dx > 0 ? o : 0;
-      pt.fc.querySelector(".stamp.again").style.opacity = dx < 0 ? o : 0;
+      pt.fc.querySelector(".stamp.know").style.opacity = dx < 0 ? o : 0;
+      pt.fc.querySelector(".stamp.again").style.opacity = dx > 0 ? o : 0;
     }
   });
   function endPointer(e, cancelled) {
@@ -446,7 +446,7 @@
     }
     if (p.drag) {
       const fast = Math.abs(p.dx) > 30 && Date.now() - p.t < 250;
-      if (Math.abs(p.dx) > 70 || fast) judge(p.dx > 0);
+      if (Math.abs(p.dx) > 70 || fast) judge(p.dx < 0);
       else {
         bounce(p.fc);
         p.fc.querySelectorAll(".stamp").forEach((st) => { st.style.opacity = 0; });
@@ -470,7 +470,7 @@
     const act = e.target.closest("[data-act]")?.dataset.act;
     if (!act) return;
     const s = state.session;
-    if (act === "coach") { store.set("coachSeen", true); stageEl.querySelector(".coach")?.remove(); }
+    if (act === "coach") { store.set("coachSeen2", true); stageEl.querySelector(".coach")?.remove(); }
     if (act === "retry") startSession(listSession("retry", "다시 볼 단어", shuffle([...new Set(s.again)].filter((no) => state.status[no] === "a"))));
     if (act === "next") { state.section = s.section + 1; store.set("section", state.section); startSession(sectionSession(state.section)); }
     if (act === "restart") startSession({ ...s, queue: [...new Set(s.queue)], pos: 0, known: [], again: [] });
@@ -809,8 +809,8 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") { if (!$("#previewSheet").hidden) closePreview(); else closeSheets(); }
     if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open") || $("#cards").hidden) return;
-    if (e.key === "ArrowRight") judge(true);
-    if (e.key === "ArrowLeft") judge(false);
+    if (e.key === "ArrowLeft") judge(true);
+    if (e.key === "ArrowRight") judge(false);
     if (e.key === " ") { e.preventDefault(); flip(); }
   });
 
