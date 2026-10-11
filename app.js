@@ -31,7 +31,7 @@
 
   const state = {
     section: clampSection(store.get("section", 0)),
-    dir: store.get("dir", "zh"),               // zh: 한자 보고 뜻 떠올리기 / ko: 뜻 보고 중국어 말하기
+    dir: store.get("dir", "zh"),               // zh: 중국어 → 한국어 / ko: 한국어 → 중국어
     rounds: store.get("rounds", {}),           // { 단어번호: [bool, bool, bool] } 체크박스 3개
     status: store.get("status", {}),           // { 단어번호: "k"(알아요) | "a"(다시) } 마지막 결과
     log: store.get("log", {}),                 // { "YYYY-MM-DD": { seen, known } } 날짜별 공부량
