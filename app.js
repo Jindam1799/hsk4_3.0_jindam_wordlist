@@ -271,7 +271,7 @@
     let k = Math.max(0.78, Math.min(1.3, stageEl.clientHeight / 430));
     const over = () => [...fc.querySelectorAll(".face")].some((f) => f.scrollHeight > f.clientHeight + 1);
     fc.style.setProperty("--k", k.toFixed(2));
-    for (let i = 0; i < 14 && over() && k > 0.6; i++) {
+    for (let i = 0; i < 20 && over() && k > 0.52; i++) {
       k -= 0.04;
       fc.style.setProperty("--k", k.toFixed(2));
     }
@@ -280,7 +280,6 @@
   function renderCard() {
     const s = state.session;
     $("#cardBandTitle").textContent = s.title;
-    document.querySelectorAll("#dirSeg button").forEach((b) => b.classList.toggle("on", b.dataset.dir === state.dir));
     if (isDone()) {
       stageEl.innerHTML = doneHTML();
     } else {
@@ -292,6 +291,7 @@
       </div>`;
       $("#judge").hidden = false;
       fitCard();
+      requestAnimationFrame(fitCard); // 화면이 다 그려진 뒤 한 번 더 맞춤
     }
     renderFoot();
     maybeCoach();
@@ -379,7 +379,8 @@
   const putBack = (obj, no, v) => { if (v === undefined) delete obj[no]; else obj[no] = v; };
   function undoJudge() {
     const u = lastJudge;
-    if (!u || busy || !state.session || u.session.key !== state.session.key) { hideUndo(); return; }
+    if (busy) { setTimeout(undoJudge, 120); return; } // 카드가 넘어가는 중이면 끝난 뒤에
+    if (!u || !state.session || u.session.key !== state.session.key) { hideUndo(); return; }
     lastJudge = null;
     hideUndo();
     putBack(state.rounds, u.no, u.rounds); store.set("rounds", state.rounds);
@@ -404,12 +405,12 @@
       setStatus(no, "a");
       s.again.push(no);
       s.queue.splice(Math.min(s.pos + 1 + AGAIN_GAP, s.queue.length), 0, no); // 4장 뒤에 다시
-      toast(dontKnow(no));
+      openStudy(no, dontKnow(no)); // 몰라요 → 그 자리에서 바로 공부
     }
     addLog(known);
     markSeen(no);
     slide(known ? 1 : -1, () => { s.pos += 1; flipped = false; saveSession(); }); // 민 방향으로 날아감
-    showUndo();
+    if (known) showUndo();
   }
   $("#undoBtn").addEventListener("click", undoJudge);
 
@@ -512,14 +513,6 @@
     if (act === "restart") startSession({ ...s, queue: [...new Set(s.queue)], pos: 0, known: [], again: [] });
   });
 
-  $("#dirSeg").addEventListener("click", (e) => {
-    const b = e.target.closest("button[data-dir]");
-    if (!b) return;
-    state.dir = b.dataset.dir;
-    store.set("dir", state.dir);
-    flipped = false;
-    renderCard();
-  });
 
   function startSession(sess) {
     lastJudge = null; hideUndo();
@@ -569,7 +562,21 @@
     if (history.state?.screen === "cards") history.back();
     else showScreen("home");
   }));
+  // 시작하기 → 연습 방향(중국어 → 한국어 / 한국어 → 중국어)을 먼저 고르고 들어감
   $("#cardsBtn").addEventListener("click", () => {
+    $("#dirSub").textContent = `${$("#cardsBtn b").textContent} · ${$("#continueSub").textContent}`;
+    document.querySelectorAll("#dirSheet .dir-opt").forEach((b) => b.classList.toggle("last", b.dataset.dir === state.dir));
+    openSheet($("#dirSheet"));
+  });
+  $("#dirSheet").addEventListener("click", (e) => {
+    const b = e.target.closest(".dir-opt");
+    if (!b) return;
+    state.dir = b.dataset.dir;
+    store.set("dir", state.dir);
+    closeSheets();
+    enterCards();
+  });
+  function enterCards() {
     // 이어서 하던 묶음이 지금 구간과 같으면 그대로, 아니면 이 구간을 새로 시작
     const s = state.session;
     const keep = s && !isDone() && (!s.key.startsWith("s") || s.section === state.section);
@@ -580,9 +587,10 @@
     }
     flipped = false;
     showScreen("cards");
-  });
+  }
 
   window.addEventListener("resize", () => { if (!$("#cards").hidden) fitCard(); });
+  document.fonts?.ready.then(() => { if (!$("#cards").hidden) fitCard(); }); // 글꼴이 늦게 들어오면 크기를 다시 맞춤
 
   // ---------- 아래에서 올라오는 창 ----------
   function openSheet(sheet) {
@@ -710,12 +718,22 @@
   });
 
   // 미리보기 카드: 앞면 정보 + 짝꿍어휘 + 🔊, 체크·기록은 바뀌지 않음
-  function openPreview(no) {
-    const w = wordOf(no), lv = levelOf(no);
+  // ❌ 몰라요를 고르면: 그 단어 카드를 바로 띄워 발음을 들려주고, 짝꿍어휘까지 따라 말한 뒤 다음 카드로
+  let studyNo = 0;
+  function openStudy(no, note) {
+    studyNo = no;
+    openPreview(no, note);
+    const btn = $("#preview .pv-py [data-say]");
+    setTimeout(() => { if (studyNo === no && !$("#previewSheet").hidden) speak(wordOf(no).word, btn); }, 250);
+  }
+  function openPreview(no, studyNote) {
+    const w = wordOf(no), lv = levelOf(no), study = studyNote != null;
+    if (!study) studyNo = 0;
+    $("#previewSheet").classList.toggle("study", study);
     $("#preview").innerHTML = `
       <div class="pv-top">
         <span class="no">${pad(no)}</span>
-        <span class="boxes">${[0, 1, 2].map((k) => `<span class="box${k < lv ? " on" : ""}"></span>`).join("")}</span>
+        ${study ? `<span class="pv-badge">❌ 몰라요 · 지금 바로 익혀요</span>` : `<span class="boxes">${[0, 1, 2].map((k) => `<span class="box${k < lv ? " on" : ""}"></span>`).join("")}</span>`}
         <button class="sheet-close" data-pv-close aria-label="닫기">✕</button>
       </div>
       <div class="pv-word">
@@ -732,16 +750,23 @@
             ${speakBtn(p[0], "sm")}
           </li>`).join("")}
       </ol>
+      ${study ? `<p class="pv-tip">🔊 듣고 <b>소리 내어 2번</b> 따라 말해요 · ${esc(studyNote.replace(/^❌\s*몰라요\s*·\s*/, ""))}</p>` : ""}
       <div class="pv-actions">
-        <button class="ghost" data-pv-close>닫기</button>
-        <button class="cta-sm" data-pv-go="${no}">이 단어부터 카드로</button>
+        ${study
+          ? `<button class="ghost" data-pv-undo><svg class="ic-undo" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>실수였어요</button><button class="cta-sm" data-pv-close>다음 카드 →</button>`
+          : `<button class="ghost" data-pv-close>닫기</button><button class="cta-sm" data-pv-go="${no}">이 단어부터 카드로</button>`}
       </div>`;
     $("#previewSheet").hidden = false;
   }
-  const closePreview = () => { stopPlaying(); $("#previewSheet").hidden = true; };
+  const closePreview = () => {
+    stopPlaying();
+    $("#previewSheet").hidden = true;
+    if (studyNo) { studyNo = 0; showUndo(); } // 공부 카드를 닫으면 6초 동안 '취소'도 할 수 있음
+  };
   $("#previewSheet").addEventListener("click", (e) => {
     const say = e.target.closest("[data-say]");
     if (say) { speak(say.dataset.say, say); return; }
+    if (e.target.closest("[data-pv-undo]")) { stopPlaying(); studyNo = 0; $("#previewSheet").hidden = true; undoJudge(); return; }
     if (e.target === $("#previewSheet") || e.target.closest("[data-pv-close]")) { closePreview(); return; }
     const go = e.target.closest("[data-pv-go]");
     if (go) {
@@ -846,6 +871,7 @@
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") { if (!$("#previewSheet").hidden) closePreview(); else closeSheets(); }
+    if (!$("#previewSheet").hidden) { if (studyNo && e.key === "Enter") { e.preventDefault(); closePreview(); } return; }
     if (e.target.tagName === "INPUT" || document.body.classList.contains("sheet-open") || $("#cards").hidden) return;
     if (e.key === "ArrowLeft") judge(true);
     if (e.key === "ArrowRight") judge(false);

@@ -535,6 +535,34 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* 미리보기 카드 */
 .preview-sheet { z-index: 30; align-items: center; padding: 16px; }
+/* ❌ 몰라요 → 바로 공부 카드 */
+.pv-badge { font-weight: 900; font-size: 14px; color: var(--main-dark); }
+.preview-sheet.study .pv-top { background: var(--tint-2); }
+.pv-tip { margin: 0; padding: 8px 14px; font-size: 13px; color: var(--ink-2); text-align: center; background: var(--tint); border-top: 1px dashed var(--line); word-break: keep-all; }
+.pv-tip b { color: var(--main); }
+/* 시작하기 → 연습 방향 고르기 */
+.dir-pick { display: grid; gap: 10px; padding-bottom: calc(18px + var(--safe-b)); }
+.dir-sub { margin: -4px 2px 2px; font-size: 13px; color: var(--ink-2); }
+.dir-opt {
+  position: relative; display: flex; align-items: center; gap: 14px; text-align: left; width: 100%;
+  border: 2px solid var(--line); background: #fff; border-radius: 18px; padding: 14px 16px; color: var(--ink);
+  box-shadow: 0 4px 0 var(--tint-2);
+}
+.dir-opt:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--tint-2); }
+.dir-opt.last { border-color: var(--main); }
+.dir-ic {
+  flex: none; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center;
+  background: var(--main); color: #fff; font-weight: 900; font-size: 24px; font-family: var(--zh);
+}
+.dir-opt[data-dir="ko"] .dir-ic { font-family: var(--ko); }
+.dir-txt { display: grid; gap: 2px; }
+.dir-txt b { font-size: 18px; font-weight: 900; }
+.dir-txt b i { font-style: normal; color: var(--main); }
+.dir-txt small { font-size: 13px; color: var(--ink-2); }
+.dir-last { display: none; position: absolute; top: -9px; right: 14px; font-size: 11px; font-weight: 700; color: var(--main); background: var(--tint); border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+.dir-opt.last .dir-last { display: inline-block; }
+.dir-opt.last .dir-last { border: 1.5px solid var(--main); background: #fff; }
+.ic-undo { width: 16px; height: 16px; margin-right: 4px; vertical-align: -3px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 .preview {
   width: min(var(--appw), 100%); max-height: 92dvh; overflow-y: auto; background: #fff;
   border: 2px solid var(--line); border-radius: 22px; box-shadow: 0 6px 0 var(--tint-2), 0 16px 40px rgba(0, 0, 0, .2);

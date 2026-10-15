@@ -73,10 +73,6 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M8.5 9h7M8.5 13h7M8.5 17h4"/></svg>
       </button>
       <button class="icon-btn stats-btn" data-stats aria-label="내 공부 현황"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.2S6.2 13.3 6.2 8.9a5.8 5.8 0 0 1 11.6 0c0 4.4-5.8 10.3-5.8 10.3z"/><circle cx="12" cy="8.9" r="2.4"/><ellipse cx="12" cy="20.4" rx="6.2" ry="1.7"/></svg></button>
-      <div class="seg" id="dirSeg" aria-label="연습 방향">
-        <button data-dir="zh" class="on" aria-label="중국어 보고 한국어 뜻 떠올리기">중국어<i class="arr">→</i>한국어</button>
-        <button data-dir="ko" aria-label="한국어 뜻 보고 중국어 말하기">한국어<i class="arr">→</i>중국어</button>
-      </div>
     </header>
 
     <main class="card-stage" id="cardStage"></main>
@@ -89,6 +85,24 @@
     </div>
     <footer class="card-foot" id="cardFoot"></footer>
   </div>
+
+  <!-- ===== 시작하기: 연습 방향 고르기 ===== -->
+  <section class="sheet" id="dirSheet" hidden aria-label="연습 방향 고르기">
+    <div class="sheet-panel dir-pick">
+      <div class="sheet-head"><b>어떻게 연습할까요?</b><button class="sheet-close" data-close aria-label="닫기">✕</button></div>
+      <p class="dir-sub" id="dirSub"></p>
+      <button class="dir-opt" data-dir="zh">
+        <span class="dir-ic" lang="zh-CN">中</span>
+        <span class="dir-txt"><b>중국어 <i>→</i> 한국어</b><small>한자를 보고 뜻 떠올리기</small></span>
+        <span class="dir-last">지난번</span>
+      </button>
+      <button class="dir-opt" data-dir="ko">
+        <span class="dir-ic">한</span>
+        <span class="dir-txt"><b>한국어 <i>→</i> 중국어</b><small>뜻을 보고 중국어로 말하기</small></span>
+        <span class="dir-last">지난번</span>
+      </button>
+    </div>
+  </section>
 
   <!-- ===== 📍 내 공부 현황 ===== -->
   <section class="sheet" id="statsSheet" hidden aria-label="내 공부 현황">
@@ -160,7 +174,8 @@
         <li><b>밀기</b>떠올렸으면 왼쪽으로 밀어 ⭕ 알아요, 헷갈리면 오른쪽으로 밀어 ❌ 몰라요 — 몰라요 단어는 4장 뒤에 또 나와요.</li>
         <li><b>↩ 취소</b>실수로 밀었으면 아래 가운데 ‘↩ 취소’를 눌러요(6초 동안 보여요). 체크도 그대로 돌아오고 카드가 다시 나와요.</li>
         <li><b>🔊</b>소리 버튼을 누르면 중국어 발음이 나와요. 따라 말해 보세요.<br><small class="voice">발음 목소리: <span id="voiceName">확인 중…</span></small></li>
-        <li><b>방향</b>위쪽에서 ‘한국어 → 중국어’로 바꾸면 한국어 뜻을 보고 중국어를 먼저 말해요.</li>
+        <li><b>방향</b>‘시작하기’를 누르면 고를 수 있어요. ‘중국어 → 한국어’는 한자를 보고 뜻 떠올리기, ‘한국어 → 중국어’는 뜻을 보고 중국어로 말하기예요.</li>
+        <li><b>❌ 바로 공부</b>몰라요로 넘기면 그 단어 카드가 바로 떠서 발음을 들려줘요. 짝꿍어휘까지 소리 내어 따라 말하고 ‘다음 카드’를 눌러요.</li>
       </ul>
       <p class="source">HSK 단어 및 급수는 중외언어교류협력센터의 《HSK考试大纲》 어휘 목록을 기준으로 확인했으며, 짝꿍어휘는 실제 말하기 연습을 위해 진담중국어가 추가하였다.</p>
       <p class="copyright">© 2026 진담중국어(진심을 담은 중국어). All rights reserved.<br>단어장의 짝꿍어휘·구성·디자인·캐릭터는 진담중국어의 저작물로, 무단 복제·배포를 금합니다.</p>
