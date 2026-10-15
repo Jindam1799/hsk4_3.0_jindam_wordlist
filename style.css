@@ -205,6 +205,18 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .judge .sg { font-size: 14px; font-weight: 900; white-space: nowrap; }
 .judge .left { color: var(--main); }
 .judge .right { color: var(--ink-2); text-align: right; }
+/* 방금 넘긴 카드 취소 */
+.undo-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 1px; min-width: 0; max-width: 34%;
+  border: 2px solid var(--main); background: #fff; color: var(--main); border-radius: 14px; padding: 4px 12px;
+  box-shadow: 0 3px 0 var(--tint-2); animation: undo-in .2s ease-out;
+}
+.undo-btn[hidden] { display: none; }
+.undo-btn b { font-size: 14px; font-weight: 900; white-space: nowrap; }
+.undo-btn b svg { width: 15px; height: 15px; margin-right: 3px; vertical-align: -2px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.undo-btn small { font-family: var(--zh); font-size: 11px; color: var(--ink-2); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.undo-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--tint-2); }
+@keyframes undo-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 /* 밀 때 나타나는 도장 */
 .stamp {

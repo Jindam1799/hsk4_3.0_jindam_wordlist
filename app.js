@@ -357,10 +357,45 @@
     el.style.transform = "";
   }
 
+  // ---------- 방금 넘긴 카드 취소 (실수로 밀었을 때) ----------
+  // 알아요·몰라요를 누르기 직전의 기록을 저장해 두었다가, '↩ 취소'를 누르면 그대로 되돌림
+  let lastJudge = null, undoTimer = null;
+  const clone = (v) => (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
+  function rememberBefore(no, known) {
+    lastJudge = {
+      no, known, day: todayKey(),
+      rounds: clone(state.rounds[no]), srs: clone(state.srs[no]), status: state.status[no],
+      log: clone(state.log[todayKey()]), seenDay: clone(store.get("seenDay", null)), session: clone(state.session),
+    };
+  }
+  function showUndo() {
+    const btn = $("#undoBtn");
+    btn.querySelector("small").textContent = wordOf(lastJudge.no).word;
+    btn.hidden = false;
+    clearTimeout(undoTimer);
+    undoTimer = setTimeout(hideUndo, 6000);
+  }
+  function hideUndo() { clearTimeout(undoTimer); $("#undoBtn").hidden = true; }
+  const putBack = (obj, no, v) => { if (v === undefined) delete obj[no]; else obj[no] = v; };
+  function undoJudge() {
+    const u = lastJudge;
+    if (!u || busy || !state.session || u.session.key !== state.session.key) { hideUndo(); return; }
+    lastJudge = null;
+    hideUndo();
+    putBack(state.rounds, u.no, u.rounds); store.set("rounds", state.rounds);
+    putBack(state.srs, u.no, u.srs); store.set("srs", state.srs);
+    putBack(state.status, u.no, u.status); store.set("status", state.status);
+    putBack(state.log, u.day, u.log); store.set("log", state.log);
+    store.set("seenDay", u.seenDay);
+    toast(`↩ 취소했어요 · ${wordOf(u.no).word} 다시 보기`);
+    slide(u.known ? -1 : 1, () => { state.session = u.session; flipped = false; saveSession(); }); // 날아간 쪽에서 다시 돌아옴
+  }
+
   // 왼쪽으로 밀기 = ⭕ 알아요 / 오른쪽으로 밀기 = ❌ 몰라요
   function judge(known) {
     if (busy || isDone()) return;
     const s = state.session, no = s.queue[s.pos];
+    rememberBefore(no, known);
     if (known) {
       setStatus(no, "k");
       s.known.push(no);
@@ -374,7 +409,9 @@
     addLog(known);
     markSeen(no);
     slide(known ? 1 : -1, () => { s.pos += 1; flipped = false; saveSession(); }); // 민 방향으로 날아감
+    showUndo();
   }
+  $("#undoBtn").addEventListener("click", undoJudge);
 
   function flip() {
     stopPlaying();
@@ -485,6 +522,7 @@
   });
 
   function startSession(sess) {
+    lastJudge = null; hideUndo();
     // 구간 카드를 넘기다가 '다시 볼 단어' 연습으로 가면, 구간 진행 위치를 따로 보관해 두었다가 이어서 함
     const prev = state.session;
     if (prev && prev.key.startsWith("s") && !isDone()) store.set("sectionSession", prev);
@@ -517,6 +555,7 @@
   }
   $("#reviewBtn").addEventListener("click", startReview);
   function showScreen(name) {
+    if (name !== "cards") hideUndo();
     $("#home").hidden = name !== "home";
     $("#cards").hidden = name !== "cards";
     if (name === "home") renderHome();
@@ -811,6 +850,7 @@
     if (e.key === "ArrowLeft") judge(true);
     if (e.key === "ArrowRight") judge(false);
     if (e.key === " ") { e.preventDefault(); flip(); }
+    if (e.key === "Backspace" || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z")) { e.preventDefault(); if (!$("#undoBtn").hidden) undoJudge(); }
   });
 
   // ---------- 시작: 홈(표지). 처음 온 사람에게는 '공부 방법'을 한 번 보여 줌 ----------
