@@ -28,7 +28,7 @@ HSK 3.0 4급 필수 어휘 1000개를 단어마다 짝꿍어휘 3개와 함께 �
   - 아이폰 카카오톡 → 기본 브라우저(사파리, 또는 기본으로 설정한 크롬) / 아이폰 인스타 등 → 크롬(설치된 경우)
   - 자동 이동이 안 되면 위쪽에 `크롬으로 열기` · `링크 복사` 안내 띠가 나옴
 - **링크 미리보기**: 카카오톡 등에 링크를 보내면 `og-kiwi.png`가 미리보기 이미지로 나옴
-  (주소가 `https://jindam1799.github.io/hsk4_3.0_jindam_wordlist/` 가 아니면 `index.html`의 `og:url`, `og:image` 주소를 바꿔 주세요)
+  (주소가 `https://jindam1799.github.io/jindam_hsk3.0_dapei_H4/` 가 아니면 `index.html`의 `og:url`, `og:image` 주소를 바꿔 주세요)
 
 ## 파일 구성
 | 파일 | 내용 |
@@ -58,7 +58,7 @@ python3 tools/build_data.py
 ## GitHub Pages 배포
 1. 이 파일들을 `main` 브랜치에 올립니다.
 2. 저장소 **Settings → Pages → Build and deployment**에서 Source를 `Deploy from a branch`, Branch를 `main` / `(root)`로 저장합니다.
-3. 1~2분 후 `https://<계정>.github.io/hsk4_3.0_jindam_wordlist/` 에서 열립니다.
+3. 1~2분 후 `https://<계정>.github.io/jindam_hsk3.0_dapei_H4/` 에서 열립니다.
 
 ---
 게임과 단어장의 HSK 단어 및 급수는 중외언어교류협력센터의 《HSK考试大纲》 어휘 목록을 기준으로 확인했으며, 짝꿍어휘는 실제 말하기 연습을 위해 진담중국어가 추가하였다.
